@@ -40,6 +40,12 @@
             this.snapRB = new System.Windows.Forms.RadioButton();
             this.additivRB = new System.Windows.Forms.RadioButton();
             this.groupAuto = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.resetCB = new System.Windows.Forms.ComboBox();
+            this.hmdyawLB = new System.Windows.Forms.Label();
+            this.zeroBT = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -50,8 +56,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.loopTimer = new System.Windows.Forms.Timer(this.components);
             this.label9 = new System.Windows.Forms.Label();
-            this.zeroBT = new System.Windows.Forms.Button();
-            this.hmdyawLB = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.angleNUD)).BeginInit();
             this.groupAuto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.deactivateNUD)).BeginInit();
@@ -164,6 +168,10 @@
             // 
             // groupAuto
             // 
+            this.groupAuto.Controls.Add(this.label12);
+            this.groupAuto.Controls.Add(this.label11);
+            this.groupAuto.Controls.Add(this.label10);
+            this.groupAuto.Controls.Add(this.resetCB);
             this.groupAuto.Controls.Add(this.hmdyawLB);
             this.groupAuto.Controls.Add(this.zeroBT);
             this.groupAuto.Controls.Add(this.label7);
@@ -176,10 +184,68 @@
             this.groupAuto.Location = new System.Drawing.Point(119, 61);
             this.groupAuto.Name = "groupAuto";
             this.groupAuto.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupAuto.Size = new System.Drawing.Size(170, 123);
+            this.groupAuto.Size = new System.Drawing.Size(167, 156);
             this.groupAuto.TabIndex = 13;
             this.groupAuto.TabStop = false;
             this.groupAuto.Text = "Autorotate";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Enabled = false;
+            this.label12.Location = new System.Drawing.Point(12, 95);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(138, 13);
+            this.label12.TabIndex = 26;
+            this.label12.Text = "To calibrate HMD Yaw look";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Enabled = false;
+            this.label11.Location = new System.Drawing.Point(16, 112);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(123, 13);
+            this.label11.TabIndex = 25;
+            this.label11.Text = "straight ahead and press";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Enabled = false;
+            this.label10.Location = new System.Drawing.Point(65, 131);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(16, 13);
+            this.label10.TabIndex = 24;
+            this.label10.Text = "or";
+            // 
+            // resetCB
+            // 
+            this.resetCB.FormattingEnabled = true;
+            this.resetCB.Location = new System.Drawing.Point(83, 128);
+            this.resetCB.Name = "resetCB";
+            this.resetCB.Size = new System.Drawing.Size(64, 21);
+            this.resetCB.TabIndex = 23;
+            this.resetCB.SelectedIndexChanged += new System.EventHandler(this.resetCB_SelectedIndexChanged);
+            // 
+            // hmdyawLB
+            // 
+            this.hmdyawLB.AutoSize = true;
+            this.hmdyawLB.Location = new System.Drawing.Point(63, 18);
+            this.hmdyawLB.Name = "hmdyawLB";
+            this.hmdyawLB.Size = new System.Drawing.Size(59, 13);
+            this.hmdyawLB.TabIndex = 22;
+            this.hmdyawLB.Text = "HMD Yaw:";
+            // 
+            // zeroBT
+            // 
+            this.zeroBT.Location = new System.Drawing.Point(6, 127);
+            this.zeroBT.Name = "zeroBT";
+            this.zeroBT.Size = new System.Drawing.Size(58, 23);
+            this.zeroBT.TabIndex = 20;
+            this.zeroBT.Text = "reset";
+            this.zeroBT.UseVisualStyleBackColor = true;
+            this.zeroBT.Click += new System.EventHandler(this.zeroBT_Click);
             // 
             // label7
             // 
@@ -224,11 +290,12 @@
             // autoCB
             // 
             this.autoCB.AutoSize = true;
+            this.autoCB.Cursor = System.Windows.Forms.Cursors.Default;
             this.autoCB.Location = new System.Drawing.Point(5, 17);
             this.autoCB.Name = "autoCB";
-            this.autoCB.Size = new System.Drawing.Size(58, 17);
+            this.autoCB.Size = new System.Drawing.Size(59, 17);
             this.autoCB.TabIndex = 15;
-            this.autoCB.Text = "enable";
+            this.autoCB.Text = "Enable";
             this.autoCB.UseVisualStyleBackColor = true;
             this.autoCB.CheckedChanged += new System.EventHandler(this.autoCB_CheckedChanged);
             // 
@@ -293,30 +360,11 @@
             this.label9.TabIndex = 21;
             this.label9.Text = "+/-";
             // 
-            // zeroBT
-            // 
-            this.zeroBT.Location = new System.Drawing.Point(112, 94);
-            this.zeroBT.Name = "zeroBT";
-            this.zeroBT.Size = new System.Drawing.Size(58, 23);
-            this.zeroBT.TabIndex = 20;
-            this.zeroBT.Text = "reset";
-            this.zeroBT.UseVisualStyleBackColor = true;
-            this.zeroBT.Click += new System.EventHandler(this.zeroBT_Click);
-            // 
-            // hmdyawLB
-            // 
-            this.hmdyawLB.AutoSize = true;
-            this.hmdyawLB.Location = new System.Drawing.Point(4, 99);
-            this.hmdyawLB.Name = "hmdyawLB";
-            this.hmdyawLB.Size = new System.Drawing.Size(56, 13);
-            this.hmdyawLB.TabIndex = 22;
-            this.hmdyawLB.Text = "Hmd Yaw:";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(299, 192);
+            this.ClientSize = new System.Drawing.Size(299, 221);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.groupAuto);
@@ -367,6 +415,10 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label hmdyawLB;
         private System.Windows.Forms.Button zeroBT;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox resetCB;
     }
 }
 

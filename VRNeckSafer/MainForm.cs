@@ -24,8 +24,12 @@ namespace VRNeckSafer
         public int pov_left;
         public int but_right;
         public int pov_right;
+        public int but_reset;
+        public int pov_reset;
 
-        public int offset_angle;
+        public int joy_offset_angle;
+        public int auto_offset_angle;
+        public int sum_offset_angle;
         public int last_offset_angle;
 
         public int hmdYaw;
@@ -49,6 +53,7 @@ namespace VRNeckSafer
             deactivateNUD.Value = conf.DeactivationAngle;
             leftCB.Text = conf.LeftButton;
             rightCB.Text = conf.RightButton;
+            resetCB.Text = conf.ResetButton;
             if (conf.Auto) enableAuto(true);
             else enableAuto(false);
 
@@ -64,6 +69,7 @@ namespace VRNeckSafer
 
             js.setJoystickButton(conf.JoystickGUID, conf.LeftButton, ref but_left, ref pov_left);
             js.setJoystickButton(conf.JoystickGUID, conf.RightButton, ref but_right, ref pov_right);
+            js.setJoystickButton(conf.JoystickGUID, conf.ResetButton, ref but_reset, ref pov_reset);
 
             setComboBoxes();
 
@@ -76,10 +82,15 @@ namespace VRNeckSafer
             label5.Enabled = enable;
             label6.Enabled = enable;
             label7.Enabled = enable;
+            label10.Enabled = enable;
+            label11.Enabled = enable;
+            label12.Enabled = enable;
             hmdyawLB.Enabled = enable;
             zeroBT.Enabled = enable;
             activateNUP.Enabled = enable;
             deactivateNUD.Enabled = enable;
+            resetCB.Enabled = enable;
+            if (!enable) auto_offset_angle = 0;
         }
         private void setComboBoxes()
         {
@@ -91,13 +102,15 @@ namespace VRNeckSafer
 
             leftCB.Items.Clear();
             rightCB.Items.Clear();
+            resetCB.Items.Clear();
 
-            Joystick joy = js.GetJoystick(JoystickCB.SelectedIndex);
+            //            Joystick joy = js.GetJoystick(JoystickCB.SelectedIndex);
 
             for (int i = 0; i < js.GetJoystick(JoystickCB.SelectedIndex).Capabilities.ButtonCount; i++)
             {
                 leftCB.Items.Add("But: " + (i+1));
-                rightCB.Items.Add("But: " + (i+1));
+                rightCB.Items.Add("But: " + (i + 1));
+                resetCB.Items.Add("But: " + (i + 1));
             }
             for (int i = 0; i < js.GetJoystick(JoystickCB.SelectedIndex).Capabilities.PovCount; i++)
             {
@@ -109,6 +122,11 @@ namespace VRNeckSafer
                 rightCB.Items.Add("Pov " + i + ": D");
                 rightCB.Items.Add("Pov " + i + ": L");
                 rightCB.Items.Add("Pov " + i + ": R");
+                resetCB.Items.Add("Pov " + i + ": U");
+                resetCB.Items.Add("Pov " + i + ": D");
+                resetCB.Items.Add("Pov " + i + ": L");
+                resetCB.Items.Add("Pov " + i + ": R");
+                
             }
 
         }
@@ -174,58 +192,77 @@ namespace VRNeckSafer
             if (additivRB.Checked)
             {
                 if (l_pressed && !lastpressed)
-                    offset_angle -= (int)angleNUD.Value;
+                    joy_offset_angle -= (int)angleNUD.Value;
                 if (r_pressed && !lastpressed)
-                    offset_angle += (int)angleNUD.Value;
+                    joy_offset_angle += (int)angleNUD.Value;
             }
             else
             {
                 if (l_pressed)
-                    offset_angle = -(int)angleNUD.Value;
+                    joy_offset_angle = -(int)angleNUD.Value;
                 if (r_pressed)
-                    offset_angle = (int)angleNUD.Value;
+                    joy_offset_angle = (int)angleNUD.Value;
                 if (!(l_pressed || r_pressed))
-                    offset_angle = 0;
+                    joy_offset_angle = 0;
+
                 if (autoCB.Checked)
                 {
-                    hmdYaw = -vr.getHmdYaw() - hmdYawOffset - offset_angle;
-                    hmdyawLB.Text = "Hmd yaw: " + hmdYaw + " deg";
+                    if (js.IsButtonPressed(but_reset, pov_reset))
+                        hmdYawOffset = vr.getHmdYaw();
+
+                    int y = vr.getHmdYaw();
+                    int hmdYaw = -(vr.getHmdYaw() - hmdYawOffset + sum_offset_angle);
+                    if (hmdYaw < -180)
+                        hmdYaw += 360;
+                    if (hmdYaw > 180) 
+                        hmdYaw -= 360;
+
+                    hmdyawLB.Text = "HMD yaw: " + hmdYaw + " deg";
 
                     if (hmdYaw > 0 && hmdYaw > activateNUP.Value)
                     {
-                        offset_angle = (int)angleNUD.Value;
+                        auto_offset_angle = (int)angleNUD.Value;
                     }
                     else if (hmdYaw > 0 && hmdYaw < deactivateNUD.Value)
                     {
-                        offset_angle = 0;
+                        auto_offset_angle = 0;
                     }
                     else if (hmdYaw < 0 && hmdYaw < -activateNUP.Value)
                     {
-                        offset_angle = -(int)angleNUD.Value;
+                        auto_offset_angle = -(int)angleNUD.Value;
                     }
                     else if (hmdYaw < 0 && hmdYaw > -deactivateNUD.Value)
                     {
-                        offset_angle = 0;
+                        auto_offset_angle = 0;
                     }
                 }
                 else
-                    hmdyawLB.Text = "Hmd yaw:";
+                    hmdyawLB.Text = "Hmd yaw: -- deg";
             }
 
-            if (last_offset_angle != offset_angle)
-                vr.setOffsetAngle((float)(offset_angle*Math.PI/180.0));
+            sum_offset_angle = joy_offset_angle + auto_offset_angle;
+
+            if (last_offset_angle != sum_offset_angle)
+                vr.setOffsetAngle((float)((sum_offset_angle) * Math.PI/180.0));
 
 
             lastpressed = l_pressed || r_pressed;
 
-            last_offset_angle = offset_angle;
+            last_offset_angle = sum_offset_angle;
 
-            Text = "VRNeckSafer (" + offset_angle + " deg)";
+            Text = "VRNeckSafer (" + sum_offset_angle + " deg)";
         }
 
         private void zeroBT_Click(object sender, EventArgs e)
         {
-            hmdYawOffset = hmdYaw;
+            hmdYawOffset = vr.getHmdYaw();
+        }
+
+        private void resetCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            conf.ResetButton = resetCB.SelectedItem.ToString();
+            conf.WriteConfig();
+            js.setJoystickButton(conf.JoystickGUID, conf.ResetButton, ref but_reset, ref pov_reset);
         }
     }
 }

@@ -13,6 +13,7 @@ namespace VRNeckSafer
         public String JoystickGUID;
         public String LeftButton;
         public String RightButton;
+        public String ResetButton;
         public int Angle;
         public bool Additiv;
         public bool Auto;
@@ -24,6 +25,7 @@ namespace VRNeckSafer
             JoystickGUID = "none";
             LeftButton = "none";
             RightButton = "none";
+            ResetButton = "none";
             Angle = 30;
             Additiv = false;
             Auto = false;

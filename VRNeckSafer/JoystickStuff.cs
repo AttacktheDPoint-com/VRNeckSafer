@@ -39,6 +39,7 @@ namespace VRNeckSafer
             }
             else
             {
+                if (State.PointOfViewControllers[pov] == -1) return false;
                 return Math.Abs(State.PointOfViewControllers[pov] - but) < 5000;
             }
         }
