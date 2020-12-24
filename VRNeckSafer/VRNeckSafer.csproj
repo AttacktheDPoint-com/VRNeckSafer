@@ -131,7 +131,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Release\VRNeckSafer.exe" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Costura32\openvr_api.dll" />
     <EmbeddedResource Include="Costura64\openvr_api.dll" />
