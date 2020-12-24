@@ -114,6 +114,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Release\VRNeckSafer.zip" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
