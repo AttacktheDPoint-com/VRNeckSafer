@@ -39,11 +39,6 @@
             this.snapRB = new System.Windows.Forms.RadioButton();
             this.additivRB = new System.Windows.Forms.RadioButton();
             this.groupAuto = new System.Windows.Forms.GroupBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.resetCB = new System.Windows.Forms.ComboBox();
-            this.zeroBT = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -51,6 +46,11 @@
             this.autoCB = new System.Windows.Forms.CheckBox();
             this.deactivateNUD = new System.Windows.Forms.NumericUpDown();
             this.activateNUP = new System.Windows.Forms.NumericUpDown();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.resetCB = new System.Windows.Forms.ComboBox();
+            this.zeroBT = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.loopTimer = new System.Windows.Forms.Timer(this.components);
             this.label9 = new System.Windows.Forms.Label();
@@ -64,6 +64,7 @@
             this.HMDYawLabel = new System.Windows.Forms.Label();
             this.translationBox1 = new System.Windows.Forms.GroupBox();
             this.rotationBox = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.angleNUD)).BeginInit();
             this.groupAuto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.deactivateNUD)).BeginInit();
@@ -179,61 +180,13 @@
             this.groupAuto.Controls.Add(this.autoCB);
             this.groupAuto.Controls.Add(this.deactivateNUD);
             this.groupAuto.Controls.Add(this.activateNUP);
-            this.groupAuto.Location = new System.Drawing.Point(131, 144);
+            this.groupAuto.Location = new System.Drawing.Point(131, 139);
             this.groupAuto.Name = "groupAuto";
             this.groupAuto.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupAuto.Size = new System.Drawing.Size(156, 89);
+            this.groupAuto.Size = new System.Drawing.Size(156, 87);
             this.groupAuto.TabIndex = 13;
             this.groupAuto.TabStop = false;
             this.groupAuto.Text = "Autorotate";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(37, 22);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(86, 13);
-            this.label12.TabIndex = 26;
-            this.label12.Text = "To calibrate look";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(18, 37);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(123, 13);
-            this.label11.TabIndex = 25;
-            this.label11.Text = "straight ahead and press";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(63, 56);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(16, 13);
-            this.label10.TabIndex = 24;
-            this.label10.Text = "or";
-            // 
-            // resetCB
-            // 
-            this.resetCB.FormattingEnabled = true;
-            this.resetCB.Location = new System.Drawing.Point(81, 53);
-            this.resetCB.Name = "resetCB";
-            this.resetCB.Size = new System.Drawing.Size(64, 21);
-            this.resetCB.TabIndex = 23;
-            this.resetCB.SelectedIndexChanged += new System.EventHandler(this.resetCB_SelectedIndexChanged);
-            // 
-            // zeroBT
-            // 
-            this.zeroBT.Location = new System.Drawing.Point(4, 52);
-            this.zeroBT.Name = "zeroBT";
-            this.zeroBT.Size = new System.Drawing.Size(58, 23);
-            this.zeroBT.TabIndex = 20;
-            this.zeroBT.Text = "reset";
-            this.zeroBT.UseVisualStyleBackColor = true;
-            this.zeroBT.Click += new System.EventHandler(this.zeroBT_Click);
             // 
             // label7
             // 
@@ -324,6 +277,54 @@
             0,
             0});
             this.activateNUP.ValueChanged += new System.EventHandler(this.activateNUP_ValueChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(37, 22);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(86, 13);
+            this.label12.TabIndex = 26;
+            this.label12.Text = "To calibrate look";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(18, 37);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(123, 13);
+            this.label11.TabIndex = 25;
+            this.label11.Text = "straight ahead and press";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(63, 56);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(16, 13);
+            this.label10.TabIndex = 24;
+            this.label10.Text = "or";
+            // 
+            // resetCB
+            // 
+            this.resetCB.FormattingEnabled = true;
+            this.resetCB.Location = new System.Drawing.Point(81, 53);
+            this.resetCB.Name = "resetCB";
+            this.resetCB.Size = new System.Drawing.Size(64, 21);
+            this.resetCB.TabIndex = 23;
+            this.resetCB.SelectedIndexChanged += new System.EventHandler(this.resetCB_SelectedIndexChanged);
+            // 
+            // zeroBT
+            // 
+            this.zeroBT.Location = new System.Drawing.Point(4, 52);
+            this.zeroBT.Name = "zeroBT";
+            this.zeroBT.Size = new System.Drawing.Size(58, 23);
+            this.zeroBT.TabIndex = 20;
+            this.zeroBT.Text = "reset";
+            this.zeroBT.UseVisualStyleBackColor = true;
+            this.zeroBT.Click += new System.EventHandler(this.zeroBT_Click);
             // 
             // label8
             // 
@@ -451,11 +452,22 @@
             this.rotationBox.TabStop = false;
             this.rotationBox.Text = "Rotation";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(270, 225);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(28, 13);
+            this.label1.TabIndex = 34;
+            this.label1.Text = "v1.2";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(297, 238);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.rotationBox);
             this.Controls.Add(this.translationBox1);
             this.Controls.Add(this.HMDYawBox);
@@ -527,6 +539,7 @@
         private System.Windows.Forms.Label HMDYawLabel;
         private System.Windows.Forms.GroupBox translationBox1;
         private System.Windows.Forms.GroupBox rotationBox;
+        private System.Windows.Forms.Label label1;
     }
 }
 
