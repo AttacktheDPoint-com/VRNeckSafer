@@ -15,6 +15,8 @@ namespace VRNeckSafer
         public String RightButton;
         public String ResetButton;
         public int Angle;
+        public int TransLR;
+        public int TransF;
         public bool Additiv;
         public bool Auto;
         public int ActivationAngle;
@@ -27,6 +29,8 @@ namespace VRNeckSafer
             RightButton = "none";
             ResetButton = "none";
             Angle = 30;
+            TransLR = 0;
+            TransF = 0;
             Additiv = false;
             Auto = false;
             ActivationAngle = 70;

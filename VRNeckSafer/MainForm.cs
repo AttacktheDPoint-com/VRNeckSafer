@@ -10,6 +10,7 @@ using System.IO;
 using System.Windows.Forms;
 using SharpDX.DirectInput;
 using Newtonsoft.Json;
+using SharpDX;
 
 namespace VRNeckSafer
 {
@@ -32,6 +33,10 @@ namespace VRNeckSafer
         public int sum_offset_angle;
         public int last_offset_angle;
 
+        public float trans_offset_LR;
+        public float trans_offset_F;
+        public Vector3 trans_offset;
+
         public int hmdYaw;
         public int hmdYawOffset;
 
@@ -47,6 +52,8 @@ namespace VRNeckSafer
             vr = new VRStuff();
 
             angleNUD.Value = conf.Angle;
+            transFNUP.Value = conf.TransF;
+            transLRNUP.Value = conf.TransLR;
             additivRB.Checked = conf.Additiv;
             autoCB.Checked = conf.Auto;
             activateNUP.Value = conf.ActivationAngle;
@@ -82,14 +89,14 @@ namespace VRNeckSafer
             label5.Enabled = enable;
             label6.Enabled = enable;
             label7.Enabled = enable;
-            label10.Enabled = enable;
-            label11.Enabled = enable;
-            label12.Enabled = enable;
-            hmdyawLB.Enabled = enable;
-            zeroBT.Enabled = enable;
+//            label10.Enabled = enable;
+//            label11.Enabled = enable;
+//            label12.Enabled = enable;
+//            HMDYawLabel.Enabled = enable;
+//            zeroBT.Enabled = enable;
             activateNUP.Enabled = enable;
             deactivateNUD.Enabled = enable;
-            resetCB.Enabled = enable;
+//            resetCB.Enabled = enable;
             if (!enable) auto_offset_angle = 0;
         }
         private void setComboBoxes()
@@ -103,8 +110,6 @@ namespace VRNeckSafer
             leftCB.Items.Clear();
             rightCB.Items.Clear();
             resetCB.Items.Clear();
-
-            //            Joystick joy = js.GetJoystick(JoystickCB.SelectedIndex);
 
             for (int i = 0; i < js.GetJoystick(JoystickCB.SelectedIndex).Capabilities.ButtonCount; i++)
             {
@@ -174,6 +179,8 @@ namespace VRNeckSafer
         {
             conf.Additiv = additivRB.Checked;
             groupAuto.Enabled =!additivRB.Checked;
+            HMDYawBox.Enabled = !additivRB.Checked;
+            translationBox1.Enabled = !additivRB.Checked;
             conf.WriteConfig();
         }
 
@@ -189,39 +196,54 @@ namespace VRNeckSafer
             bool l_pressed = js.IsButtonPressed(but_left, pov_left);
             bool r_pressed = js.IsButtonPressed(but_right, pov_right);
 
+            trans_offset = new Vector3(0, 0, 0);
+
             if (additivRB.Checked)
             {
                 if (l_pressed && !lastpressed)
                     joy_offset_angle -= (int)angleNUD.Value;
                 if (r_pressed && !lastpressed)
                     joy_offset_angle += (int)angleNUD.Value;
+                HMDYawLabel.Text = "HMD yaw: -- deg";
             }
             else
             {
                 if (l_pressed)
+                {
                     joy_offset_angle = -(int)angleNUD.Value;
-                if (r_pressed)
+                    trans_offset.X = trans_offset_LR;
+                    trans_offset.Z = trans_offset_F;
+                }
+                else if (r_pressed)
+                {
                     joy_offset_angle = (int)angleNUD.Value;
-                if (!(l_pressed || r_pressed))
+                    trans_offset.X = -trans_offset_LR;
+                    trans_offset.Z = trans_offset_F;
+                }
+                else
                     joy_offset_angle = 0;
+
+                if (js.IsButtonPressed(but_reset, pov_reset))
+                    hmdYawOffset = vr.getHmdYaw();
+
+                int hmdYaw = -(vr.getHmdYaw() - hmdYawOffset + sum_offset_angle);
+
+                if (hmdYaw < -180)
+                    hmdYaw += 360;
+                if (hmdYaw > 180)
+                    hmdYaw -= 360;
+
+                HMDYawLabel.Text = "HMD yaw: " + hmdYaw + " deg";
 
                 if (autoCB.Checked)
                 {
-                    if (js.IsButtonPressed(but_reset, pov_reset))
-                        hmdYawOffset = vr.getHmdYaw();
 
-                    int hmdYaw = -(vr.getHmdYaw() - hmdYawOffset + sum_offset_angle);
- 
-                    if (hmdYaw < -180)
-                        hmdYaw += 360;
-                    if (hmdYaw > 180) 
-                        hmdYaw -= 360;
-
-                    hmdyawLB.Text = "HMD yaw: " + hmdYaw + " deg";
 
                     if (hmdYaw > 0 && hmdYaw > activateNUP.Value)
                     {
                         auto_offset_angle = (int)angleNUD.Value;
+                        trans_offset.X = -trans_offset_LR;
+                        trans_offset.Z = trans_offset_F;
                     }
                     else if (hmdYaw > 0 && hmdYaw < deactivateNUD.Value)
                     {
@@ -230,21 +252,31 @@ namespace VRNeckSafer
                     else if (hmdYaw < 0 && hmdYaw < -activateNUP.Value)
                     {
                         auto_offset_angle = -(int)angleNUD.Value;
+                        trans_offset.X = trans_offset_LR;
+                        trans_offset.Z = trans_offset_F;
                     }
                     else if (hmdYaw < 0 && hmdYaw > -deactivateNUD.Value)
                     {
                         auto_offset_angle = 0;
                     }
                 }
-                else
-                    hmdyawLB.Text = "HMD yaw: -- deg";
             }
 
             sum_offset_angle = joy_offset_angle + auto_offset_angle;
 
-            if (last_offset_angle != sum_offset_angle)
-                vr.setOffsetAngle((float)((sum_offset_angle) * Math.PI/180.0));
 
+            if (last_offset_angle != sum_offset_angle)
+            {
+                if (autoCB.Checked && !additivRB.Checked && last_offset_angle != 0)
+                {
+                    sum_offset_angle = 0;
+                    trans_offset.X = 0;
+                    trans_offset.Z = 0;
+                }
+
+                trans_offset = vr.rotateCoord(trans_offset, -(float)((hmdYawOffset+ sum_offset_angle) * Math.PI / 180.0F));
+                vr.setOffsetAngle(sum_offset_angle, trans_offset);
+            }
 
             lastpressed = l_pressed || r_pressed;
 
@@ -263,6 +295,20 @@ namespace VRNeckSafer
             conf.ResetButton = resetCB.SelectedItem.ToString();
             conf.WriteConfig();
             js.setJoystickButton(conf.JoystickGUID, conf.ResetButton, ref but_reset, ref pov_reset);
+        }
+
+        private void transFNUP_ValueChanged(object sender, EventArgs e)
+        {
+            conf.TransF = (int)transFNUP.Value;
+            trans_offset_F = (float)transFNUP.Value / 100F;
+            conf.WriteConfig();
+        }
+
+        private void transLRNUP_ValueChanged(object sender, EventArgs e)
+        {
+            conf.TransLR = (int)transLRNUP.Value;
+            trans_offset_LR = (float)transLRNUP.Value / 100F;
+            conf.WriteConfig();
         }
     }
 }
