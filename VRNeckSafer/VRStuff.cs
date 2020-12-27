@@ -29,6 +29,14 @@ namespace VRNeckSafer
             Poses = new TrackedDevicePose_t[OpenVR.k_unMaxTrackedDeviceCount];
         }
 
+        public bool HmdIsActive()
+        {
+            if (system.GetTrackedDeviceActivityLevel(0) == EDeviceActivityLevel.k_EDeviceActivityLevel_UserInteraction)
+                return true;
+            else
+                return false;
+        }
+
         public int getHmdYaw()
         {
             system.GetDeviceToAbsoluteTrackingPose(ETrackingUniverseOrigin.TrackingUniverseStanding, 0.0f, Poses);

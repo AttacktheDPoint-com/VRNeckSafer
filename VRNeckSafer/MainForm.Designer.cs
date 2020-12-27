@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.JoystickCB = new System.Windows.Forms.ComboBox();
             this.leftCB = new System.Windows.Forms.ComboBox();
             this.rightCB = new System.Windows.Forms.ComboBox();
@@ -460,7 +461,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(28, 13);
             this.label1.TabIndex = 34;
-            this.label1.Text = "v1.2";
+            this.label1.Text = "v1.3";
             // 
             // MainForm
             // 
@@ -480,6 +481,7 @@
             this.Controls.Add(this.rightCB);
             this.Controls.Add(this.leftCB);
             this.Controls.Add(this.JoystickCB);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(313, 277);
             this.MinimumSize = new System.Drawing.Size(313, 277);
             this.Name = "MainForm";

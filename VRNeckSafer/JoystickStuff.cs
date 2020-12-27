@@ -13,7 +13,7 @@ namespace VRNeckSafer
         DirectInput DInput;
         public IList<DeviceInstance> ll;
         public Joystick Stick;
-        public  JoystickStuff()
+        public JoystickStuff()
         {
             DInput = new DirectInput();
             ll = DInput.GetDevices(DeviceClass.GameControl, DeviceEnumerationFlags.AttachedOnly);
@@ -32,10 +32,12 @@ namespace VRNeckSafer
         {
             if (Stick == null) return false;
 
+            if ((pov == -1) && (but == -1)) return false;
+
             JoystickState State = Stick.GetCurrentState();
             if (pov == -1)
-            {
-                return State.Buttons[but-1];
+            {  
+                return State.Buttons[but - 1];
             }
             else
             {
@@ -47,15 +49,17 @@ namespace VRNeckSafer
         {
             foreach (DeviceInstance joy in ll)
             {
-                if (joy.InstanceGuid.ToString() == guid)
+               if (joy.InstanceGuid.ToString() == guid)
                 {
-                    if (butstr == "none") but = -1;
-                    else if (butstr.StartsWith("But:"))
+                    but = -1;
+                    pov = -1;
+
+                    if (butstr.StartsWith("But:"))
                     {
                         int.TryParse(butstr.Substring(5), out but);
                         pov = -1;
                     }
-                    else
+                    else if ((butstr.StartsWith("Pov ")))
                     {
                         int.TryParse(butstr.Substring(4, 1), out pov);
                         switch (butstr.Substring(7))
@@ -74,7 +78,7 @@ namespace VRNeckSafer
                                 break;
                         }
                     }
-                   break;
+                    break;
                 }
             }
         }

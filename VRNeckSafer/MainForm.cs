@@ -89,14 +89,8 @@ namespace VRNeckSafer
             label5.Enabled = enable;
             label6.Enabled = enable;
             label7.Enabled = enable;
-//            label10.Enabled = enable;
-//            label11.Enabled = enable;
-//            label12.Enabled = enable;
-//            HMDYawLabel.Enabled = enable;
-//            zeroBT.Enabled = enable;
             activateNUP.Enabled = enable;
             deactivateNUD.Enabled = enable;
-//            resetCB.Enabled = enable;
             if (!enable) auto_offset_angle = 0;
         }
         private void setComboBoxes()
@@ -110,6 +104,10 @@ namespace VRNeckSafer
             leftCB.Items.Clear();
             rightCB.Items.Clear();
             resetCB.Items.Clear();
+
+            leftCB.Items.Add("none");
+            rightCB.Items.Add("none");
+            resetCB.Items.Add("none");
 
             for (int i = 0; i < js.GetJoystick(JoystickCB.SelectedIndex).Capabilities.ButtonCount; i++)
             {
@@ -130,10 +128,8 @@ namespace VRNeckSafer
                 resetCB.Items.Add("Pov " + i + ": U");
                 resetCB.Items.Add("Pov " + i + ": D");
                 resetCB.Items.Add("Pov " + i + ": L");
-                resetCB.Items.Add("Pov " + i + ": R");
-                
+                resetCB.Items.Add("Pov " + i + ": R");               
             }
-
         }
         private void JoystickCB_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -233,7 +229,8 @@ namespace VRNeckSafer
                 if (hmdYaw > 180)
                     hmdYaw -= 360;
 
-                HMDYawLabel.Text = "HMD yaw: " + hmdYaw + " deg";
+                if (vr.HmdIsActive())
+                    HMDYawLabel.Text = "HMD yaw: " + hmdYaw + " deg";
 
                 if (autoCB.Checked)
                 {
@@ -303,7 +300,6 @@ namespace VRNeckSafer
             trans_offset_F = (float)transFNUP.Value / 100F;
             conf.WriteConfig();
         }
-
         private void transLRNUP_ValueChanged(object sender, EventArgs e)
         {
             conf.TransLR = (int)transLRNUP.Value;
