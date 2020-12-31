@@ -37,3 +37,9 @@ To use it:
 -     open VRNeckSafer.cfg in a text editor
 -     at the line "Use8WayHat" change false to true
 -     safe and exit editor
+
+**Update v1.5:**
+
+Separate rotation angles for snap and autorotation
+
+  
