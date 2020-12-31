@@ -109,6 +109,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="LICENSE" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -119,6 +120,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -138,6 +140,7 @@
   <ItemGroup>
     <Content Include="Release\VRNeckSafer.exe" />
     <Content Include="Release\VRNSv14.JPG" />
+    <Content Include="Release\VRNSv15.JPG" />
     <Content Include="VRNS.ico" />
   </ItemGroup>
   <ItemGroup>
