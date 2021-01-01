@@ -233,7 +233,7 @@ namespace VRNeckSafer
 
                 if (js.IsButtonPressed(conf.Use8WayHat, but_reset, pov_reset))
                 {
-                    vr.setHmdSeatedPosition();
+                    vr.getHmdSeatedPositionOffset();
                     hmdYawOffset = vr.getHmdYaw();
                 }
 
