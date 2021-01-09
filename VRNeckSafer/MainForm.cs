@@ -27,6 +27,8 @@ namespace VRNeckSafer
         public int pov_right;
         public int but_reset;
         public int pov_reset;
+        public int but_disableauto;
+        public int pov_disableauto;
 
         public int joy_offset_angle;
         public int auto_offset_angle;
@@ -62,6 +64,7 @@ namespace VRNeckSafer
             leftCB.Text = conf.LeftButton;
             rightCB.Text = conf.RightButton;
             resetCB.Text = conf.ResetButton;
+            tempDisCB.Text = conf.autoDisableButton;
             if (conf.Auto) enableAuto(true);
             else enableAuto(false);
 
@@ -78,7 +81,7 @@ namespace VRNeckSafer
             js.setJoystickButton(conf.JoystickGUID, conf.LeftButton, conf.Use8WayHat, ref but_left, ref pov_left);
             js.setJoystickButton(conf.JoystickGUID, conf.RightButton, conf.Use8WayHat, ref but_right, ref pov_right);
             js.setJoystickButton(conf.JoystickGUID, conf.ResetButton, conf.Use8WayHat, ref but_reset, ref pov_reset);
-
+            js.setJoystickButton(conf.JoystickGUID, conf.autoDisableButton, conf.Use8WayHat, ref but_disableauto, ref pov_disableauto);
             setComboBoxes();
 
             loopTimer.Start();
@@ -91,10 +94,12 @@ namespace VRNeckSafer
             label6.Enabled = enable;
             label7.Enabled = enable;
             label18.Enabled = enable;
+            label20.Enabled = enable;
             label13.Enabled = enable;
             autoRotNUD.Enabled = enable;
             activateNUP.Enabled = enable;
             deactivateNUD.Enabled = enable;
+            tempDisCB.Enabled = enable;
             if (!enable) auto_offset_angle = 0;
         }
         private void setComboBoxes()
@@ -108,16 +113,19 @@ namespace VRNeckSafer
             leftCB.Items.Clear();
             rightCB.Items.Clear();
             resetCB.Items.Clear();
+            tempDisCB.Items.Clear();
 
             leftCB.Items.Add("none");
             rightCB.Items.Add("none");
             resetCB.Items.Add("none");
+            tempDisCB.Items.Add("none");
 
             for (int i = 0; i < js.GetJoystick(JoystickCB.SelectedIndex).Capabilities.ButtonCount; i++)
             {
                 leftCB.Items.Add("But: " + (i + 1));
                 rightCB.Items.Add("But: " + (i + 1));
                 resetCB.Items.Add("But: " + (i + 1));
+                tempDisCB.Items.Add("But: " + (i + 1));
             }
             for (int i = 0; i < js.GetJoystick(JoystickCB.SelectedIndex).Capabilities.PovCount; i++)
             {
@@ -128,6 +136,7 @@ namespace VRNeckSafer
                         leftCB.Items.Add("P" + i + ": " + j);
                         rightCB.Items.Add("P" + i + ": " + j);
                         resetCB.Items.Add("P" + i + ": " + j);
+                        tempDisCB.Items.Add("P" + i + ": " + j);
                     }
                 }
                 else
@@ -144,6 +153,10 @@ namespace VRNeckSafer
                     resetCB.Items.Add("Pov " + i + ": D");
                     resetCB.Items.Add("Pov " + i + ": L");
                     resetCB.Items.Add("Pov " + i + ": R");
+                    tempDisCB.Items.Add("Pov " + i + ": U");
+                    tempDisCB.Items.Add("Pov " + i + ": D");
+                    tempDisCB.Items.Add("Pov " + i + ": L");
+                    tempDisCB.Items.Add("Pov " + i + ": R");
                 }
             }
         }
@@ -167,6 +180,20 @@ namespace VRNeckSafer
             conf.RightButton = rightCB.SelectedItem.ToString();
             conf.WriteConfig();
             js.setJoystickButton(conf.JoystickGUID, conf.RightButton, conf.Use8WayHat, ref but_right, ref pov_right);
+        }
+
+        private void tempDisCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            conf.autoDisableButton = tempDisCB.SelectedItem.ToString();
+            conf.WriteConfig();
+            js.setJoystickButton(conf.JoystickGUID, conf.autoDisableButton, conf.Use8WayHat, ref but_disableauto, ref pov_disableauto);
+        }
+
+        private void tempDisCB_KeyUp(object sender, KeyEventArgs e)
+        {
+            conf.autoDisableButton = tempDisCB.SelectedItem.ToString();
+            conf.WriteConfig();
+            js.setJoystickButton(conf.JoystickGUID, conf.autoDisableButton, conf.Use8WayHat, ref but_disableauto, ref pov_disableauto);
         }
 
         private void angleNUD_ValueChanged(object sender, EventArgs e)
@@ -224,8 +251,18 @@ namespace VRNeckSafer
 
             bool l_pressed = js.IsButtonPressed(conf.Use8WayHat, but_left, pov_left);
             bool r_pressed = js.IsButtonPressed(conf.Use8WayHat, but_right, pov_right);
+            bool autofrozen= js.IsButtonPressed(conf.Use8WayHat, but_disableauto, pov_disableauto);
 
             trans_offset = new Vector3(0, 0, 0);
+
+            if (vr.isSeatedMode())
+            {
+                modeLB.Text = "(playing mode: seated)";
+            }
+            else
+            {
+                modeLB.Text = "(playing mode: standing)";
+            }
 
             if (additivRB.Checked)
             {
@@ -268,10 +305,8 @@ namespace VRNeckSafer
                 else
                     HMDYawLabel.Text = "HMD yaw: standby";
 
-                if (autoCB.Checked)
+                if (autoCB.Checked && ! autofrozen)
                 {
-
-
                     if (hmdYaw > 0 && hmdYaw > activateNUP.Value)
                     {
                         auto_offset_angle = (int)autoRotNUD.Value;

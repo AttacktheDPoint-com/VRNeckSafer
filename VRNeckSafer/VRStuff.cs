@@ -15,11 +15,8 @@ namespace VRNeckSafer
         private CVRSystem system;
         private TrackedDevicePose_t[] Poses;
         private HmdMatrix34_t HmdPose;
-        private Vector3 DiffXyz;
 
         private float lastAngle;
-        private HmdMatrix34_t seated,lll;
-        public String debugMsg;
         public Vector3 deltaPos;
 
         public VRStuff()
@@ -38,6 +35,11 @@ namespace VRNeckSafer
             }
 
             getHmdSeatedPositionOffset();
+        }
+
+        public bool isSeatedMode()
+        {
+            return OpenVR.Compositor.GetTrackingSpace() == ETrackingUniverseOrigin.TrackingUniverseSeated;
         }
 
         public void getHmdSeatedPositionOffset()

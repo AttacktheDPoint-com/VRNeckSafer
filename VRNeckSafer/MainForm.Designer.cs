@@ -40,13 +40,16 @@
             this.snapRB = new System.Windows.Forms.RadioButton();
             this.additivRB = new System.Windows.Forms.RadioButton();
             this.groupAuto = new System.Windows.Forms.GroupBox();
+            this.deactivateNUD = new System.Windows.Forms.NumericUpDown();
+            this.activateNUP = new System.Windows.Forms.NumericUpDown();
+            this.autoRotNUD = new System.Windows.Forms.NumericUpDown();
+            this.label13 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.autoCB = new System.Windows.Forms.CheckBox();
-            this.deactivateNUD = new System.Windows.Forms.NumericUpDown();
-            this.activateNUP = new System.Windows.Forms.NumericUpDown();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -66,25 +69,25 @@
             this.translationBox1 = new System.Windows.Forms.GroupBox();
             this.rotationBox = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.autoRotNUD = new System.Windows.Forms.NumericUpDown();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
+            this.modeLB = new System.Windows.Forms.Label();
+            this.tempDisCB = new System.Windows.Forms.ComboBox();
+            this.label20 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.angleNUD)).BeginInit();
             this.groupAuto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.deactivateNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.activateNUP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.autoRotNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.transLRNUP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.transFNUP)).BeginInit();
             this.HMDYawBox.SuspendLayout();
             this.translationBox1.SuspendLayout();
             this.rotationBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.autoRotNUD)).BeginInit();
             this.SuspendLayout();
             // 
             // JoystickCB
             // 
             this.JoystickCB.FormattingEnabled = true;
-            this.JoystickCB.Location = new System.Drawing.Point(11, 32);
+            this.JoystickCB.Location = new System.Drawing.Point(11, 25);
             this.JoystickCB.Name = "JoystickCB";
             this.JoystickCB.Size = new System.Drawing.Size(135, 21);
             this.JoystickCB.TabIndex = 11;
@@ -93,7 +96,7 @@
             // leftCB
             // 
             this.leftCB.FormattingEnabled = true;
-            this.leftCB.Location = new System.Drawing.Point(152, 32);
+            this.leftCB.Location = new System.Drawing.Point(152, 25);
             this.leftCB.Name = "leftCB";
             this.leftCB.Size = new System.Drawing.Size(64, 21);
             this.leftCB.TabIndex = 2;
@@ -102,7 +105,7 @@
             // rightCB
             // 
             this.rightCB.FormattingEnabled = true;
-            this.rightCB.Location = new System.Drawing.Point(222, 32);
+            this.rightCB.Location = new System.Drawing.Point(222, 25);
             this.rightCB.Name = "rightCB";
             this.rightCB.Size = new System.Drawing.Size(64, 21);
             this.rightCB.TabIndex = 3;
@@ -111,7 +114,7 @@
             // lable1
             // 
             this.lable1.AutoSize = true;
-            this.lable1.Location = new System.Drawing.Point(13, 16);
+            this.lable1.Location = new System.Drawing.Point(13, 9);
             this.lable1.Name = "lable1";
             this.lable1.Size = new System.Drawing.Size(45, 13);
             this.lable1.TabIndex = 4;
@@ -120,7 +123,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(152, 16);
+            this.label2.Location = new System.Drawing.Point(152, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(58, 13);
             this.label2.TabIndex = 6;
@@ -129,7 +132,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(222, 16);
+            this.label3.Location = new System.Drawing.Point(222, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 13);
             this.label3.TabIndex = 7;
@@ -158,7 +161,7 @@
             // 
             this.snapRB.AutoSize = true;
             this.snapRB.Checked = true;
-            this.snapRB.Location = new System.Drawing.Point(12, 189);
+            this.snapRB.Location = new System.Drawing.Point(12, 185);
             this.snapRB.Name = "snapRB";
             this.snapRB.Size = new System.Drawing.Size(50, 17);
             this.snapRB.TabIndex = 1;
@@ -169,7 +172,7 @@
             // additivRB
             // 
             this.additivRB.AutoSize = true;
-            this.additivRB.Location = new System.Drawing.Point(12, 212);
+            this.additivRB.Location = new System.Drawing.Point(12, 208);
             this.additivRB.Name = "additivRB";
             this.additivRB.Size = new System.Drawing.Size(89, 17);
             this.additivRB.TabIndex = 12;
@@ -179,6 +182,8 @@
             // 
             // groupAuto
             // 
+            this.groupAuto.Controls.Add(this.label20);
+            this.groupAuto.Controls.Add(this.tempDisCB);
             this.groupAuto.Controls.Add(this.deactivateNUD);
             this.groupAuto.Controls.Add(this.activateNUP);
             this.groupAuto.Controls.Add(this.autoRotNUD);
@@ -189,13 +194,81 @@
             this.groupAuto.Controls.Add(this.label5);
             this.groupAuto.Controls.Add(this.label4);
             this.groupAuto.Controls.Add(this.autoCB);
-            this.groupAuto.Location = new System.Drawing.Point(131, 140);
+            this.groupAuto.Location = new System.Drawing.Point(131, 133);
             this.groupAuto.Name = "groupAuto";
             this.groupAuto.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupAuto.Size = new System.Drawing.Size(156, 96);
+            this.groupAuto.Size = new System.Drawing.Size(156, 119);
             this.groupAuto.TabIndex = 13;
             this.groupAuto.TabStop = false;
             this.groupAuto.Text = "Autorotate";
+            // 
+            // deactivateNUD
+            // 
+            this.deactivateNUD.Enabled = false;
+            this.deactivateNUD.Location = new System.Drawing.Point(90, 71);
+            this.deactivateNUD.Maximum = new decimal(new int[] {
+            369,
+            0,
+            0,
+            0});
+            this.deactivateNUD.Name = "deactivateNUD";
+            this.deactivateNUD.Size = new System.Drawing.Size(38, 20);
+            this.deactivateNUD.TabIndex = 14;
+            this.deactivateNUD.Value = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.deactivateNUD.ValueChanged += new System.EventHandler(this.deactivateNUD_ValueChanged);
+            this.deactivateNUD.KeyUp += new System.Windows.Forms.KeyEventHandler(this.deactivateNUD_KeyUp);
+            // 
+            // activateNUP
+            // 
+            this.activateNUP.Enabled = false;
+            this.activateNUP.Location = new System.Drawing.Point(90, 48);
+            this.activateNUP.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.activateNUP.Name = "activateNUP";
+            this.activateNUP.Size = new System.Drawing.Size(38, 20);
+            this.activateNUP.TabIndex = 10;
+            this.activateNUP.Value = new decimal(new int[] {
+            70,
+            0,
+            0,
+            0});
+            this.activateNUP.ValueChanged += new System.EventHandler(this.activateNUP_ValueChanged);
+            this.activateNUP.KeyUp += new System.Windows.Forms.KeyEventHandler(this.activateNUP_KeyUp);
+            // 
+            // autoRotNUD
+            // 
+            this.autoRotNUD.Location = new System.Drawing.Point(90, 25);
+            this.autoRotNUD.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.autoRotNUD.Name = "autoRotNUD";
+            this.autoRotNUD.Size = new System.Drawing.Size(38, 20);
+            this.autoRotNUD.TabIndex = 22;
+            this.autoRotNUD.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.autoRotNUD.ValueChanged += new System.EventHandler(this.autoRotNUD_ValueChanged);
+            this.autoRotNUD.KeyUp += new System.Windows.Forms.KeyEventHandler(this.autoRotNUD_KeyUp);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(128, 27);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(25, 13);
+            this.label13.TabIndex = 23;
+            this.label13.Text = "deg";
             // 
             // label7
             // 
@@ -206,6 +279,15 @@
             this.label7.Size = new System.Drawing.Size(25, 13);
             this.label7.TabIndex = 19;
             this.label7.Text = "deg";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(58, 28);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(30, 13);
+            this.label18.TabIndex = 24;
+            this.label18.Text = "Rot.:";
             // 
             // label6
             // 
@@ -248,46 +330,6 @@
             this.autoCB.Text = "Enable";
             this.autoCB.UseVisualStyleBackColor = true;
             this.autoCB.CheckedChanged += new System.EventHandler(this.autoCB_CheckedChanged);
-            // 
-            // deactivateNUD
-            // 
-            this.deactivateNUD.Enabled = false;
-            this.deactivateNUD.Location = new System.Drawing.Point(90, 71);
-            this.deactivateNUD.Maximum = new decimal(new int[] {
-            369,
-            0,
-            0,
-            0});
-            this.deactivateNUD.Name = "deactivateNUD";
-            this.deactivateNUD.Size = new System.Drawing.Size(38, 20);
-            this.deactivateNUD.TabIndex = 14;
-            this.deactivateNUD.Value = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
-            this.deactivateNUD.ValueChanged += new System.EventHandler(this.deactivateNUD_ValueChanged);
-            this.deactivateNUD.KeyUp += new System.Windows.Forms.KeyEventHandler(this.deactivateNUD_KeyUp);
-            // 
-            // activateNUP
-            // 
-            this.activateNUP.Enabled = false;
-            this.activateNUP.Location = new System.Drawing.Point(90, 48);
-            this.activateNUP.Maximum = new decimal(new int[] {
-            360,
-            0,
-            0,
-            0});
-            this.activateNUP.Name = "activateNUP";
-            this.activateNUP.Size = new System.Drawing.Size(38, 20);
-            this.activateNUP.TabIndex = 10;
-            this.activateNUP.Value = new decimal(new int[] {
-            70,
-            0,
-            0,
-            0});
-            this.activateNUP.ValueChanged += new System.EventHandler(this.activateNUP_ValueChanged);
-            this.activateNUP.KeyUp += new System.Windows.Forms.KeyEventHandler(this.activateNUP_KeyUp);
             // 
             // label12
             // 
@@ -422,7 +464,7 @@
             this.HMDYawBox.Controls.Add(this.zeroBT);
             this.HMDYawBox.Controls.Add(this.resetCB);
             this.HMDYawBox.Controls.Add(this.label10);
-            this.HMDYawBox.Location = new System.Drawing.Point(131, 58);
+            this.HMDYawBox.Location = new System.Drawing.Point(131, 51);
             this.HMDYawBox.Name = "HMDYawBox";
             this.HMDYawBox.Size = new System.Drawing.Size(156, 79);
             this.HMDYawBox.TabIndex = 31;
@@ -446,7 +488,7 @@
             this.translationBox1.Controls.Add(this.label14);
             this.translationBox1.Controls.Add(this.label16);
             this.translationBox1.Controls.Add(this.label15);
-            this.translationBox1.Location = new System.Drawing.Point(11, 109);
+            this.translationBox1.Location = new System.Drawing.Point(11, 102);
             this.translationBox1.Name = "translationBox1";
             this.translationBox1.Size = new System.Drawing.Size(114, 74);
             this.translationBox1.TabIndex = 32;
@@ -458,7 +500,7 @@
             this.rotationBox.Controls.Add(this.angleNUD);
             this.rotationBox.Controls.Add(this.label8);
             this.rotationBox.Controls.Add(this.label9);
-            this.rotationBox.Location = new System.Drawing.Point(11, 58);
+            this.rotationBox.Location = new System.Drawing.Point(11, 51);
             this.rotationBox.Name = "rotationBox";
             this.rotationBox.Size = new System.Drawing.Size(114, 51);
             this.rotationBox.TabIndex = 33;
@@ -469,54 +511,49 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(270, 234);
+            this.label1.Location = new System.Drawing.Point(264, 253);
             this.label1.Name = "label1";
+            this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label1.Size = new System.Drawing.Size(28, 13);
             this.label1.TabIndex = 34;
-            this.label1.Text = "v1.5";
+            this.label1.Text = "v1.6";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // autoRotNUD
+            // modeLB
             // 
-            this.autoRotNUD.Location = new System.Drawing.Point(90, 25);
-            this.autoRotNUD.Maximum = new decimal(new int[] {
-            360,
-            0,
-            0,
-            0});
-            this.autoRotNUD.Name = "autoRotNUD";
-            this.autoRotNUD.Size = new System.Drawing.Size(38, 20);
-            this.autoRotNUD.TabIndex = 22;
-            this.autoRotNUD.Value = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.autoRotNUD.ValueChanged += new System.EventHandler(this.autoRotNUD_ValueChanged);
-            this.autoRotNUD.KeyUp += new System.Windows.Forms.KeyEventHandler(this.autoRotNUD_KeyUp);
+            this.modeLB.AutoSize = true;
+            this.modeLB.Location = new System.Drawing.Point(6, 252);
+            this.modeLB.Name = "modeLB";
+            this.modeLB.Size = new System.Drawing.Size(86, 13);
+            this.modeLB.TabIndex = 35;
+            this.modeLB.Text = "(Mode: standing)";
             // 
-            // label13
+            // tempDisCB
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(128, 27);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(25, 13);
-            this.label13.TabIndex = 23;
-            this.label13.Text = "deg";
+            this.tempDisCB.FormattingEnabled = true;
+            this.tempDisCB.Location = new System.Drawing.Point(89, 93);
+            this.tempDisCB.Name = "tempDisCB";
+            this.tempDisCB.Size = new System.Drawing.Size(64, 21);
+            this.tempDisCB.TabIndex = 28;
+            this.tempDisCB.SelectedIndexChanged += new System.EventHandler(this.tempDisCB_SelectedIndexChanged);
+            this.tempDisCB.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tempDisCB_KeyUp);
             // 
-            // label18
+            // label20
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(58, 28);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(30, 13);
-            this.label18.TabIndex = 24;
-            this.label18.Text = "Rot.:";
+            this.label20.AutoSize = true;
+            this.label20.Enabled = false;
+            this.label20.Location = new System.Drawing.Point(47, 96);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(39, 13);
+            this.label20.TabIndex = 29;
+            this.label20.Text = "freeze:";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(297, 248);
+            this.ClientSize = new System.Drawing.Size(297, 268);
+            this.Controls.Add(this.modeLB);
             this.Controls.Add(this.rotationBox);
             this.Controls.Add(this.translationBox1);
             this.Controls.Add(this.HMDYawBox);
@@ -531,8 +568,8 @@
             this.Controls.Add(this.JoystickCB);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(313, 287);
-            this.MinimumSize = new System.Drawing.Size(313, 287);
+            this.MaximumSize = new System.Drawing.Size(313, 307);
+            this.MinimumSize = new System.Drawing.Size(313, 307);
             this.Name = "MainForm";
             this.Text = "VRNeckSafer";
             ((System.ComponentModel.ISupportInitialize)(this.angleNUD)).EndInit();
@@ -540,6 +577,7 @@
             this.groupAuto.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.deactivateNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.activateNUP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.autoRotNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.transLRNUP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.transFNUP)).EndInit();
             this.HMDYawBox.ResumeLayout(false);
@@ -548,7 +586,6 @@
             this.translationBox1.PerformLayout();
             this.rotationBox.ResumeLayout(false);
             this.rotationBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.autoRotNUD)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -595,6 +632,9 @@
         private System.Windows.Forms.NumericUpDown autoRotNUD;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label modeLB;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.ComboBox tempDisCB;
     }
 }
 

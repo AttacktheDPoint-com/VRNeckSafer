@@ -22,6 +22,7 @@ namespace VRNeckSafer
         public int AutorotAngle;
         public int ActivationAngle;
         public int DeactivationAngle;
+        public String autoDisableButton;
         public bool Use8WayHat;
 
         public Config()
@@ -30,12 +31,13 @@ namespace VRNeckSafer
             LeftButton = "none";
             RightButton = "none";
             ResetButton = "none";
+            autoDisableButton = "none";
             Angle = 30;
             TransLR = 0;
             TransF = 0;
             Additiv = false;
             Auto = false;
-            AutorotAngle = -1;
+            AutorotAngle = 0;
             ActivationAngle = 70;
             DeactivationAngle = 60;
             Use8WayHat = false;
