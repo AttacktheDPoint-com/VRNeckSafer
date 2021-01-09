@@ -48,6 +48,7 @@ Compatibility to other major combat sim.
 Added a "temporary freeze" button for autorotation 
 
 I'll stay with the zipped folder this time, the standalone versions gave too much trouble with false av alerts...  There is no difference in usage.
+
 It's still a good idea to use the same button for HMD yaw reset and the in game "Default VR view"!
 Also, better keep the HMD standard orientation (arrow on ground on the SteamVR plains) close to your normal front direction. (the HMD yaw reset function trys to compensate, but big angular differences are problematic)
 
