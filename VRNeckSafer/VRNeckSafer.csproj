@@ -136,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Release\VRNeckSafer.exe" />
+    <Content Include="Release\VRNeckSafer_v_1_5.exe" />
     <Content Include="Release\VRNSv14.JPG" />
     <Content Include="Release\VRNSv15.JPG" />
     <Content Include="VRNS.ico" />

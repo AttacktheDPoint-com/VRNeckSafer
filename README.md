@@ -42,4 +42,4 @@ To use it:
 
 Separate rotation angles for snap and autorotation
 
-  
+

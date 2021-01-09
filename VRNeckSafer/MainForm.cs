@@ -253,7 +253,10 @@ namespace VRNeckSafer
                     joy_offset_angle = 0;
 
                 if (js.IsButtonPressed(conf.Use8WayHat, but_reset, pov_reset))
+                {
+                    vr.getHmdSeatedPositionOffset();
                     hmdYawOffset = vr.getHmdYaw();
+                }
 
                 int hmdYaw = -(vr.getHmdYaw() - hmdYawOffset + sum_offset_angle);
 
@@ -262,6 +265,8 @@ namespace VRNeckSafer
 
                 if (vr.HmdIsActive())
                     HMDYawLabel.Text = "HMD yaw: " + hmdYaw + " deg";
+                else
+                    HMDYawLabel.Text = "HMD yaw: standby";
 
                 if (autoCB.Checked)
                 {
