@@ -24,7 +24,7 @@ I added the option to use a joystick button to reset the HMD Yaw angle. To use t
 I included a feature to define translational offsets. Better use only a few centimeters here and reset HMD yaw...
 Still some  AV checker might give false alerts, haven't got an idea how to avoid that.  
 
-**Update v1.3:**
+**Update v1.3:** 
 
 Minor bugfix when no button was selected and a beautiful new icon! ;)
 
