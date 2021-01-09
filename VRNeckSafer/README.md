@@ -1,7 +1,7 @@
 VRNeckSafer tries to help to help virtual pilots flying in VR to not break their neck while trying to check their six.
 It adds an angular offset to the current viewing angle by pressing a joystick button. Currently working with IL2 with SteamVR.
 
-<img src="https://gitlab.com/NobiWan/vrnecksafer/-/raw/master/VRNeckSafer/Release/VRNSv15.JPG"> 
+<img src="https://gitlab.com/NobiWan/vrnecksafer/-/raw/master/VRNeckSafer/Release/VRNSv16.JPG"> 
 
 **How to use it:**
 
@@ -37,3 +37,23 @@ To use it:
 -     open VRNeckSafer.cfg in a text editor
 -     at the line "Use8WayHat" change false to true
 -     safe and exit editor
+ 
+**Update v1.5:**
+
+Separate rotation angles for snap and autorotation
+
+**Update v1.6:**
+
+Compatibility to other major combat sim. 
+Added a "temporary freeze" button for autorotation 
+
+I'll stay with the zipped folder this time, the standalone versions gave too much trouble with false av alerts...  There is no difference in usage.
+It's still a good idea to use the same button for HMD yaw reset and the in game "Default VR view"!
+Also, better keep the HMD standard orientation (arrow on ground on the SteamVR plains) close to your normal front direction. (the HMD yaw reset function trys to compensate, but big angular differences are problematic)
+
+ 
+Known issues:
+
+problem with  Rift CV1 (no reaction after game is launched?)
+problem with Vive Pro (View point centers on base station?)
+If anyone got these running, please let me know! 
