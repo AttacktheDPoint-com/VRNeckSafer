@@ -21,7 +21,7 @@ namespace VRNeckSafer
         DirectInput DInput;
         public IList<DeviceInstance> ll;
         public List<Joystick> Sticks;
-        public Joystick Stick;
+//        public Joystick Stick;
         public JoyBut jb;
 
         public List<bool[]> LastButtons;
@@ -75,22 +75,29 @@ namespace VRNeckSafer
 
             }
         }
-        public bool IsButtonPressed(ButtonConfig butconf)
+
+        public bool IsButtonPressed(bool use8wayhat, ButtonConfig butconf)
+        {
+            bool pressed = IsPressed(use8wayhat, butconf.JoystickGUID, butconf.Button);
+            if (butconf.UseModifier)
+                pressed = pressed && IsPressed(use8wayhat, butconf.ModJoystickGUID, butconf.ModButton);
+            return pressed;
+        }
+        public bool IsPressed(bool use8wayhat, string JoystickGUID, string Button)
         {
             int j, b=-1, p=-1;
-            int mj, mb, mp;
 
-            j = IndexFromGuid(butconf.JoystickGUID);
+            j = IndexFromGuid(JoystickGUID);
             if (j == -1) return false;
 
-            if (butconf.Button.StartsWith("But:"))
+            if (Button.StartsWith("But:"))
             {
-                int.TryParse(butconf.Button.Substring(5), out b);
+                int.TryParse(Button.Substring(5), out b);
             }
-            else if ((butconf.Button.StartsWith("Pov ")))
+            else if ((Button.StartsWith("Pov ")))
             {
-                int.TryParse(butconf.Button.Substring(4, 1), out p);
-                switch (butconf.Button.Substring(7))
+                int.TryParse(Button.Substring(4, 1), out p);
+                switch (Button.Substring(7))
                 {
                     case "U":
                         b = 0;
@@ -106,10 +113,10 @@ namespace VRNeckSafer
                         break;
                 }
             }
-            else if ((butconf.Button.StartsWith("P")))
+            else if ((Button.StartsWith("P")))
             {
-                int.TryParse(butconf.Button.Substring(1, 1), out p);
-                int.TryParse(butconf.Button.Substring(4), out b);
+                int.TryParse(Button.Substring(1, 1), out p);
+                int.TryParse(Button.Substring(4), out b);
                 b *= 100;
             }
 
@@ -123,8 +130,9 @@ namespace VRNeckSafer
             else
             {
                 if (State.PointOfViewControllers[p] == -1) return false;
-                //                if (use8wayhat)
-                //                    return State.PointOfViewControllers[pov] == but;
+                if (use8wayhat)
+                     return State.PointOfViewControllers[p] == b;
+                
                 return Math.Abs(State.PointOfViewControllers[p] - b) < 5000;
             }
         }

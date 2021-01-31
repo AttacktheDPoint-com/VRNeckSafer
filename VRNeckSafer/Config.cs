@@ -24,6 +24,7 @@ namespace VRNeckSafer
             UseModifier = false;
         }
     }
+
     public class Config
     {
         public ButtonConfig LeftButton;
@@ -38,10 +39,13 @@ namespace VRNeckSafer
         public int TransF;
         public bool Additiv;
         public bool Auto;
-        public int AutorotAngle;
-        public int ActivationAngle;
-        public int DeactivationAngle;
         public bool Use8WayHat;
+        public bool StartMinimized;
+        public bool MinimizeToTray;
+        public string GameMode;
+        public string AppMode;
+        public List<int[]> AutoSteps;
+
 
         public Config()
         {
@@ -57,10 +61,8 @@ namespace VRNeckSafer
             TransF = 0;
             Additiv = false;
             Auto = false;
-            AutorotAngle = 0;
-            ActivationAngle = 70;
-            DeactivationAngle = 60;
             Use8WayHat = false;
+            AutoSteps = new List<int[]>();
         }
 
         static public Config ReadConfig()
@@ -68,8 +70,7 @@ namespace VRNeckSafer
             try
             {
                 Config c= JsonConvert.DeserializeObject<Config>(File.ReadAllText(@".\VRNeckSafer.cfg"));
-                if (c.AutorotAngle == -1)
-                    c.AutorotAngle = c.Angle;
+                if (c.AutoSteps.Count==0) c.AutoSteps.Add(new int[5] {90,80,10,0,0});
                 return c;
             }
             catch (Exception)

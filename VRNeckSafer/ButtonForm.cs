@@ -15,9 +15,11 @@ namespace VRNeckSafer
         private MainForm mf;
         private ScanForm sf;
         public JoyBut jb;
+        private ButtonConfig butconf;
 
-        public ButtonForm(MainForm f, String titel, ButtonConfig butconf)
+        public ButtonForm(MainForm f, String titel, ButtonConfig bc)
         {
+            butconf = bc;
             mf = f;
             InitializeComponent();
             StartPosition = FormStartPosition.Manual;
@@ -51,13 +53,14 @@ namespace VRNeckSafer
             int Index = mf.js.IndexFromGuid(butconf.JoystickGUID);
             MainDeviceComboBox.SelectedIndex = Index + 1;
             FillButtonComboBox(Index, MainButtonComboBox);
-            MainButtonComboBox.Text = butconf.Button;
 
             Index = mf.js.IndexFromGuid(butconf.ModJoystickGUID);
             ModifierDeviceComboBox.SelectedIndex = Index + 1;
-            MainButtonComboBox.Text = butconf.Button;
             FillButtonComboBox(Index, ModifierButtonComboBox);
             ModifierButtonComboBox.Text = butconf.ModButton;
+
+            MainButtonComboBox.Text = butconf.Button;
+
         }
 
         void FillButtonComboBox(int joyIndex, ComboBox cb)
@@ -71,14 +74,14 @@ namespace VRNeckSafer
             }
             for (int i = 0; i < mf.js.Sticks[joyIndex].Capabilities.PovCount; i++)
             {
-//                if (conf.Use8WayHat)
-//                {
-//                    for (int j = 0; j < 360; j += 45)
-//                    {
-//                        cb.Items.Add("P" + i + ": " + j);
-//                    }
-//                }
-//                else
+                if (mf.conf.Use8WayHat)
+                {
+                    for (int j = 0; j < 360; j += 45)
+                    {
+                        cb.Items.Add("P" + i + ": " + j);
+                    }
+                }
+                else
                 {
                     cb.Items.Add("Pov " + i + ": U");
                     cb.Items.Add("Pov " + i + ": R");
@@ -108,12 +111,24 @@ namespace VRNeckSafer
             }
             else
             {
-                int butindex =
-                    mf.js.Sticks[jb.joyIndex].Capabilities.ButtonCount
-                    + jb.pov * 4
-                    + jb.btn / 9000
-                    + 1;
-                MainButtonComboBox.Text = MainButtonComboBox.Items[butindex].ToString();
+                if (mf.conf.Use8WayHat)
+                {
+                    int butindex =
+                        mf.js.Sticks[jb.joyIndex].Capabilities.ButtonCount
+                        + jb.pov * 8
+                        + jb.btn / 4500
+                        + 1;
+                    MainButtonComboBox.Text = MainButtonComboBox.Items[butindex].ToString();
+                }
+                else
+                {
+                    int butindex =
+                        mf.js.Sticks[jb.joyIndex].Capabilities.ButtonCount
+                        + jb.pov * 4
+                        + jb.btn / 9000
+                        + 1;
+                    MainButtonComboBox.Text = MainButtonComboBox.Items[butindex].ToString();
+                }
             }
         }
 
@@ -173,6 +188,20 @@ namespace VRNeckSafer
 
         private void OKButton_Click(object sender, EventArgs e)
         {
+            if (MainDeviceComboBox.SelectedIndex == 0)
+                butconf.JoystickGUID = "none";
+            else
+                butconf.JoystickGUID = mf.js.ll[MainDeviceComboBox.SelectedIndex - 1].InstanceGuid.ToString();
+            butconf.Button = MainButtonComboBox.Text;
+
+            if (ModifierDeviceComboBox.SelectedIndex == 0)
+                butconf.ModJoystickGUID = "none";
+            else
+                butconf.ModJoystickGUID = mf.js.ll[ModifierDeviceComboBox.SelectedIndex - 1].InstanceGuid.ToString();
+            butconf.ModButton = ModifierButtonComboBox.Text;
+
+            butconf.UseModifier = UseModifierCheckBox.Checked;
+
             mf.conf.WriteConfig();
             Close();
         }
@@ -181,6 +210,18 @@ namespace VRNeckSafer
         {
             mf.conf = Config.ReadConfig();
             Close();
+        }
+
+        private void MainDeviceComboBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            FillButtonComboBox(MainDeviceComboBox.SelectedIndex-1, MainButtonComboBox);
+            MainButtonComboBox.Text = "none";
+        }
+
+        private void ModifierDeviceComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FillButtonComboBox(MainDeviceComboBox.SelectedIndex - 1, MainButtonComboBox);
+            MainButtonComboBox.Text = "none";
         }
     }
 }

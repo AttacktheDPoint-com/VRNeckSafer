@@ -95,6 +95,7 @@ namespace VRNeckSafer
             this.MainDeviceComboBox.Name = "MainDeviceComboBox";
             this.MainDeviceComboBox.Size = new System.Drawing.Size(121, 21);
             this.MainDeviceComboBox.TabIndex = 4;
+            this.MainDeviceComboBox.SelectedValueChanged += new System.EventHandler(this.MainDeviceComboBox_SelectedValueChanged);
             // 
             // label3
             // 
@@ -140,6 +141,7 @@ namespace VRNeckSafer
             this.ModifierDeviceComboBox.Name = "ModifierDeviceComboBox";
             this.ModifierDeviceComboBox.Size = new System.Drawing.Size(121, 21);
             this.ModifierDeviceComboBox.TabIndex = 7;
+            this.ModifierDeviceComboBox.SelectedIndexChanged += new System.EventHandler(this.ModifierDeviceComboBox_SelectedIndexChanged);
             // 
             // OKButton
             // 
