@@ -12,6 +12,8 @@ namespace VRNeckSafer
 {
     public class VRStuff
     {
+        static public Config conf;
+
         private CVRSystem system;
         private TrackedDevicePose_t[] Poses;
         private HmdMatrix34_t HmdPose;
@@ -19,57 +21,68 @@ namespace VRNeckSafer
         public double deltaRot;
         double HMDYawOffset;
 
-
         public VRStuff()
         {
             var initError = EVRInitError.None;
 
             Poses = new TrackedDevicePose_t[OpenVR.k_unMaxTrackedDeviceCount];
 
-            system = OpenVR.Init(ref initError, EVRApplicationType.VRApplication_Overlay);
+            EVRApplicationType ea;
+            switch (conf.AppMode)
+            {
+                case "Background":
+                    ea = EVRApplicationType.VRApplication_Background;
+                    break;
+                default:
+                    ea = EVRApplicationType.VRApplication_Overlay;
+                    break;
+            }
+
+            system = OpenVR.Init(ref initError, ea);
 
 
             if (initError != EVRInitError.None)
             {
                 MessageBox.Show("Unable to connect to SteamVR/OpenVR", "Problem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                Application.Exit();
+                System.Environment.Exit(0);               
             }
-
         }
 
         public bool isSeatedMode()
         {
+            if (conf.GameMode == "Force seated") return true;
+            if (conf.GameMode == "Force standing") return false;
             return OpenVR.Compositor.GetTrackingSpace() == ETrackingUniverseOrigin.TrackingUniverseSeated;
+        }
+
+        public void calcPositionOffset()
+        {
+            system.GetDeviceToAbsoluteTrackingPose(ETrackingUniverseOrigin.TrackingUniverseSeated, 0.0f, Poses);
+            Vector3 V1 = new Vector3(
+                Poses[0].mDeviceToAbsoluteTracking.m3,
+                Poses[0].mDeviceToAbsoluteTracking.m7,
+                Poses[0].mDeviceToAbsoluteTracking.m11);
+            double rot1 = Math.Atan2(Poses[0].mDeviceToAbsoluteTracking.m2, Poses[0].mDeviceToAbsoluteTracking.m10);
+
+            system.GetDeviceToAbsoluteTrackingPose(ETrackingUniverseOrigin.TrackingUniverseStanding, 0.0f, Poses);
+            Vector3 V2 = new Vector3(
+                Poses[0].mDeviceToAbsoluteTracking.m3,
+                Poses[0].mDeviceToAbsoluteTracking.m7,
+                Poses[0].mDeviceToAbsoluteTracking.m11);
+            double rot2 = Math.Atan2(Poses[0].mDeviceToAbsoluteTracking.m2, Poses[0].mDeviceToAbsoluteTracking.m10);
+
+            deltaPos = Vector3.Subtract(V2, V1);
+            deltaRot = rot2 - rot1;
         }
 
         public void getHmdSeatedPositionOffset()
         {
-            Thread.Sleep(20);
+            deltaPos = new Vector3(0, 0, 0);
+            deltaRot = 0;
 
-            if (OpenVR.Compositor.GetTrackingSpace() == ETrackingUniverseOrigin.TrackingUniverseSeated)
-            {
-                system.GetDeviceToAbsoluteTrackingPose(ETrackingUniverseOrigin.TrackingUniverseSeated, 0.0f, Poses);
-                Vector3 V1 = new Vector3(
-                    Poses[0].mDeviceToAbsoluteTracking.m3,
-                    Poses[0].mDeviceToAbsoluteTracking.m7,
-                    Poses[0].mDeviceToAbsoluteTracking.m11);
-                double rot1 = Math.Atan2(Poses[0].mDeviceToAbsoluteTracking.m2, Poses[0].mDeviceToAbsoluteTracking.m10);
-
-                system.GetDeviceToAbsoluteTrackingPose(ETrackingUniverseOrigin.TrackingUniverseStanding, 0.0f, Poses);
-                Vector3 V2 = new Vector3(
-                    Poses[0].mDeviceToAbsoluteTracking.m3,
-                    Poses[0].mDeviceToAbsoluteTracking.m7,
-                    Poses[0].mDeviceToAbsoluteTracking.m11);
-                double rot2 = Math.Atan2(Poses[0].mDeviceToAbsoluteTracking.m2, Poses[0].mDeviceToAbsoluteTracking.m10);
-
-                deltaPos = Vector3.Subtract(V2, V1);
-                deltaRot = rot2 - rot1;
-            }
-            else
-            {
-                deltaPos = new Vector3(0, 0, 0);
-                deltaRot = 0;
-            }
+            if (conf.PosCompensation == "always") calcPositionOffset();
+            if (conf.PosCompensation == "when seated" && isSeatedMode()) calcPositionOffset();
+            if (conf.PosCompensation == "when standing" && !isSeatedMode()) calcPositionOffset();
         }
 
         public bool HmdIsActive()
@@ -80,17 +93,23 @@ namespace VRNeckSafer
                 return false;
         }
 
+        public void getHMDPose()
+        {
+            if (isSeatedMode())
+                system.GetDeviceToAbsoluteTrackingPose(ETrackingUniverseOrigin.TrackingUniverseSeated, 0.0f, Poses);
+            else
+                system.GetDeviceToAbsoluteTrackingPose(ETrackingUniverseOrigin.TrackingUniverseStanding, 0.0f, Poses);
+            HmdPose = Poses[0].mDeviceToAbsoluteTracking;
+        }
         public void getHmdYawOffset()
         {
-            system.GetDeviceToAbsoluteTrackingPose(OpenVR.Compositor.GetTrackingSpace(), 0.0f, Poses);
-            HmdPose = Poses[0].mDeviceToAbsoluteTracking;
+            getHMDPose();
             HMDYawOffset = (float)Math.Atan2(HmdPose.m2, HmdPose.m10);
         }
 
         public int getHmdYaw()
         {
-            system.GetDeviceToAbsoluteTrackingPose(OpenVR.Compositor.GetTrackingSpace(), 0.0f, Poses);
-            HmdPose = Poses[0].mDeviceToAbsoluteTracking;
+            getHMDPose();
             double HMDYaw = Math.Atan2(HmdPose.m2, HmdPose.m10);
             return (int)Math.Round((HMDYaw - HMDYawOffset) * 180.0 / Math.PI);
         }
@@ -105,8 +124,7 @@ namespace VRNeckSafer
 
             setChaperone(resetCenter);
 
-            system.GetDeviceToAbsoluteTrackingPose(OpenVR.Compositor.GetTrackingSpace(), 0.0f, Poses);
-            HmdPose = Poses[0].mDeviceToAbsoluteTracking;
+            getHMDPose();
 
             double yaw = Math.Atan2(HmdPose.m2, HmdPose.m10);
 
@@ -136,7 +154,7 @@ namespace VRNeckSafer
         void setChaperone(HmdMatrix34_t newSetup)
         {
 
-            if (OpenVR.Compositor.GetTrackingSpace() == ETrackingUniverseOrigin.TrackingUniverseSeated)
+            if (isSeatedMode())
                 OpenVR.ChaperoneSetup.SetWorkingSeatedZeroPoseToRawTrackingPose(ref newSetup);
             else
                 OpenVR.ChaperoneSetup.SetWorkingStandingZeroPoseToRawTrackingPose(ref newSetup);

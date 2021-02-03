@@ -14,10 +14,22 @@ namespace VRNeckSafer
         [STAThread]
         static void Main()
         {
+            using (var mutex = new System.Threading.Mutex(false, "saebamini.com SingletonApp"))
+            {
+                bool isAnotherInstanceOpen = !mutex.WaitOne(TimeSpan.Zero);
+                if (isAnotherInstanceOpen)
+                {
+                    return;
+                }
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+                // main application entry point
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new MainForm());
+
+                mutex.ReleaseMutex();
+            }
+
         }
     }
 }

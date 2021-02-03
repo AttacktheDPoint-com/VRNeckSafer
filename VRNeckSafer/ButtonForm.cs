@@ -38,6 +38,7 @@ namespace VRNeckSafer
             ModifierButtonComboBox.Items.Add("none");
 
             UseModifierCheckBox.Checked = butconf.UseModifier;
+            InvertcheckBox.Checked = butconf.Invert;
 
             for (int i = 0; i < mf.js.ll.Count; i++)
             {
@@ -202,6 +203,8 @@ namespace VRNeckSafer
 
             butconf.UseModifier = UseModifierCheckBox.Checked;
 
+            butconf.Invert = InvertcheckBox.Checked;
+
             mf.conf.WriteConfig();
             Close();
         }
@@ -222,6 +225,11 @@ namespace VRNeckSafer
         {
             FillButtonComboBox(MainDeviceComboBox.SelectedIndex - 1, MainButtonComboBox);
             MainButtonComboBox.Text = "none";
+        }
+
+        private void InvertcheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

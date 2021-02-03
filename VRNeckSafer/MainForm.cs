@@ -33,7 +33,6 @@ namespace VRNeckSafer
         public int hmdYaw;
 
         public bool lastpressed;
-        private System.Drawing.Color ControlText;
 
         public MainForm()
         {
@@ -41,6 +40,14 @@ namespace VRNeckSafer
             conf = Config.ReadConfig();
 
             InitializeComponent();
+            notifyIcon.ContextMenuStrip = contextMenuStrip;
+            this.showToolStripMenuItem.Click += showToolStripMenuItem_Click;
+            this.exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
+
+            if (conf.StartMinimized) this.WindowState = FormWindowState.Minimized;
+
+
+            VRStuff.conf = conf;
 
             js = new JoystickStuff();
             vr = new VRStuff();
@@ -53,14 +60,12 @@ namespace VRNeckSafer
             if (conf.Auto) enableAuto(true);
             else enableAuto(false);
 
-            if (conf.Use8WayHat) use8wayHATToolStripMenuItem.Checked = true;
-            if (conf.StartMinimized) startMinimzedToolStripMenuItem.Checked = true;
-            if (conf.MinimizeToTray) minimizeToTrayToolStripMenuItem.Checked = true;
+            setMenuCheckmarks();
 
             for (int i = 0; i < conf.AutoSteps.Count; i++)
             {
-                string [] r=new string[5]
-                { 
+                string[] r = new string[5]
+                {
                     conf.AutoSteps[i][0].ToString(),
                     conf.AutoSteps[i][1].ToString(),
                     conf.AutoSteps[i][2].ToString(),
@@ -102,7 +107,7 @@ namespace VRNeckSafer
             SetHoldButton4.Enabled = enable;
             label2.Enabled = enable;
             AutorotGridView.Enabled = enable;
-            AutorotGridView.ForeColor = enable?SystemColors.ControlText: System.Drawing.Color.Gray;
+            AutorotGridView.ForeColor = enable ? SystemColors.ControlText : System.Drawing.Color.Gray;
             if (!enable) auto_offset_angle = 0;
         }
 
@@ -178,13 +183,13 @@ namespace VRNeckSafer
 
             bool l_pressed = checkButtonPress(SetLeftButton, conf.LeftButton);
             bool r_pressed = checkButtonPress(SetRightButton, conf.RightButton);
-            bool autofrozen = 
+            bool autofrozen =
                 checkButtonPress(SetHoldButton1, conf.HoldButton1) ||
                 checkButtonPress(SetHoldButton2, conf.HoldButton2) ||
                 checkButtonPress(SetHoldButton3, conf.HoldButton3) ||
                 checkButtonPress(SetHoldButton4, conf.HoldButton4);
 
-            
+
             if (l_pressed)
             {
                 LeftLabel.ForeColor = System.Drawing.Color.LightGreen;
@@ -209,11 +214,11 @@ namespace VRNeckSafer
 
             if (vr.isSeatedMode())
             {
-                modeLB.Text = "(playing mode: seated)";
+                modeLB.Text = "(Mode: seated)";
             }
             else
             {
-                modeLB.Text = "(playing mode: standing)";
+                modeLB.Text = "(Mode: standing)";
             }
 
             if (additivRB.Checked)
@@ -244,7 +249,7 @@ namespace VRNeckSafer
                     trans_offset.X = 0;
                     trans_offset.Z = 0;
                 }
-                if (checkButtonPress(SetResetButton,conf.ResetButton))
+                if (checkButtonPress(SetResetButton, conf.ResetButton))
                 {
                     vr.getHmdSeatedPositionOffset();
                     vr.getHmdYawOffset();
@@ -322,7 +327,7 @@ namespace VRNeckSafer
             {
                 return;
             }
-            arot = yawsign*autorot;
+            arot = yawsign * autorot;
             if (transx > fabs(atrans.X)) atrans.X = (float)transx / 100.0F * -yawsign;
             if (transz > fabs(atrans.Z)) atrans.Z = (float)transz / 100.0F * -yawsign;
         }
@@ -402,7 +407,7 @@ namespace VRNeckSafer
             if (e.RowIndex == -1) return;
             string s = AutorotGridView[e.ColumnIndex, e.RowIndex].Value.ToString();
             int.TryParse(s, out val);
-            conf.AutoSteps[e.RowIndex][e.ColumnIndex]= val;
+            conf.AutoSteps[e.RowIndex][e.ColumnIndex] = val;
             conf.WriteConfig();
         }
 
@@ -490,7 +495,7 @@ namespace VRNeckSafer
             setButtonToolTip(SetHoldButton4, conf.HoldButton4);
         }
 
-        private void MainForm_SizeChanged(object sender, EventArgs e)
+        void sizeChanged()
         {
             modeLB.Location = new System.Drawing.Point(modeLB.Location.X, Size.Height - 60);
             VersionLabel.Location = new System.Drawing.Point(VersionLabel.Location.X, Size.Height - 60);
@@ -498,6 +503,197 @@ namespace VRNeckSafer
 
             AutorotGridView.Height = AutorotGridView.RowCount * 22 + 22;
             AutorotGridView.MaximumSize = new System.Drawing.Size(AutorotGridView.Width, Size.Height - groupAuto.Location.Y - 124);
+        }
+        private void MainForm_SizeChanged(object sender, EventArgs e)
+        {
+            sizeChanged();
+        }
+
+        private void sendToTrayIfNeeded()
+        {
+            if (conf.MinimizeToTray)
+            {
+                if (this.WindowState == FormWindowState.Minimized)
+                {
+                    Hide();
+                    notifyIcon.Visible = true;
+                }
+                else
+                {
+                    Show();
+                    notifyIcon.Visible = false;
+                }
+            }
+        }
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            sizeChanged();
+            sendToTrayIfNeeded();
+        }
+
+        private void notifyIcon_DoubleClick(object sender, EventArgs e)
+        {
+            Show();
+            this.WindowState = FormWindowState.Normal;
+        }
+        private void showToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Show();
+            this.WindowState = FormWindowState.Normal;
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            if (conf.MinimizeToTray && conf.StartMinimized)
+            {
+                this.WindowState = FormWindowState.Minimized;
+                this.Hide();
+            }
+        }
+
+        private void backgroundToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            conf.AppMode = "Background";
+            conf.WriteConfig();
+            setMenuCheckmarks();
+        }
+
+        private void overlayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            conf.AppMode = "Overlay";
+            conf.WriteConfig();
+            setMenuCheckmarks();
+        }
+
+        private void autoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            conf.GameMode = "Auto";
+            conf.WriteConfig();
+            setMenuCheckmarks();
+        }
+
+        private void forceSeatedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            conf.GameMode = "Force seated";
+            conf.WriteConfig();
+            setMenuCheckmarks();
+        }
+
+        private void forceStandingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            conf.GameMode = "Force standing";
+            conf.WriteConfig();
+            setMenuCheckmarks();
+        }
+
+        private void inSeatedModeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            conf.PosCompensation = "when seated";
+            conf.WriteConfig();
+            setMenuCheckmarks();
+        }
+
+        private void inStandingModeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            conf.PosCompensation = "when standing";
+            conf.WriteConfig();
+            setMenuCheckmarks();
+        }
+
+        private void alwaysToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            conf.PosCompensation = "always";
+            conf.WriteConfig();
+            setMenuCheckmarks();
+        }
+
+        private void neverToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            conf.PosCompensation = "never";
+            conf.WriteConfig();
+            setMenuCheckmarks();
+        }
+        private void setMenuCheckmarks()
+        {
+            if (conf.Use8WayHat) use8wayHATToolStripMenuItem.Checked = true;
+            if (conf.StartMinimized) startMinimzedToolStripMenuItem.Checked = true;
+            if (conf.MinimizeToTray) minimizeToTrayToolStripMenuItem.Checked = true;
+
+            switch (conf.GameMode)
+            {
+                case "Auto":
+                    autoToolStripMenuItem.Checked = true;
+                    forceSeatedToolStripMenuItem.Checked = false;
+                    forceStandingToolStripMenuItem.Checked = false;
+                    break;
+                case "Force seated":
+                    autoToolStripMenuItem.Checked = false;
+                    forceSeatedToolStripMenuItem.Checked = true;
+                    forceStandingToolStripMenuItem.Checked = false;
+                    break;
+                case "Force standing":
+                    autoToolStripMenuItem.Checked = false;
+                    forceSeatedToolStripMenuItem.Checked = false;
+                    forceStandingToolStripMenuItem.Checked = true;
+                    break;
+            }
+
+            switch (conf.AppMode)
+            {
+                case "Background":
+                    backgroundToolStripMenuItem.Checked = true;
+                    overlayToolStripMenuItem.Checked = false;
+                    break;
+                case "Overlay":
+                    backgroundToolStripMenuItem.Checked = false;
+                    overlayToolStripMenuItem.Checked = true;
+                    break;
+            }
+
+            switch (conf.PosCompensation)
+            {
+                case "when standing":
+                    inStandingModeToolStripMenuItem.Checked = true;
+                    inSeatedModeToolStripMenuItem.Checked = false;
+                    alwaysToolStripMenuItem.Checked = false;
+                    neverToolStripMenuItem.Checked = false;
+                    break;
+                case "when seated":
+                    inStandingModeToolStripMenuItem.Checked = false;
+                    inSeatedModeToolStripMenuItem.Checked = true;
+                    alwaysToolStripMenuItem.Checked = false;
+                    neverToolStripMenuItem.Checked = false;
+                    break;
+                case "always":
+                    inStandingModeToolStripMenuItem.Checked = false;
+                    inSeatedModeToolStripMenuItem.Checked = false;
+                    alwaysToolStripMenuItem.Checked = true;
+                    neverToolStripMenuItem.Checked = false;
+                    break;
+                case "never":
+                    inStandingModeToolStripMenuItem.Checked = false;
+                    inSeatedModeToolStripMenuItem.Checked = false;
+                    alwaysToolStripMenuItem.Checked = false;
+                    neverToolStripMenuItem.Checked = true;
+                    break;
+            }
+        }
+
+        private void resetOptionsToDefaultToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            conf.StartMinimized = false;
+            conf.MinimizeToTray = false;
+            conf.Use8WayHat = false;
+            conf.GameMode = "Auto";
+            conf.AppMode = "Background";
+            conf.PosCompensation = "when standing";
+            conf.WriteConfig();
+            setMenuCheckmarks();
         }
     }
 }

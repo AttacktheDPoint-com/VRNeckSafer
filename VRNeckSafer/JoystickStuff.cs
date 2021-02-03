@@ -35,7 +35,8 @@ namespace VRNeckSafer
 
         public string NameFromGuid(string guid)
         {
-            string name = "none";
+            if (guid=="none" ) return guid;
+            string name = "invalid";
             for (int i = 0; i < ll.Count; i++)
             {
                 if (ll[i].InstanceGuid.ToString() == guid)
@@ -81,7 +82,7 @@ namespace VRNeckSafer
             bool pressed = IsPressed(use8wayhat, butconf.JoystickGUID, butconf.Button);
             if (butconf.UseModifier)
                 pressed = pressed && IsPressed(use8wayhat, butconf.ModJoystickGUID, butconf.ModButton);
-            return pressed;
+            return butconf.Invert?!pressed:pressed;
         }
         public bool IsPressed(bool use8wayhat, string JoystickGUID, string Button)
         {

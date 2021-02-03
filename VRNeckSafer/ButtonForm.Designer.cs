@@ -44,6 +44,7 @@ namespace VRNeckSafer
             this.ClearButton = new System.Windows.Forms.Button();
             this.scanTimer = new System.Windows.Forms.Timer(this.components);
             this.UseModifierCheckBox = new System.Windows.Forms.CheckBox();
+            this.InvertcheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // MainScanButton
@@ -145,7 +146,7 @@ namespace VRNeckSafer
             // 
             // OKButton
             // 
-            this.OKButton.Location = new System.Drawing.Point(122, 83);
+            this.OKButton.Location = new System.Drawing.Point(122, 105);
             this.OKButton.Name = "OKButton";
             this.OKButton.Size = new System.Drawing.Size(51, 23);
             this.OKButton.TabIndex = 13;
@@ -155,7 +156,7 @@ namespace VRNeckSafer
             // 
             // CancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(177, 83);
+            this.CancelButton.Location = new System.Drawing.Point(177, 105);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(65, 23);
             this.CancelButton.TabIndex = 14;
@@ -165,7 +166,7 @@ namespace VRNeckSafer
             // 
             // ClearButton
             // 
-            this.ClearButton.Location = new System.Drawing.Point(247, 83);
+            this.ClearButton.Location = new System.Drawing.Point(247, 105);
             this.ClearButton.Name = "ClearButton";
             this.ClearButton.Size = new System.Drawing.Size(51, 23);
             this.ClearButton.TabIndex = 15;
@@ -188,11 +189,23 @@ namespace VRNeckSafer
             this.UseModifierCheckBox.UseVisualStyleBackColor = true;
             this.UseModifierCheckBox.CheckedChanged += new System.EventHandler(this.UseModifierCheckBox_CheckedChanged);
             // 
+            // InvertcheckBox
+            // 
+            this.InvertcheckBox.AutoSize = true;
+            this.InvertcheckBox.Location = new System.Drawing.Point(12, 109);
+            this.InvertcheckBox.Name = "InvertcheckBox";
+            this.InvertcheckBox.Size = new System.Drawing.Size(52, 17);
+            this.InvertcheckBox.TabIndex = 18;
+            this.InvertcheckBox.Text = "invert";
+            this.InvertcheckBox.UseVisualStyleBackColor = true;
+            this.InvertcheckBox.CheckedChanged += new System.EventHandler(this.InvertcheckBox_CheckedChanged);
+            // 
             // ButtonForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(304, 111);
+            this.ClientSize = new System.Drawing.Size(304, 131);
+            this.Controls.Add(this.InvertcheckBox);
             this.Controls.Add(this.UseModifierCheckBox);
             this.Controls.Add(this.ClearButton);
             this.Controls.Add(this.CancelButton);
@@ -228,5 +241,6 @@ namespace VRNeckSafer
         public System.Windows.Forms.ComboBox ModifierButtonComboBox;
         public System.Windows.Forms.ComboBox ModifierDeviceComboBox;
         public System.Windows.Forms.CheckBox UseModifierCheckBox;
+        public System.Windows.Forms.CheckBox InvertcheckBox;
     }
 }

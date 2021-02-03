@@ -84,14 +84,24 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.use8wayHATToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.appModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.overlayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gameModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.forceSeatedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.forceStandingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.appModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.backgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.overlayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.utilityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PosCompensationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inSeatedModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inStandingModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alwaysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.neverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.resetOptionsToDefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupAuto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AutorotGridView)).BeginInit();
             this.HMDYawBox.SuspendLayout();
@@ -100,6 +110,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.angleNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.transLRNUP)).BeginInit();
             this.menuStrip.SuspendLayout();
+            this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupAuto
@@ -626,8 +637,11 @@
             this.toolStripSeparator1,
             this.use8wayHATToolStripMenuItem,
             this.toolStripSeparator2,
+            this.appModeToolStripMenuItem,
             this.gameModeToolStripMenuItem,
-            this.appModeToolStripMenuItem});
+            this.PosCompensationToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.resetOptionsToDefaultToolStripMenuItem});
             this.advancedConfigToolStripMenuItem.Name = "advancedConfigToolStripMenuItem";
             this.advancedConfigToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.advancedConfigToolStripMenuItem.Text = "Options";
@@ -636,7 +650,7 @@
             // 
             this.startMinimzedToolStripMenuItem.CheckOnClick = true;
             this.startMinimzedToolStripMenuItem.Name = "startMinimzedToolStripMenuItem";
-            this.startMinimzedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.startMinimzedToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.startMinimzedToolStripMenuItem.Text = "Start minimzed";
             this.startMinimzedToolStripMenuItem.CheckStateChanged += new System.EventHandler(this.startMinimzedToolStripMenuItem_CheckStateChanged);
             // 
@@ -644,27 +658,52 @@
             // 
             this.minimizeToTrayToolStripMenuItem.CheckOnClick = true;
             this.minimizeToTrayToolStripMenuItem.Name = "minimizeToTrayToolStripMenuItem";
-            this.minimizeToTrayToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.minimizeToTrayToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.minimizeToTrayToolStripMenuItem.Text = "Minimize to tray";
             this.minimizeToTrayToolStripMenuItem.CheckStateChanged += new System.EventHandler(this.minimizeToTrayToolStripMenuItem_CheckStateChanged);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(196, 6);
             // 
             // use8wayHATToolStripMenuItem
             // 
             this.use8wayHATToolStripMenuItem.CheckOnClick = true;
             this.use8wayHATToolStripMenuItem.Name = "use8wayHATToolStripMenuItem";
-            this.use8wayHATToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.use8wayHATToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.use8wayHATToolStripMenuItem.Text = "Use 8-way HAT";
             this.use8wayHATToolStripMenuItem.CheckedChanged += new System.EventHandler(this.use8wayHATToolStripMenuItem_CheckedChanged);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(196, 6);
+            // 
+            // appModeToolStripMenuItem
+            // 
+            this.appModeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.overlayToolStripMenuItem,
+            this.backgroundToolStripMenuItem});
+            this.appModeToolStripMenuItem.Name = "appModeToolStripMenuItem";
+            this.appModeToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.appModeToolStripMenuItem.Text = "App  mode";
+            // 
+            // backgroundToolStripMenuItem
+            // 
+            this.backgroundToolStripMenuItem.Name = "backgroundToolStripMenuItem";
+            this.backgroundToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.backgroundToolStripMenuItem.Text = "Background";
+            this.backgroundToolStripMenuItem.ToolTipText = "Changes require restart!";
+            this.backgroundToolStripMenuItem.Click += new System.EventHandler(this.backgroundToolStripMenuItem_Click);
+            // 
+            // overlayToolStripMenuItem
+            // 
+            this.overlayToolStripMenuItem.Name = "overlayToolStripMenuItem";
+            this.overlayToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.overlayToolStripMenuItem.Text = "Overlay";
+            this.overlayToolStripMenuItem.ToolTipText = "Changes require restart!";
+            this.overlayToolStripMenuItem.Click += new System.EventHandler(this.overlayToolStripMenuItem_Click);
             // 
             // gameModeToolStripMenuItem
             // 
@@ -673,54 +712,106 @@
             this.forceSeatedToolStripMenuItem,
             this.forceStandingToolStripMenuItem});
             this.gameModeToolStripMenuItem.Name = "gameModeToolStripMenuItem";
-            this.gameModeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gameModeToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.gameModeToolStripMenuItem.Text = "Game mode";
             // 
             // autoToolStripMenuItem
             // 
             this.autoToolStripMenuItem.Name = "autoToolStripMenuItem";
-            this.autoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.autoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.autoToolStripMenuItem.Text = "Auto";
+            this.autoToolStripMenuItem.Click += new System.EventHandler(this.autoToolStripMenuItem_Click);
             // 
             // forceSeatedToolStripMenuItem
             // 
             this.forceSeatedToolStripMenuItem.Name = "forceSeatedToolStripMenuItem";
-            this.forceSeatedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.forceSeatedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.forceSeatedToolStripMenuItem.Text = "Force seated";
+            this.forceSeatedToolStripMenuItem.Click += new System.EventHandler(this.forceSeatedToolStripMenuItem_Click);
             // 
             // forceStandingToolStripMenuItem
             // 
             this.forceStandingToolStripMenuItem.Name = "forceStandingToolStripMenuItem";
-            this.forceStandingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.forceStandingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.forceStandingToolStripMenuItem.Text = "Force standing";
+            this.forceStandingToolStripMenuItem.Click += new System.EventHandler(this.forceStandingToolStripMenuItem_Click);
             // 
-            // appModeToolStripMenuItem
+            // PosCompensationToolStripMenuItem
             // 
-            this.appModeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.backgroundToolStripMenuItem,
-            this.overlayToolStripMenuItem,
-            this.utilityToolStripMenuItem});
-            this.appModeToolStripMenuItem.Name = "appModeToolStripMenuItem";
-            this.appModeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.appModeToolStripMenuItem.Text = "App  mode";
+            this.PosCompensationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.inSeatedModeToolStripMenuItem,
+            this.inStandingModeToolStripMenuItem,
+            this.alwaysToolStripMenuItem,
+            this.neverToolStripMenuItem});
+            this.PosCompensationToolStripMenuItem.Name = "PosCompensationToolStripMenuItem";
+            this.PosCompensationToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.PosCompensationToolStripMenuItem.Text = "Position compensation";
             // 
-            // backgroundToolStripMenuItem
+            // inSeatedModeToolStripMenuItem
             // 
-            this.backgroundToolStripMenuItem.Name = "backgroundToolStripMenuItem";
-            this.backgroundToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.backgroundToolStripMenuItem.Text = "\"Background\"";
+            this.inSeatedModeToolStripMenuItem.Name = "inSeatedModeToolStripMenuItem";
+            this.inSeatedModeToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.inSeatedModeToolStripMenuItem.Text = "in seated mode";
+            this.inSeatedModeToolStripMenuItem.Click += new System.EventHandler(this.inSeatedModeToolStripMenuItem_Click);
             // 
-            // overlayToolStripMenuItem
+            // inStandingModeToolStripMenuItem
             // 
-            this.overlayToolStripMenuItem.Name = "overlayToolStripMenuItem";
-            this.overlayToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.overlayToolStripMenuItem.Text = "\"Overlay\"";
+            this.inStandingModeToolStripMenuItem.Name = "inStandingModeToolStripMenuItem";
+            this.inStandingModeToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.inStandingModeToolStripMenuItem.Text = "in standing mode";
+            this.inStandingModeToolStripMenuItem.Click += new System.EventHandler(this.inStandingModeToolStripMenuItem_Click);
             // 
-            // utilityToolStripMenuItem
+            // alwaysToolStripMenuItem
             // 
-            this.utilityToolStripMenuItem.Name = "utilityToolStripMenuItem";
-            this.utilityToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.utilityToolStripMenuItem.Text = "\"Utility\"";
+            this.alwaysToolStripMenuItem.Name = "alwaysToolStripMenuItem";
+            this.alwaysToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.alwaysToolStripMenuItem.Text = "always";
+            this.alwaysToolStripMenuItem.Click += new System.EventHandler(this.alwaysToolStripMenuItem_Click);
+            // 
+            // neverToolStripMenuItem
+            // 
+            this.neverToolStripMenuItem.Name = "neverToolStripMenuItem";
+            this.neverToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.neverToolStripMenuItem.Text = "never";
+            this.neverToolStripMenuItem.Click += new System.EventHandler(this.neverToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(196, 6);
+            // 
+            // resetOptionsToDefaultToolStripMenuItem
+            // 
+            this.resetOptionsToDefaultToolStripMenuItem.Name = "resetOptionsToDefaultToolStripMenuItem";
+            this.resetOptionsToDefaultToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.resetOptionsToDefaultToolStripMenuItem.Text = "Reset options to default";
+            this.resetOptionsToDefaultToolStripMenuItem.Click += new System.EventHandler(this.resetOptionsToDefaultToolStripMenuItem_Click);
+            // 
+            // notifyIcon
+            // 
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "VRNeckSafer";
+            this.notifyIcon.DoubleClick += new System.EventHandler(this.notifyIcon_DoubleClick);
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showToolStripMenuItem,
+            this.exitToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(104, 48);
+            // 
+            // showToolStripMenuItem
+            // 
+            this.showToolStripMenuItem.Name = "showToolStripMenuItem";
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.showToolStripMenuItem.Text = "Show";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
             // 
             // MainForm
             // 
@@ -740,7 +831,9 @@
             this.MinimumSize = new System.Drawing.Size(292, 530);
             this.Name = "MainForm";
             this.Text = "VRNeckSafer";
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
+            this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.groupAuto.ResumeLayout(false);
             this.groupAuto.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AutorotGridView)).EndInit();
@@ -753,6 +846,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.transLRNUP)).EndInit();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
+            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -813,7 +907,6 @@
         private System.Windows.Forms.ToolStripMenuItem appModeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem backgroundToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem overlayToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem utilityToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.DataGridViewTextBoxColumn act;
@@ -821,6 +914,17 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn rot;
         private System.Windows.Forms.DataGridViewTextBoxColumn LR;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fwd;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem PosCompensationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resetOptionsToDefaultToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inSeatedModeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inStandingModeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem alwaysToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem neverToolStripMenuItem;
     }
 }
 

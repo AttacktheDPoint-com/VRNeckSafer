@@ -15,6 +15,7 @@ namespace VRNeckSafer
         public string ModJoystickGUID;
         public string ModButton;
         public bool UseModifier;
+        public bool Invert;
         public ButtonConfig()
         {
             JoystickGUID = "none";
@@ -22,6 +23,7 @@ namespace VRNeckSafer
             ModJoystickGUID = "none";
             ModButton = "none";
             UseModifier = false;
+            Invert = false;
         }
     }
 
@@ -44,6 +46,8 @@ namespace VRNeckSafer
         public bool MinimizeToTray;
         public string GameMode;
         public string AppMode;
+        public string PosCompensation;
+        public static string configfilename;
         public List<int[]> AutoSteps;
 
 
@@ -62,14 +66,24 @@ namespace VRNeckSafer
             Additiv = false;
             Auto = false;
             Use8WayHat = false;
+            GameMode = "Auto";
+            AppMode = "Overlay";
+            PosCompensation = "when seated" ;
+            StartMinimized = false;
+            MinimizeToTray = false;
             AutoSteps = new List<int[]>();
-        }
+        }   
 
         static public Config ReadConfig()
         {
             try
             {
-                Config c= JsonConvert.DeserializeObject<Config>(File.ReadAllText(@".\VRNeckSafer.cfg"));
+                configfilename = @".\VRNeckSafer.cfg";
+                string[] args = Environment.GetCommandLineArgs();
+                if (args.Length > 1)
+                    configfilename = @".\" + args[1];
+
+                Config c = JsonConvert.DeserializeObject<Config>(File.ReadAllText(configfilename));
                 if (c.AutoSteps.Count==0) c.AutoSteps.Add(new int[5] {90,80,10,0,0});
                 return c;
             }
@@ -83,7 +97,7 @@ namespace VRNeckSafer
 
         public void WriteConfig()
         {
-            File.WriteAllText(@".\VRNeckSafer.cfg", JsonConvert.SerializeObject(this, Formatting.Indented));
+            File.WriteAllText(configfilename, JsonConvert.SerializeObject(this, Formatting.Indented));
         }
     }
 }
