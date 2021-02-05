@@ -73,12 +73,20 @@ namespace VRNeckSafer
             }
         }
 
-        public bool IsButtonPressed(bool use8wayhat, ButtonConfig butconf)
+        public bool IsButtonPressed(ButtonConfig butconf)
         {
-            bool pressed = IsPressed(use8wayhat, butconf.JoystickGUID, butconf.Button);
+            bool pressed = IsPressed(butconf.Use8WayHat, butconf.JoystickGUID, butconf.Button);
             if (butconf.UseModifier)
-                pressed = pressed && IsPressed(use8wayhat, butconf.ModJoystickGUID, butconf.ModButton);
-            return butconf.Invert ? !pressed : pressed;
+                pressed = pressed && IsPressed(butconf.Use8WayHat, butconf.ModJoystickGUID, butconf.ModButton);
+            if (butconf.Toggle)
+            {
+                if (pressed && !butconf.laststate)
+                    butconf.togglestate = !butconf.togglestate;
+                butconf.laststate = pressed;
+                return butconf.togglestate;
+            }
+            pressed = butconf.Invert ? !pressed : pressed;
+            return pressed;
         }
         public bool IsPressed(bool use8wayhat, string JoystickGUID, string Button)
         {

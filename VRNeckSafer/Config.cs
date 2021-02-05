@@ -12,7 +12,12 @@ namespace VRNeckSafer
         public string ModJoystickGUID;
         public string ModButton;
         public bool UseModifier;
+        public bool Use8WayHat;
         public bool Invert;
+        public bool Toggle;
+        [JsonIgnore]
+        public bool togglestate;
+        public bool laststate;
         public ButtonConfig()
         {
             JoystickGUID = "none";
@@ -20,9 +25,13 @@ namespace VRNeckSafer
             ModJoystickGUID = "none";
             ModButton = "none";
             UseModifier = false;
+            Use8WayHat = false;
             Invert = false;
-        }
+            Toggle = false;
+            togglestate = false;
+            laststate = false;
     }
+}
 
     public class Config
     {
@@ -38,7 +47,6 @@ namespace VRNeckSafer
         public int TransF;
         public bool Additiv;
         public bool Auto;
-        public bool Use8WayHat;
         public bool StartMinimized;
         public bool MinimizeToTray;
         public string GameMode;
@@ -62,7 +70,6 @@ namespace VRNeckSafer
             TransF = 0;
             Additiv = false;
             Auto = false;
-            Use8WayHat = false;
             GameMode = "Auto";
             AppMode = "Overlay";
             PosCompensation = "when seated";

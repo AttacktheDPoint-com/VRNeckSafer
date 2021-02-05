@@ -45,6 +45,8 @@ namespace VRNeckSafer
             this.scanTimer = new System.Windows.Forms.Timer(this.components);
             this.UseModifierCheckBox = new System.Windows.Forms.CheckBox();
             this.InvertcheckBox = new System.Windows.Forms.CheckBox();
+            this.toggleCheckBox = new System.Windows.Forms.CheckBox();
+            this.Use8WayHatCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // MainScanButton
@@ -146,9 +148,9 @@ namespace VRNeckSafer
             // 
             // OKButton
             // 
-            this.OKButton.Location = new System.Drawing.Point(122, 105);
+            this.OKButton.Location = new System.Drawing.Point(102, 112);
             this.OKButton.Name = "OKButton";
-            this.OKButton.Size = new System.Drawing.Size(51, 23);
+            this.OKButton.Size = new System.Drawing.Size(71, 23);
             this.OKButton.TabIndex = 13;
             this.OKButton.Text = "OK";
             this.OKButton.UseVisualStyleBackColor = true;
@@ -156,7 +158,7 @@ namespace VRNeckSafer
             // 
             // CancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(177, 105);
+            this.CancelButton.Location = new System.Drawing.Point(177, 112);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(65, 23);
             this.CancelButton.TabIndex = 14;
@@ -166,7 +168,7 @@ namespace VRNeckSafer
             // 
             // ClearButton
             // 
-            this.ClearButton.Location = new System.Drawing.Point(247, 105);
+            this.ClearButton.Location = new System.Drawing.Point(247, 112);
             this.ClearButton.Name = "ClearButton";
             this.ClearButton.Size = new System.Drawing.Size(51, 23);
             this.ClearButton.TabIndex = 15;
@@ -181,7 +183,7 @@ namespace VRNeckSafer
             // UseModifierCheckBox
             // 
             this.UseModifierCheckBox.AutoSize = true;
-            this.UseModifierCheckBox.Location = new System.Drawing.Point(12, 87);
+            this.UseModifierCheckBox.Location = new System.Drawing.Point(12, 116);
             this.UseModifierCheckBox.Name = "UseModifierCheckBox";
             this.UseModifierCheckBox.Size = new System.Drawing.Size(82, 17);
             this.UseModifierCheckBox.TabIndex = 17;
@@ -192,19 +194,41 @@ namespace VRNeckSafer
             // InvertcheckBox
             // 
             this.InvertcheckBox.AutoSize = true;
-            this.InvertcheckBox.Location = new System.Drawing.Point(12, 109);
+            this.InvertcheckBox.Location = new System.Drawing.Point(12, 87);
             this.InvertcheckBox.Name = "InvertcheckBox";
             this.InvertcheckBox.Size = new System.Drawing.Size(52, 17);
             this.InvertcheckBox.TabIndex = 18;
             this.InvertcheckBox.Text = "invert";
             this.InvertcheckBox.UseVisualStyleBackColor = true;
-            this.InvertcheckBox.CheckedChanged += new System.EventHandler(this.InvertcheckBox_CheckedChanged);
+            // 
+            // toggleCheckBox
+            // 
+            this.toggleCheckBox.AutoSize = true;
+            this.toggleCheckBox.Location = new System.Drawing.Point(102, 87);
+            this.toggleCheckBox.Name = "toggleCheckBox";
+            this.toggleCheckBox.Size = new System.Drawing.Size(55, 17);
+            this.toggleCheckBox.TabIndex = 19;
+            this.toggleCheckBox.Text = "toggle";
+            this.toggleCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // Use8WayHatCheckBox
+            // 
+            this.Use8WayHatCheckBox.AutoSize = true;
+            this.Use8WayHatCheckBox.Location = new System.Drawing.Point(178, 87);
+            this.Use8WayHatCheckBox.Name = "Use8WayHatCheckBox";
+            this.Use8WayHatCheckBox.Size = new System.Drawing.Size(79, 17);
+            this.Use8WayHatCheckBox.TabIndex = 20;
+            this.Use8WayHatCheckBox.Text = "8-way HAT";
+            this.Use8WayHatCheckBox.UseVisualStyleBackColor = true;
+            this.Use8WayHatCheckBox.CheckedChanged += new System.EventHandler(this.Use8WayHatCheckBox_CheckedChanged);
             // 
             // ButtonForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(304, 131);
+            this.ClientSize = new System.Drawing.Size(304, 140);
+            this.Controls.Add(this.Use8WayHatCheckBox);
+            this.Controls.Add(this.toggleCheckBox);
             this.Controls.Add(this.InvertcheckBox);
             this.Controls.Add(this.UseModifierCheckBox);
             this.Controls.Add(this.ClearButton);
@@ -219,6 +243,8 @@ namespace VRNeckSafer
             this.Controls.Add(this.label1);
             this.Controls.Add(this.MainButtonComboBox);
             this.Controls.Add(this.MainDeviceComboBox);
+            this.MaximumSize = new System.Drawing.Size(320, 179);
+            this.MinimumSize = new System.Drawing.Size(320, 179);
             this.Name = "ButtonForm";
             this.Text = "ButtonForm";
             this.ResumeLayout(false);
@@ -242,5 +268,7 @@ namespace VRNeckSafer
         public System.Windows.Forms.ComboBox ModifierDeviceComboBox;
         public System.Windows.Forms.CheckBox UseModifierCheckBox;
         public System.Windows.Forms.CheckBox InvertcheckBox;
+        public System.Windows.Forms.CheckBox toggleCheckBox;
+        public System.Windows.Forms.CheckBox Use8WayHatCheckBox;
     }
 }

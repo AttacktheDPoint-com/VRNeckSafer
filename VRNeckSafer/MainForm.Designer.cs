@@ -38,11 +38,6 @@
             this.SetHoldButton1 = new System.Windows.Forms.Button();
             this.autoCB = new System.Windows.Forms.CheckBox();
             this.AutorotGridView = new System.Windows.Forms.DataGridView();
-            this.act = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deact = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LR = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fwd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AddButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
@@ -82,11 +77,9 @@
             this.startMinimzedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.minimizeToTrayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.use8wayHATToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.appModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.backgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.overlayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gameModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.forceSeatedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,6 +95,11 @@
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.act = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LR = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fwd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupAuto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AutorotGridView)).BeginInit();
             this.HMDYawBox.SuspendLayout();
@@ -215,47 +213,6 @@
             this.AutorotGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.AutorotGridView_RowsAdded);
             this.AutorotGridView.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.AutorotGridView_RowsRemoved);
             // 
-            // act
-            // 
-            this.act.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.act.HeaderText = "act";
-            this.act.Name = "act";
-            this.act.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.act.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.act.ToolTipText = "Activation angle";
-            this.act.Width = 30;
-            // 
-            // deact
-            // 
-            this.deact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.deact.HeaderText = "deact";
-            this.deact.Name = "deact";
-            this.deact.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.deact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.deact.ToolTipText = "Deactivation angle";
-            this.deact.Width = 30;
-            // 
-            // rot
-            // 
-            this.rot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.rot.HeaderText = "rotation";
-            this.rot.Name = "rot";
-            this.rot.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.rot.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.rot.Width = 30;
-            // 
-            // LR
-            // 
-            this.LR.HeaderText = "L/R";
-            this.LR.Name = "LR";
-            this.LR.Width = 30;
-            // 
-            // Fwd
-            // 
-            this.Fwd.HeaderText = "Fwd";
-            this.Fwd.Name = "Fwd";
-            this.Fwd.Width = 30;
-            // 
             // AddButton
             // 
             this.AddButton.Location = new System.Drawing.Point(156, 18);
@@ -353,6 +310,7 @@
             this.HMDYawLabel.Size = new System.Drawing.Size(101, 13);
             this.HMDYawLabel.TabIndex = 27;
             this.HMDYawLabel.Text = "HMD yaw: 0 deg";
+            this.toolTip1.SetToolTip(this.HMDYawLabel, "Physical rotation angle of the headset");
             // 
             // VersionLabel
             // 
@@ -374,6 +332,7 @@
             this.modeLB.Size = new System.Drawing.Size(86, 13);
             this.modeLB.TabIndex = 35;
             this.modeLB.Text = "(Mode: standing)";
+            this.toolTip1.SetToolTip(this.modeLB, "current VR gaming mode ");
             // 
             // groupBox1
             // 
@@ -635,8 +594,6 @@
             this.startMinimzedToolStripMenuItem,
             this.minimizeToTrayToolStripMenuItem,
             this.toolStripSeparator1,
-            this.use8wayHATToolStripMenuItem,
-            this.toolStripSeparator2,
             this.appModeToolStripMenuItem,
             this.gameModeToolStripMenuItem,
             this.PosCompensationToolStripMenuItem,
@@ -667,19 +624,6 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(196, 6);
             // 
-            // use8wayHATToolStripMenuItem
-            // 
-            this.use8wayHATToolStripMenuItem.CheckOnClick = true;
-            this.use8wayHATToolStripMenuItem.Name = "use8wayHATToolStripMenuItem";
-            this.use8wayHATToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
-            this.use8wayHATToolStripMenuItem.Text = "Use 8-way HAT";
-            this.use8wayHATToolStripMenuItem.CheckedChanged += new System.EventHandler(this.use8wayHATToolStripMenuItem_CheckedChanged);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(196, 6);
-            // 
             // appModeToolStripMenuItem
             // 
             this.appModeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -689,21 +633,21 @@
             this.appModeToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.appModeToolStripMenuItem.Text = "App  mode";
             // 
-            // backgroundToolStripMenuItem
-            // 
-            this.backgroundToolStripMenuItem.Name = "backgroundToolStripMenuItem";
-            this.backgroundToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.backgroundToolStripMenuItem.Text = "Background";
-            this.backgroundToolStripMenuItem.ToolTipText = "Changes require restart!";
-            this.backgroundToolStripMenuItem.Click += new System.EventHandler(this.backgroundToolStripMenuItem_Click);
-            // 
             // overlayToolStripMenuItem
             // 
             this.overlayToolStripMenuItem.Name = "overlayToolStripMenuItem";
-            this.overlayToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.overlayToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.overlayToolStripMenuItem.Text = "Overlay";
             this.overlayToolStripMenuItem.ToolTipText = "Changes require restart!";
             this.overlayToolStripMenuItem.Click += new System.EventHandler(this.overlayToolStripMenuItem_Click);
+            // 
+            // backgroundToolStripMenuItem
+            // 
+            this.backgroundToolStripMenuItem.Name = "backgroundToolStripMenuItem";
+            this.backgroundToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.backgroundToolStripMenuItem.Text = "Background";
+            this.backgroundToolStripMenuItem.ToolTipText = "Changes require restart!";
+            this.backgroundToolStripMenuItem.Click += new System.EventHandler(this.backgroundToolStripMenuItem_Click);
             // 
             // gameModeToolStripMenuItem
             // 
@@ -718,21 +662,21 @@
             // autoToolStripMenuItem
             // 
             this.autoToolStripMenuItem.Name = "autoToolStripMenuItem";
-            this.autoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.autoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.autoToolStripMenuItem.Text = "Auto";
             this.autoToolStripMenuItem.Click += new System.EventHandler(this.autoToolStripMenuItem_Click);
             // 
             // forceSeatedToolStripMenuItem
             // 
             this.forceSeatedToolStripMenuItem.Name = "forceSeatedToolStripMenuItem";
-            this.forceSeatedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.forceSeatedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.forceSeatedToolStripMenuItem.Text = "Force seated";
             this.forceSeatedToolStripMenuItem.Click += new System.EventHandler(this.forceSeatedToolStripMenuItem_Click);
             // 
             // forceStandingToolStripMenuItem
             // 
             this.forceStandingToolStripMenuItem.Name = "forceStandingToolStripMenuItem";
-            this.forceStandingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.forceStandingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.forceStandingToolStripMenuItem.Text = "Force standing";
             this.forceStandingToolStripMenuItem.Click += new System.EventHandler(this.forceStandingToolStripMenuItem_Click);
             // 
@@ -812,6 +756,55 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.exitToolStripMenuItem.Text = "Exit";
+            // 
+            // act
+            // 
+            this.act.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.act.Frozen = true;
+            this.act.HeaderText = "act";
+            this.act.Name = "act";
+            this.act.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.act.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.act.ToolTipText = "Activation angle";
+            this.act.Width = 30;
+            // 
+            // deact
+            // 
+            this.deact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.deact.Frozen = true;
+            this.deact.HeaderText = "deact";
+            this.deact.Name = "deact";
+            this.deact.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.deact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.deact.ToolTipText = "Deactivation angle (< act and > previous act)";
+            this.deact.Width = 30;
+            // 
+            // rot
+            // 
+            this.rot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.rot.Frozen = true;
+            this.rot.HeaderText = "rot";
+            this.rot.Name = "rot";
+            this.rot.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.rot.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.rot.ToolTipText = "Rotation angle";
+            this.rot.Width = 30;
+            // 
+            // LR
+            // 
+            this.LR.Frozen = true;
+            this.LR.HeaderText = "L/R";
+            this.LR.Name = "LR";
+            this.LR.ToolTipText = "Translation Left/Right (<40cm)";
+            this.LR.Width = 30;
+            // 
+            // Fwd
+            // 
+            this.Fwd.Frozen = true;
+            this.Fwd.HeaderText = "Fwd";
+            this.Fwd.Name = "Fwd";
+            this.Fwd.ToolTipText = "Translation to front (< 20cm)";
+            this.Fwd.Width = 50;
             // 
             // MainForm
             // 
@@ -897,7 +890,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem advancedConfigToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem use8wayHATToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem startMinimzedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem minimizeToTrayToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gameModeToolStripMenuItem;
@@ -908,12 +900,6 @@
         private System.Windows.Forms.ToolStripMenuItem backgroundToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem overlayToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn act;
-        private System.Windows.Forms.DataGridViewTextBoxColumn deact;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rot;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LR;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Fwd;
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
@@ -925,6 +911,11 @@
         private System.Windows.Forms.ToolStripMenuItem inStandingModeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem alwaysToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem neverToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn act;
+        private System.Windows.Forms.DataGridViewTextBoxColumn deact;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rot;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LR;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Fwd;
     }
 }
 

@@ -156,7 +156,7 @@ namespace VRNeckSafer
 
         bool checkButtonPress(Button b, ButtonConfig bc)
         {
-            bool pressed = js.IsButtonPressed(conf.Use8WayHat, bc);
+            bool pressed = js.IsButtonPressed(bc);
             if (pressed)
             {
                 b.ForeColor = System.Drawing.Color.LightGreen;
@@ -367,7 +367,7 @@ namespace VRNeckSafer
             int[] i = new int[5];
             i[0] = conf.AutoSteps[conf.AutoSteps.Count - 1][0] + 10;
             i[1] = conf.AutoSteps[conf.AutoSteps.Count - 1][0] + 1;
-            i[2] = conf.AutoSteps[conf.AutoSteps.Count - 1][2];
+            i[2] = conf.AutoSteps[conf.AutoSteps.Count - 1][2] + 10;
             i[3] = conf.AutoSteps[conf.AutoSteps.Count - 1][3];
             i[4] = conf.AutoSteps[conf.AutoSteps.Count - 1][4];
             conf.AutoSteps.Add(i);
@@ -397,14 +397,33 @@ namespace VRNeckSafer
 
             if (e.RowIndex == -1) return;
             string s = AutorotGridView[e.ColumnIndex, e.RowIndex].Value.ToString();
-            int.TryParse(s, out val);
-            conf.AutoSteps[e.RowIndex][e.ColumnIndex] = val;
-            conf.WriteConfig();
+            bool good = int.TryParse(s, out val);
+
+            if (good)
+            {
+                if (val < 0) good = false; 
+                if (e.RowIndex > 0 && e.ColumnIndex == 1 && val <= conf.AutoSteps[e.RowIndex - 1][0]) good = false;
+                if (e.ColumnIndex == 0 && val <= conf.AutoSteps[e.RowIndex][1]) good = false;
+                if (e.ColumnIndex == 1 && val >= conf.AutoSteps[e.RowIndex][0]) good = false;
+                if (e.ColumnIndex == 3 && val > 40) good = false;
+                if (e.ColumnIndex == 4 && val > 20) good = false;
+            }
+
+            if (good) 
+            {
+                conf.AutoSteps[e.RowIndex][e.ColumnIndex] = val;
+                conf.WriteConfig();
+                AutorotGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = SystemColors.Control;
+            }
+            else
+            {
+                AutorotGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = System.Drawing.Color.Red;
+            }
         }
 
         private void AutorotGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            AutorotGridView.Height = AutorotGridView.RowCount * 22 + 22;
+            AutorotGridView.Height = AutorotGridView.RowCount * 22 + 23;
             AutorotGridView.MaximumSize = new System.Drawing.Size(AutorotGridView.Width, Size.Height - groupAuto.Location.Y - 124);
 
             conf.WriteConfig();
@@ -412,7 +431,7 @@ namespace VRNeckSafer
 
         private void AutorotGridView_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            AutorotGridView.Height = AutorotGridView.RowCount * 22 + 22;
+            AutorotGridView.Height = AutorotGridView.RowCount * 22 + 23;
             AutorotGridView.MaximumSize = new System.Drawing.Size(AutorotGridView.Width, Size.Height - groupAuto.Location.Y - 124);
             conf.WriteConfig();
         }
@@ -426,12 +445,6 @@ namespace VRNeckSafer
         private void minimizeToTrayToolStripMenuItem_CheckStateChanged(object sender, EventArgs e)
         {
             conf.MinimizeToTray = minimizeToTrayToolStripMenuItem.Checked;
-            conf.WriteConfig();
-        }
-
-        private void use8wayHATToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
-        {
-            conf.Use8WayHat = use8wayHATToolStripMenuItem.Checked;
             conf.WriteConfig();
         }
 
@@ -492,7 +505,7 @@ namespace VRNeckSafer
             VersionLabel.Location = new System.Drawing.Point(VersionLabel.Location.X, Size.Height - 60);
             groupAuto.Height = Size.Height - groupAuto.Location.Y - 67;
 
-            AutorotGridView.Height = AutorotGridView.RowCount * 22 + 22;
+            AutorotGridView.Height = AutorotGridView.RowCount * 22 + 23;
             AutorotGridView.MaximumSize = new System.Drawing.Size(AutorotGridView.Width, Size.Height - groupAuto.Location.Y - 124);
         }
         private void MainForm_SizeChanged(object sender, EventArgs e)
@@ -610,7 +623,6 @@ namespace VRNeckSafer
         }
         private void setMenuCheckmarks()
         {
-            if (conf.Use8WayHat) use8wayHATToolStripMenuItem.Checked = true;
             if (conf.StartMinimized) startMinimzedToolStripMenuItem.Checked = true;
             if (conf.MinimizeToTray) minimizeToTrayToolStripMenuItem.Checked = true;
 
@@ -679,12 +691,12 @@ namespace VRNeckSafer
 
             conf.StartMinimized = false;
             conf.MinimizeToTray = false;
-            conf.Use8WayHat = false;
             conf.GameMode = "Auto";
-            conf.AppMode = "Background";
+            conf.AppMode = "Overlay";
             conf.PosCompensation = "when standing";
             conf.WriteConfig();
             setMenuCheckmarks();
         }
+
     }
 }

@@ -21,6 +21,15 @@ namespace VRNeckSafer
             Text = titel;
             mf.js.GetJoysticks();
 
+            UseModifierCheckBox.Checked = butconf.UseModifier;
+            InvertcheckBox.Checked = butconf.Invert;
+            toggleCheckBox.Checked = butconf.Toggle;
+            Use8WayHatCheckBox.Checked = butconf.Use8WayHat;
+
+            FillComboBoxes();
+        }
+        void FillComboBoxes()
+        {
             MainDeviceComboBox.Items.Clear();
             MainDeviceComboBox.Items.Add("none");
             ModifierDeviceComboBox.Items.Clear();
@@ -30,8 +39,6 @@ namespace VRNeckSafer
             ModifierButtonComboBox.Items.Clear();
             ModifierButtonComboBox.Items.Add("none");
 
-            UseModifierCheckBox.Checked = butconf.UseModifier;
-            InvertcheckBox.Checked = butconf.Invert;
 
             for (int i = 0; i < mf.js.ll.Count; i++)
             {
@@ -49,9 +56,7 @@ namespace VRNeckSafer
             ModifierButtonComboBox.Text = butconf.ModButton;
 
             MainButtonComboBox.Text = butconf.Button;
-
         }
-
         void FillButtonComboBox(int joyIndex, ComboBox cb)
         {
             cb.Items.Clear();
@@ -63,7 +68,7 @@ namespace VRNeckSafer
             }
             for (int i = 0; i < mf.js.Sticks[joyIndex].Capabilities.PovCount; i++)
             {
-                if (mf.conf.Use8WayHat)
+                if (butconf.Use8WayHat)
                 {
                     for (int j = 0; j < 360; j += 45)
                     {
@@ -100,7 +105,7 @@ namespace VRNeckSafer
             }
             else
             {
-                if (mf.conf.Use8WayHat)
+                if (butconf.Use8WayHat)
                 {
                     int butindex =
                         mf.js.Sticks[jb.joyIndex].Capabilities.ButtonCount
@@ -187,11 +192,12 @@ namespace VRNeckSafer
                 butconf.ModJoystickGUID = "none";
             else
                 butconf.ModJoystickGUID = mf.js.ll[ModifierDeviceComboBox.SelectedIndex - 1].InstanceGuid.ToString();
+
             butconf.ModButton = ModifierButtonComboBox.Text;
-
             butconf.UseModifier = UseModifierCheckBox.Checked;
-
             butconf.Invert = InvertcheckBox.Checked;
+            butconf.Toggle = toggleCheckBox.Checked;
+            butconf.Use8WayHat = Use8WayHatCheckBox.Checked;
 
             mf.conf.WriteConfig();
             Close();
@@ -215,9 +221,10 @@ namespace VRNeckSafer
             MainButtonComboBox.Text = "none";
         }
 
-        private void InvertcheckBox_CheckedChanged(object sender, EventArgs e)
+        private void Use8WayHatCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-
+            butconf.Use8WayHat = Use8WayHatCheckBox.Checked;
+            FillComboBoxes();
         }
     }
 }
