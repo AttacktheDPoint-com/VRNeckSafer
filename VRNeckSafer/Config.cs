@@ -94,6 +94,7 @@ namespace VRNeckSafer
             catch (Exception)
             {
                 Config conf = new Config();
+                if (conf.AutoSteps.Count == 0) conf.AutoSteps.Add(new int[5] { 90, 80, 10, 0, 0 });
                 conf.WriteConfig();
                 return conf;
             }
