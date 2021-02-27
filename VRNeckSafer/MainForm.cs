@@ -171,15 +171,15 @@ namespace VRNeckSafer
         }
         private void loopTimer_Tick(object sender, EventArgs e)
         {
-
+            bool reset_pressed = checkButtonPress(SetResetButton, conf.ResetButton);
             bool l_pressed = checkButtonPress(SetLeftButton, conf.LeftButton);
             bool r_pressed = checkButtonPress(SetRightButton, conf.RightButton);
-            bool autofrozen =
-                checkButtonPress(SetHoldButton1, conf.HoldButton1) ||
-                checkButtonPress(SetHoldButton2, conf.HoldButton2) ||
-                checkButtonPress(SetHoldButton3, conf.HoldButton3) ||
-                checkButtonPress(SetHoldButton4, conf.HoldButton4);
+            bool h1 = checkButtonPress(SetHoldButton1, conf.HoldButton1);
+            bool h2 = checkButtonPress(SetHoldButton2, conf.HoldButton2);
+            bool h3 = checkButtonPress(SetHoldButton3, conf.HoldButton3);
+            bool h4 = checkButtonPress(SetHoldButton4, conf.HoldButton4);
 
+            bool autofrozen = h1 || h2 || h3 || h4;
 
             if (l_pressed)
             {
@@ -222,7 +222,7 @@ namespace VRNeckSafer
             else
                 HMDYawLabel.Text = "HMD yaw: standby";
 
-            if (checkButtonPress(SetResetButton, conf.ResetButton))
+            if (reset_pressed)
             {
                 vr.getHmdSeatedPositionOffset();
                 vr.getHmdYawOffset();

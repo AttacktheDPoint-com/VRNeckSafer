@@ -138,10 +138,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Release\VRNeckSaferV16.zip" />
-    <None Include="Release\VRNeckSaferV20.zip" />
-    <None Include="Release\VRNeckSaferV201.zip" />
     <None Include="Release\VRNeckSaferV202.zip" />
     <None Include="Release\VRNeckSaferV203.zip" />
+    <None Include="Release\VRNeckSaferV204.zip" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -159,18 +158,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Release\VRNSv14.JPG" />
-    <Content Include="Release\VRNSv15.JPG" />
     <Content Include="Release\VRNSv16.JPG" />
-    <Content Include="Release\VRNSv20.JPG" />
-    <Content Include="Release\VRNSv201.JPG" />
     <Content Include="Release\VRNSv202.JPG" />
     <Content Include="Release\VRNSv20_2.JPG" />
     <Content Include="VRNS.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Costura32\openvr_api.dll" />
-    <EmbeddedResource Include="Costura64\openvr_api.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

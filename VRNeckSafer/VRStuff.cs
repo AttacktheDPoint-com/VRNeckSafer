@@ -52,22 +52,12 @@ namespace VRNeckSafer
 
         public void calcPositionOffset()
         {
-            system.GetDeviceToAbsoluteTrackingPose(ETrackingUniverseOrigin.TrackingUniverseSeated, 0.0f, Poses);
-            Vector3 V1 = new Vector3(
-                Poses[0].mDeviceToAbsoluteTracking.m3,
-                Poses[0].mDeviceToAbsoluteTracking.m7,
-                Poses[0].mDeviceToAbsoluteTracking.m11);
-            double rot1 = Math.Atan2(Poses[0].mDeviceToAbsoluteTracking.m2, Poses[0].mDeviceToAbsoluteTracking.m10);
-
             system.GetDeviceToAbsoluteTrackingPose(ETrackingUniverseOrigin.TrackingUniverseStanding, 0.0f, Poses);
-            Vector3 V2 = new Vector3(
+            deltaPos = new Vector3(
                 Poses[0].mDeviceToAbsoluteTracking.m3,
                 Poses[0].mDeviceToAbsoluteTracking.m7,
                 Poses[0].mDeviceToAbsoluteTracking.m11);
-            double rot2 = Math.Atan2(Poses[0].mDeviceToAbsoluteTracking.m2, Poses[0].mDeviceToAbsoluteTracking.m10);
-
-            deltaPos = Vector3.Subtract(V2, V1);
-            deltaRot = rot2 - rot1;
+            deltaRot = Math.Atan2(Poses[0].mDeviceToAbsoluteTracking.m2, Poses[0].mDeviceToAbsoluteTracking.m10);
         }
 
         public void getHmdSeatedPositionOffset()
@@ -121,17 +111,13 @@ namespace VRNeckSafer
 
             getHMDPose();
 
-            double yaw = Math.Atan2(HmdPose.m2, HmdPose.m10);
-
             Vector3 oldHmdXyz = new Vector3(HmdPose.m3, HmdPose.m7, HmdPose.m11);
             Vector3 newHmdXyz = new Vector3(HmdPose.m3, HmdPose.m7, HmdPose.m11);
 
-            Vector3 newtrans = rotateCoord(trans, -(HMDYawOffset + deltaRot));
+            Vector3 rottrans = rotateCoord(trans, -(HMDYawOffset + Angle));
 
-
-            newHmdXyz = Vector3.Subtract(newHmdXyz, newtrans);
+            newHmdXyz = Vector3.Subtract(newHmdXyz, rottrans);
             newHmdXyz = Vector3.Subtract(newHmdXyz, deltaPos);
-            newHmdXyz = rotateCoord(newHmdXyz, -Angle);
 
             Vector3 Xyz = Vector3.Subtract(oldHmdXyz, newHmdXyz);
 
