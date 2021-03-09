@@ -81,4 +81,7 @@ hotfix for DCS
 
 fix for fwd translation when autorotation to left 
 
-Download link: [VRNeckSaferV202.zip](https://gitlab.com/NobiWan/vrnecksafer/-/blob/master/VRNeckSafer/Release/VRNeckSaferV203.zip)
+**Update v2.04:**
+
+
+Download link: [VRNeckSaferV20VRNeckSaferV204VRNeckSaferV204.zip](https://gitlab.com/NobiWan/vrnecksafer/-/blob/master/VRNeckSafer/Release/VRNeckSaferV20VRNeckSaferV204VRNeckSaferV204.zip)
