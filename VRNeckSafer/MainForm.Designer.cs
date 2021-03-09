@@ -33,7 +33,7 @@
             this.groupAuto = new System.Windows.Forms.GroupBox();
             this.error_label2 = new System.Windows.Forms.Label();
             this.error_label = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.graphButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.SetHoldButton4 = new System.Windows.Forms.Button();
             this.SetHoldButton3 = new System.Windows.Forms.Button();
@@ -118,7 +118,7 @@
             // 
             this.groupAuto.Controls.Add(this.error_label2);
             this.groupAuto.Controls.Add(this.error_label);
-            this.groupAuto.Controls.Add(this.button1);
+            this.groupAuto.Controls.Add(this.graphButton);
             this.groupAuto.Controls.Add(this.label2);
             this.groupAuto.Controls.Add(this.SetHoldButton4);
             this.groupAuto.Controls.Add(this.SetHoldButton3);
@@ -140,7 +140,7 @@
             this.error_label2.AutoSize = true;
             this.error_label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.error_label2.ForeColor = System.Drawing.Color.Red;
-            this.error_label2.Location = new System.Drawing.Point(87, 31);
+            this.error_label2.Location = new System.Drawing.Point(179, 31);
             this.error_label2.Name = "error_label2";
             this.error_label2.Size = new System.Drawing.Size(38, 13);
             this.error_label2.TabIndex = 57;
@@ -151,20 +151,22 @@
             this.error_label.AutoSize = true;
             this.error_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.error_label.ForeColor = System.Drawing.Color.Red;
-            this.error_label.Location = new System.Drawing.Point(84, 20);
+            this.error_label.Location = new System.Drawing.Point(176, 20);
             this.error_label.Name = "error_label";
             this.error_label.Size = new System.Drawing.Size(45, 13);
             this.error_label.TabIndex = 56;
             this.error_label.Text = "Invalid";
             // 
-            // button1
+            // graphButton
             // 
-            this.button1.Location = new System.Drawing.Point(227, 20);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(24, 23);
-            this.button1.TabIndex = 55;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
+            this.graphButton.BackgroundImage = global::VRNeckSafer.Properties.Resources.Graph;
+            this.graphButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.graphButton.Location = new System.Drawing.Point(226, 20);
+            this.graphButton.Name = "graphButton";
+            this.graphButton.Size = new System.Drawing.Size(24, 23);
+            this.graphButton.TabIndex = 55;
+            this.graphButton.UseVisualStyleBackColor = true;
+            this.graphButton.Click += new System.EventHandler(this.graphButton_Click);
             // 
             // label2
             // 
@@ -301,7 +303,7 @@
             // 
             // AddButton
             // 
-            this.AddButton.Location = new System.Drawing.Point(135, 20);
+            this.AddButton.Location = new System.Drawing.Point(81, 20);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(43, 23);
             this.AddButton.TabIndex = 40;
@@ -311,7 +313,7 @@
             // 
             // DeleteButton
             // 
-            this.DeleteButton.Location = new System.Drawing.Point(181, 20);
+            this.DeleteButton.Location = new System.Drawing.Point(128, 20);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(43, 23);
             this.DeleteButton.TabIndex = 41;
@@ -407,7 +409,7 @@
             this.VersionLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.VersionLabel.Size = new System.Drawing.Size(34, 13);
             this.VersionLabel.TabIndex = 34;
-            this.VersionLabel.Text = "v2.04";
+            this.VersionLabel.Text = "v2.05";
             this.VersionLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // modeLB
@@ -954,7 +956,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn LR;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fwd;
         private System.Windows.Forms.Label error_label;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button graphButton;
         private System.Windows.Forms.Label error_label2;
     }
 }

@@ -92,11 +92,11 @@ namespace VRNeckSafer
                 {
                     c.AutoSteps.Add(new int[5] { 60, 51, 10, 0, 0 });
                     c.AutoSteps.Add(new int[5] { 70, 61, 20, 5, 1 });
-                    c.AutoSteps.Add(new int[5] { 80, 71, 30, 10, 1 });
-                    c.AutoSteps.Add(new int[5] { 90, 81, 40, 10, 2 });
-                    c.AutoSteps.Add(new int[5] { 100, 91, 50, 10, 2 });
-                    c.AutoSteps.Add(new int[5] { 110, 101, 60, 10, 2 });
-                    c.AutoSteps.Add(new int[5] { 120, 111, 70, 10, 2 });
+                    c.AutoSteps.Add(new int[5] { 80, 71, 30, 7, 3 });
+                    c.AutoSteps.Add(new int[5] { 90, 81, 40, 10, 5 });
+                    c.AutoSteps.Add(new int[5] { 100, 91, 50, 10, 5 });
+                    c.AutoSteps.Add(new int[5] { 110, 101, 60, 10, 5 });
+                    c.AutoSteps.Add(new int[5] { 120, 111, 70, 10, 5 });
                 }
                 return c;
             }
@@ -107,11 +107,11 @@ namespace VRNeckSafer
                 {
                     conf.AutoSteps.Add(new int[5] { 60, 51, 10, 0, 0 });
                     conf.AutoSteps.Add(new int[5] { 70, 61, 20, 5, 1 });
-                    conf.AutoSteps.Add(new int[5] { 80, 71, 30, 10, 1 });
-                    conf.AutoSteps.Add(new int[5] { 90, 81, 40, 10, 2 });
-                    conf.AutoSteps.Add(new int[5] { 100, 91, 50, 10, 2 });
-                    conf.AutoSteps.Add(new int[5] { 110, 101, 60, 10, 2 });
-                    conf.AutoSteps.Add(new int[5] { 120, 111, 70, 10, 2 });
+                    conf.AutoSteps.Add(new int[5] { 80, 71, 30, 7, 3 });
+                    conf.AutoSteps.Add(new int[5] { 90, 81, 40, 10, 5 });
+                    conf.AutoSteps.Add(new int[5] { 100, 91, 50, 10, 5 });
+                    conf.AutoSteps.Add(new int[5] { 110, 101, 60, 10, 5 });
+                    conf.AutoSteps.Add(new int[5] { 120, 111, 70, 10, 5 });
                 }
 
                 conf.WriteConfig();

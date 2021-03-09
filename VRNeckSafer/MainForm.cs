@@ -11,6 +11,7 @@ namespace VRNeckSafer
         public JoystickStuff js;
         public VRStuff vr;
         public Config conf;
+        public Graph gr;
 
         public int joy_offset_angle;
         public int auto_offset_angle;
@@ -70,13 +71,24 @@ namespace VRNeckSafer
                 };
                 AutorotGridView.Rows.Add(r);
             }
-
+            AutorotGridView.EnableHeadersVisualStyles = false;
+            AutorotGridView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Raised;
             AutorotGridView.RowHeadersVisible = false;
             AutorotGridView.Columns[0].HeaderText = @"act";
+            AutorotGridView.Columns[0].HeaderCell.Style.ForeColor = System.Drawing.Color.Red;
+            AutorotGridView.Columns[0].HeaderCell.Style.BackColor = System.Drawing.Color.LightGray;
             AutorotGridView.Columns[1].HeaderText = @"de";
+            AutorotGridView.Columns[1].HeaderCell.Style.ForeColor = System.Drawing.Color.Green;
+            AutorotGridView.Columns[1].HeaderCell.Style.BackColor = System.Drawing.Color.LightGray;
             AutorotGridView.Columns[2].HeaderText = @"rot";
+            AutorotGridView.Columns[2].HeaderCell.Style.ForeColor = System.Drawing.Color.Black;
+            AutorotGridView.Columns[2].HeaderCell.Style.BackColor = System.Drawing.Color.LightGray;
             AutorotGridView.Columns[3].HeaderText = @"L/R";
+            AutorotGridView.Columns[3].HeaderCell.Style.ForeColor = System.Drawing.Color.Blue;
+            AutorotGridView.Columns[3].HeaderCell.Style.BackColor = System.Drawing.Color.LightGray;
             AutorotGridView.Columns[4].HeaderText = @"Fwd";
+            AutorotGridView.Columns[4].HeaderCell.Style.ForeColor = System.Drawing.Color.CadetBlue;
+            AutorotGridView.Columns[4].HeaderCell.Style.BackColor = System.Drawing.Color.LightGray;
 
 
             setButtonToolTip(SetLeftButton, conf.LeftButton);
@@ -99,6 +111,7 @@ namespace VRNeckSafer
         {
             AddButton.Enabled = enable;
             DeleteButton.Enabled = enable;
+            graphButton.Enabled = enable;
             SetHoldButton1.Enabled = enable;
             SetHoldButton2.Enabled = enable;
             SetHoldButton3.Enabled = enable;
@@ -143,8 +156,6 @@ namespace VRNeckSafer
         private void additivRB_CheckedChanged(object sender, EventArgs e)
         {
             conf.Additiv = additivRB.Checked;
- //           groupAuto.Enabled = !additivRB.Checked;
- //           HMDYawBox.Enabled = !additivRB.Checked;
             transLRNUP.Enabled = !additivRB.Checked;
             transFNUP.Enabled = !additivRB.Checked;
             label14.Enabled = !additivRB.Checked;
@@ -176,6 +187,7 @@ namespace VRNeckSafer
             }
             return pressed;
         }
+
         private void loopTimer_Tick(object sender, EventArgs e)
         {
             bool reset_pressed = checkButtonPress(SetResetButton, conf.ResetButton);
@@ -283,6 +295,17 @@ namespace VRNeckSafer
             last_offset_angle = sum_offset_angle;
 
             Text = "VRNeckSafer (" + sum_offset_angle + " deg)";
+
+            if (gr != null)
+            {
+                if (gr.hmd != hmdYaw)
+                {
+                    gr.hmd = hmdYaw;
+                    gr.rot = -vr.getHmdYaw();
+                    gr.Refresh();
+                }
+            }
+
         }
 
         private void calcAutoRotAndTrans(int yaw, ref int arot, ref Vector3 atrans)
@@ -459,22 +482,28 @@ namespace VRNeckSafer
 
             error_label.Visible = check_autorot_config();
             error_label2.Visible = error_label.Visible;
+            if (gr != null)
+                gr.Graph_ValuesChanged();
         }
 
         private void AutorotGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            AutorotGridView.Height = AutorotGridView.RowCount * 22 + 23;
+            AutorotGridView.Height = AutorotGridView.RowCount * 22 + 20;
             AutorotGridView.MaximumSize = new System.Drawing.Size(AutorotGridView.Width, Size.Height - groupAuto.Location.Y - 124);
             MaximumSize = new System.Drawing.Size(MaximumSize.Width, Math.Max(min_form_heigh, AutorotGridView.RowCount * 22 + 430));
             conf.WriteConfig();
+            if (gr != null)
+                gr.Graph_ValuesChanged();
         }
 
         private void AutorotGridView_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            AutorotGridView.Height = AutorotGridView.RowCount * 22 + 23;
+            AutorotGridView.Height = AutorotGridView.RowCount * 22 + 20;
             AutorotGridView.MaximumSize = new System.Drawing.Size(AutorotGridView.Width, Size.Height - groupAuto.Location.Y - 124);
             MaximumSize = new System.Drawing.Size(MaximumSize.Width, Math.Max(min_form_heigh, AutorotGridView.RowCount * 22 + 430));
             conf.WriteConfig();
+            if (gr != null)
+                gr.Graph_ValuesChanged();
         }
 
         private void startMinimzedToolStripMenuItem_CheckStateChanged(object sender, EventArgs e)
@@ -546,7 +575,7 @@ namespace VRNeckSafer
             VersionLabel.Location = new System.Drawing.Point(VersionLabel.Location.X, Size.Height - 60);
             groupAuto.Height = Size.Height - groupAuto.Location.Y - 67;
 
-            AutorotGridView.Height = AutorotGridView.RowCount * 22 + 23;
+            AutorotGridView.Height = AutorotGridView.RowCount * 22 + 20;
             AutorotGridView.MaximumSize = new System.Drawing.Size(AutorotGridView.Width, Size.Height - groupAuto.Location.Y - 124);
         }
         private void MainForm_SizeChanged(object sender, EventArgs e)
@@ -737,6 +766,12 @@ namespace VRNeckSafer
             conf.PosCompensation = "when standing";
             conf.WriteConfig();
             setMenuCheckmarks();
+        }
+
+        private void graphButton_Click(object sender, EventArgs e)
+        {
+            gr = new Graph(this);
+            gr.Show();
         }
     }
 }
