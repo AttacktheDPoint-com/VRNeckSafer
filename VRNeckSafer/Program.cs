@@ -16,6 +16,7 @@ namespace VRNeckSafer
                 bool isAnotherInstanceOpen = !mutex.WaitOne(TimeSpan.Zero);
                 if (isAnotherInstanceOpen)
                 {
+                    MessageBox.Show("VRNS already running!", "VRNeckSafer - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 

@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace VRNeckSafer
@@ -16,17 +10,17 @@ namespace VRNeckSafer
 
         private int x1, y1, x2, y2, step;
         public int hmd, rot;
-        Bitmap bm1,bm2;
+        Bitmap bm1, bm2;
         Graphics gr;
         float grx, gry;
         float borderL, borderT;
         Pen redPen;
         Pen greenPen;
         Pen black2Pen;
-        Pen bluePen ;
-        Pen blue2Pen ;
-        Pen blackPen ;
-        Pen dashedPen ;
+        Pen bluePen;
+        Pen blue2Pen;
+        Pen blackPen;
+        Pen dashedPen;
         Font myFont;
         Brush myBrush;
 
@@ -73,13 +67,13 @@ namespace VRNeckSafer
 
             if (hmd > 0)
             {
-//                e.Graphics.DrawString(rot.ToString(), myFont, myBrush, 0, 0);
-//                e.Graphics.DrawString(hmd.ToString(), myFont, myBrush, 0, 15);
+                //                e.Graphics.DrawString(rot.ToString(), myFont, myBrush, 0, 0);
+                //                e.Graphics.DrawString(hmd.ToString(), myFont, myBrush, 0, 15);
                 Point P1 = Scale(hmd, 0);
                 Point P2 = Scale(hmd, rot);
                 Point P3 = Scale(hmd, 180);
                 e.Graphics.DrawLine(black2Pen, P1.X + borderL, ClientSize.Height / 2 + P1.Y + borderT, P2.X + borderL, ClientSize.Height / 2 + P2.Y + borderT);
-                e.Graphics.DrawLine(black2Pen, P1.X + borderL, P1.Y + 10 +borderT, P3.X + borderL, P3.Y + 10 +borderT);
+                e.Graphics.DrawLine(black2Pen, P1.X + borderL, P1.Y + 10 + borderT, P3.X + borderL, P3.Y + 10 + borderT);
                 P1 = Scale(0, rot);
                 e.Graphics.DrawLine(black2Pen, P1.X + borderL, ClientSize.Height / 2 + P1.Y + borderT, P2.X + borderL, ClientSize.Height / 2 + P2.Y + borderT);
 
@@ -131,24 +125,24 @@ namespace VRNeckSafer
         void Line(Pen p, int x, int l)
         {
             x2 = mf.conf.AutoSteps[0][x];
-            y2 =0;
+            y2 = 0;
             DLine(p, 0, 0, x2, y2);
             for (int i = 1; i < mf.conf.AutoSteps.Count; i++)
             {
                 x1 = x2;
                 y1 = y2;
-                y2 = mf.conf.AutoSteps[i-1][l];
-                DLine(p, x2, y2*3, x1, y1 * 3);
+                y2 = mf.conf.AutoSteps[i - 1][l];
+                DLine(p, x2, y2 * 3, x1, y1 * 3);
                 y1 = y2;
                 x2 = mf.conf.AutoSteps[i][x];
                 DLine(p, x1, y1 * 3, x2, y2 * 3);
             }
             x1 = x2;
             y1 = y2;
-            y2 = mf.conf.AutoSteps[mf.conf.AutoSteps.Count-1][l];
+            y2 = mf.conf.AutoSteps[mf.conf.AutoSteps.Count - 1][l];
             DLine(p, x2, y2 * 3, x1, y1 * 3);
             y1 = y2;
-            x2 = 180;          
+            x2 = 180;
             DLine(p, x1, y1 * 3, x2, y2 * 3);
         }
 
@@ -218,7 +212,7 @@ namespace VRNeckSafer
             float sx = grx / 180F;
             float sy = gry / 180F;
 
-            return new Point((int)(x * sx), (int)( (180-y) * sy));
+            return new Point((int)(x * sx), (int)((180 - y) * sy));
 
         }
 
@@ -242,11 +236,11 @@ namespace VRNeckSafer
 
             gr.DrawLine(pen, P1.X + borderL, P1.Y + borderT, P2.X + borderL, P2.Y + borderT);
         }
-        
+
 
         void DrawBitmap1()
         {
-            grx = ClientSize.Width-40;
+            grx = ClientSize.Width - 40;
             gry = ClientSize.Height / 2 - 30;
             bm1 = new Bitmap(ClientSize.Width, ClientSize.Height / 2);
             gr = Graphics.FromImage(bm1);
@@ -264,8 +258,8 @@ namespace VRNeckSafer
                 DLine(dashedPen, 0, i, 180, i);
                 DString(i.ToString() + "°", myFont, myBrush, 1, i);
             }
-            gr.DrawString("Physical HMD yaw angle", myFont, myBrush, grx/2-70, gry + 8);
- 
+            gr.DrawString("Physical HMD yaw angle", myFont, myBrush, grx / 2 - 70, gry + 8);
+
             gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
             GreenLine();
@@ -313,7 +307,7 @@ namespace VRNeckSafer
             Rectangle L2 = new Rectangle(ClientSize.Width - 192, 10, 137, 48);
             gr.FillRectangle(new SolidBrush(System.Drawing.Color.White), L2);
             gr.DrawRectangle(blackPen, L2);
-            gr.DrawString("Translational offset:", myFont, new SolidBrush(System.Drawing.Color.Black),L2.X+1, L2.Y+2);
+            gr.DrawString("Translational offset:", myFont, new SolidBrush(System.Drawing.Color.Black), L2.X + 1, L2.Y + 2);
             gr.DrawString(" Left/Right (L/R)", myFont, new SolidBrush(System.Drawing.Color.Blue), L2.X + 1, L2.Y + 17);
             gr.DrawString(" Forward (Fwd)", myFont, new SolidBrush(System.Drawing.Color.CadetBlue), L2.X + 1, L2.Y + 32);
             gr.RotateTransform(270);

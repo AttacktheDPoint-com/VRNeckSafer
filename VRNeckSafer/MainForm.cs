@@ -290,7 +290,7 @@ namespace VRNeckSafer
             if (Math.Abs(auto_trans_offset.Z) > Math.Abs(trans_offset.Z)) trans_offset.Z = auto_trans_offset.Z;
 
 
-            if (last_offset_angle != sum_offset_angle 
+            if (last_offset_angle != sum_offset_angle
                 || last_offset_x != trans_offset.X
                 || last_offset_z != trans_offset.Z)
             {
@@ -368,11 +368,6 @@ namespace VRNeckSafer
             vr.getHmdYaw();
         }
 
-        private float fabs(float i)
-        {
-            return i < 0F ? -i : i;
-        }
-
         private void transFNUP_ValueChanged(object sender, EventArgs e)
         {
             conf.TransF = (int)transFNUP.Value;
@@ -447,7 +442,8 @@ namespace VRNeckSafer
                     if (good)
                     {
                         if (val < 0) good = false;
-                        if (row < AutorotGridView.RowCount - 1 && col==0) {
+                        if (row < AutorotGridView.RowCount - 1 && col == 0)
+                        {
                             if (val >= conf.AutoSteps[row + 1][1]) good = false;
                             if (val >= conf.AutoSteps[row + 1][0]) good = false;
                         }

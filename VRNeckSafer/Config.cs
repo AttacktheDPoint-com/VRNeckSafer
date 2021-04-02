@@ -30,8 +30,8 @@ namespace VRNeckSafer
             Toggle = false;
             togglestate = false;
             laststate = false;
+        }
     }
-}
 
     public class Config
     {

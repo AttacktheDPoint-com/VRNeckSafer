@@ -113,7 +113,7 @@ namespace VRNeckSafer
         public void setOffset(int a, Vector3 trans)
         {
             double Angle = a * Math.PI / 180.0;
- 
+
             HmdMatrix34_t resetCenter = new HmdMatrix34_t()
             { m0 = 1, m1 = 0, m2 = 0, m3 = deltaPos.X, m4 = 0, m5 = 1, m6 = 0, m7 = deltaPos.Y, m8 = 0, m9 = 0, m10 = 1, m11 = deltaPos.Z };
             setChaperone(resetCenter);
@@ -122,16 +122,16 @@ namespace VRNeckSafer
 
             // IL-2: deltaRot and deltaPos = 0
             // DCS: HMDYawOffset =0
-            Vector3 newTrans = rotateCoord(trans, -HMDYawOffset); 
+            Vector3 newTrans = rotateCoord(trans, -HMDYawOffset);
 
             Vector3 oldHmdXyz = new Vector3(HmdPose.m3, HmdPose.m7, HmdPose.m11);
-            oldHmdXyz = rotateCoord(oldHmdXyz, -deltaRot); 
-            oldHmdXyz = Vector3.Add(oldHmdXyz, deltaPos);  
+            oldHmdXyz = rotateCoord(oldHmdXyz, -deltaRot);
+            oldHmdXyz = Vector3.Add(oldHmdXyz, deltaPos);
 
             Vector3 newHmdXyz = new Vector3(HmdPose.m3, HmdPose.m7, HmdPose.m11);
- 
+
             newHmdXyz = Vector3.Subtract(newHmdXyz, newTrans);
-            newHmdXyz = rotateCoord(newHmdXyz, -Angle -deltaRot);
+            newHmdXyz = rotateCoord(newHmdXyz, -Angle - deltaRot);
 
             Vector3 Xyz = Vector3.Subtract(oldHmdXyz, newHmdXyz);
 
