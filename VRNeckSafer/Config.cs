@@ -52,6 +52,7 @@ namespace VRNeckSafer
         public string GameMode;
         public string AppMode;
         public string PosCompensation;
+        public int PitchLimForAutorot;
         public static string configfilename;
         public List<int[]> AutoSteps;
 
@@ -75,6 +76,7 @@ namespace VRNeckSafer
             PosCompensation = "when seated";
             StartMinimized = false;
             MinimizeToTray = false;
+            PitchLimForAutorot = 90;
             AutoSteps = new List<int[]>();
         }
 

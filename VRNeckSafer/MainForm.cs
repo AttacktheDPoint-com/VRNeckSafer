@@ -200,8 +200,9 @@ namespace VRNeckSafer
             bool h2 = checkButtonPress(SetHoldButton2, conf.HoldButton2);
             bool h3 = checkButtonPress(SetHoldButton3, conf.HoldButton3);
             bool h4 = checkButtonPress(SetHoldButton4, conf.HoldButton4);
+            bool pitchlimit= vr.getHmdPitch() - 90 > conf.PitchLimForAutorot;
 
-            bool autofrozen = h1 || h2 || h3 || h4;
+            bool autofrozen = h1 || h2 || h3 || h4 || pitchlimit;
 
             if (l_pressed)
             {
@@ -248,6 +249,7 @@ namespace VRNeckSafer
             {
                 vr.getHmdSeatedPositionOffset();
                 vr.getHmdYawOffset();
+                joy_offset_angle = 0;
             }
 
             if (additivRB.Checked)
@@ -279,9 +281,19 @@ namespace VRNeckSafer
                 }
             }
 
-            if (autoCB.Checked && !autofrozen)
+            if (autoCB.Checked)
             {
-                calcAutoRotAndTrans(hmdYaw, ref auto_offset_angle, ref auto_trans_offset);
+                if (autofrozen)
+                {
+                    AutorotLabel.Text = "Autorotation - on hold";
+                    if (pitchlimit) AutorotLabel.Text += " (pitch limit)";
+                    else AutorotLabel.Text += " (button)";
+                }
+                else
+                {
+                    AutorotLabel.Text = "Autorotation";
+                    calcAutoRotAndTrans(hmdYaw, ref auto_offset_angle, ref auto_trans_offset);
+                }
             }
 
 
@@ -303,7 +315,7 @@ namespace VRNeckSafer
             last_offset_x = trans_offset.X;
             last_offset_z = trans_offset.Z;
 
-            Text = "VRNeckSafer (" + sum_offset_angle + " deg)";
+            Text = "VRNS (" + sum_offset_angle + " deg)";
 
             if (gr != null)
             {
@@ -759,11 +771,12 @@ namespace VRNeckSafer
                     neverToolStripMenuItem.Checked = true;
                     break;
             }
+            ToolStripMenuItem item= (ToolStripMenuItem)PitchLimToolStripMenuItem.DropDownItems[conf.PitchLimForAutorot / 10 - 1];
+            item.Checked = true;
         }
 
         private void resetOptionsToDefaultToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             conf.StartMinimized = false;
             conf.MinimizeToTray = false;
             conf.GameMode = "Auto";
@@ -777,6 +790,14 @@ namespace VRNeckSafer
         {
             gr = new Graph(this);
             gr.Show();
+        }
+
+        private void PitchLimToolStripMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            foreach (ToolStripMenuItem item in PitchLimToolStripMenuItem.DropDownItems) item.Checked = false;
+            ((ToolStripMenuItem)e.ClickedItem).Checked = true;
+            int.TryParse(e.ClickedItem.Text.Substring(0,2), out conf.PitchLimForAutorot);
+            conf.WriteConfig();
         }
     }
 }

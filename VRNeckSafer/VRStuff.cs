@@ -109,6 +109,13 @@ namespace VRNeckSafer
             double HMDYaw = Math.Atan2(HmdPose.m2, HmdPose.m10);
             return (int)Math.Round((HMDYaw - HMDYawOffset) * 180.0 / Math.PI);
         }
+        public int getHmdPitch()
+        {
+            getHMDPose();
+            double HMDPitch = Math.Atan2(Math.Sqrt(HmdPose.m2 * HmdPose.m2 + HmdPose.m10 * HmdPose.m10), HmdPose.m6);
+            return (int)Math.Round((HMDPitch) * 180.0 / Math.PI);
+        }
+
 
         public void setOffset(int a, Vector3 trans)
         {

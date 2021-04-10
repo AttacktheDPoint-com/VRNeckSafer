@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupAuto = new System.Windows.Forms.GroupBox();
             this.error_label2 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
+            this.AutorotLabel = new System.Windows.Forms.Label();
             this.error_label = new System.Windows.Forms.Label();
             this.graphButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -104,6 +104,17 @@
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.PitchLimToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
             this.groupAuto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AutorotGridView)).BeginInit();
             this.HMDYawBox.SuspendLayout();
@@ -118,7 +129,7 @@
             // groupAuto
             // 
             this.groupAuto.Controls.Add(this.error_label2);
-            this.groupAuto.Controls.Add(this.label26);
+            this.groupAuto.Controls.Add(this.AutorotLabel);
             this.groupAuto.Controls.Add(this.error_label);
             this.groupAuto.Controls.Add(this.graphButton);
             this.groupAuto.Controls.Add(this.label2);
@@ -130,10 +141,10 @@
             this.groupAuto.Controls.Add(this.AutorotGridView);
             this.groupAuto.Controls.Add(this.AddButton);
             this.groupAuto.Controls.Add(this.DeleteButton);
-            this.groupAuto.Location = new System.Drawing.Point(12, 298);
+            this.groupAuto.Location = new System.Drawing.Point(12, 275);
             this.groupAuto.Name = "groupAuto";
             this.groupAuto.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupAuto.Size = new System.Drawing.Size(256, 181);
+            this.groupAuto.Size = new System.Drawing.Size(256, 167);
             this.groupAuto.TabIndex = 13;
             this.groupAuto.TabStop = false;
             // 
@@ -142,28 +153,28 @@
             this.error_label2.AutoSize = true;
             this.error_label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.error_label2.ForeColor = System.Drawing.Color.Red;
-            this.error_label2.Location = new System.Drawing.Point(179, 31);
+            this.error_label2.Location = new System.Drawing.Point(179, 29);
             this.error_label2.Name = "error_label2";
             this.error_label2.Size = new System.Drawing.Size(38, 13);
             this.error_label2.TabIndex = 57;
             this.error_label2.Text = "value";
             // 
-            // label26
+            // AutorotLabel
             // 
-            this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.Location = new System.Drawing.Point(5, -2);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(91, 16);
-            this.label26.TabIndex = 54;
-            this.label26.Text = "Autorotation";
+            this.AutorotLabel.AutoSize = true;
+            this.AutorotLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AutorotLabel.Location = new System.Drawing.Point(5, -2);
+            this.AutorotLabel.Name = "AutorotLabel";
+            this.AutorotLabel.Size = new System.Drawing.Size(91, 16);
+            this.AutorotLabel.TabIndex = 54;
+            this.AutorotLabel.Text = "Autorotation";
             // 
             // error_label
             // 
             this.error_label.AutoSize = true;
             this.error_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.error_label.ForeColor = System.Drawing.Color.Red;
-            this.error_label.Location = new System.Drawing.Point(176, 20);
+            this.error_label.Location = new System.Drawing.Point(176, 18);
             this.error_label.Name = "error_label";
             this.error_label.Size = new System.Drawing.Size(45, 13);
             this.error_label.TabIndex = 56;
@@ -173,9 +184,9 @@
             // 
             this.graphButton.BackgroundImage = global::VRNeckSafer.Properties.Resources.Graph;
             this.graphButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.graphButton.Location = new System.Drawing.Point(226, 20);
+            this.graphButton.Location = new System.Drawing.Point(226, 18);
             this.graphButton.Name = "graphButton";
-            this.graphButton.Size = new System.Drawing.Size(24, 23);
+            this.graphButton.Size = new System.Drawing.Size(24, 21);
             this.graphButton.TabIndex = 55;
             this.graphButton.UseVisualStyleBackColor = true;
             this.graphButton.Click += new System.EventHandler(this.graphButton_Click);
@@ -184,7 +195,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 42);
+            this.label2.Location = new System.Drawing.Point(3, 39);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 15);
             this.label2.TabIndex = 54;
@@ -192,9 +203,9 @@
             // 
             // SetHoldButton4
             // 
-            this.SetHoldButton4.Location = new System.Drawing.Point(8, 148);
+            this.SetHoldButton4.Location = new System.Drawing.Point(8, 137);
             this.SetHoldButton4.Name = "SetHoldButton4";
-            this.SetHoldButton4.Size = new System.Drawing.Size(66, 23);
+            this.SetHoldButton4.Size = new System.Drawing.Size(66, 21);
             this.SetHoldButton4.TabIndex = 45;
             this.SetHoldButton4.Text = "Hold 4";
             this.SetHoldButton4.UseVisualStyleBackColor = true;
@@ -202,9 +213,9 @@
             // 
             // SetHoldButton3
             // 
-            this.SetHoldButton3.Location = new System.Drawing.Point(8, 119);
+            this.SetHoldButton3.Location = new System.Drawing.Point(8, 110);
             this.SetHoldButton3.Name = "SetHoldButton3";
-            this.SetHoldButton3.Size = new System.Drawing.Size(66, 23);
+            this.SetHoldButton3.Size = new System.Drawing.Size(66, 21);
             this.SetHoldButton3.TabIndex = 44;
             this.SetHoldButton3.Text = "Hold 3";
             this.SetHoldButton3.UseVisualStyleBackColor = true;
@@ -212,9 +223,9 @@
             // 
             // SetHoldButton2
             // 
-            this.SetHoldButton2.Location = new System.Drawing.Point(8, 90);
+            this.SetHoldButton2.Location = new System.Drawing.Point(8, 83);
             this.SetHoldButton2.Name = "SetHoldButton2";
-            this.SetHoldButton2.Size = new System.Drawing.Size(66, 23);
+            this.SetHoldButton2.Size = new System.Drawing.Size(66, 21);
             this.SetHoldButton2.TabIndex = 43;
             this.SetHoldButton2.Text = "Hold 2";
             this.SetHoldButton2.UseVisualStyleBackColor = true;
@@ -222,9 +233,9 @@
             // 
             // SetHoldButton1
             // 
-            this.SetHoldButton1.Location = new System.Drawing.Point(9, 61);
+            this.SetHoldButton1.Location = new System.Drawing.Point(9, 56);
             this.SetHoldButton1.Name = "SetHoldButton1";
-            this.SetHoldButton1.Size = new System.Drawing.Size(66, 23);
+            this.SetHoldButton1.Size = new System.Drawing.Size(66, 21);
             this.SetHoldButton1.TabIndex = 42;
             this.SetHoldButton1.Text = "Hold 1";
             this.SetHoldButton1.UseVisualStyleBackColor = true;
@@ -234,9 +245,9 @@
             // 
             this.autoCB.AutoSize = true;
             this.autoCB.Cursor = System.Windows.Forms.Cursors.Default;
-            this.autoCB.Location = new System.Drawing.Point(13, 20);
+            this.autoCB.Location = new System.Drawing.Point(13, 18);
             this.autoCB.Name = "autoCB";
-            this.autoCB.Size = new System.Drawing.Size(59, 17);
+            this.autoCB.Size = new System.Drawing.Size(52, 16);
             this.autoCB.TabIndex = 15;
             this.autoCB.Text = "Enable";
             this.autoCB.UseVisualStyleBackColor = true;
@@ -255,10 +266,10 @@
             this.rot,
             this.LR,
             this.Fwd});
-            this.AutorotGridView.Location = new System.Drawing.Point(81, 47);
+            this.AutorotGridView.Location = new System.Drawing.Point(81, 43);
             this.AutorotGridView.Name = "AutorotGridView";
             this.AutorotGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.AutorotGridView.Size = new System.Drawing.Size(169, 123);
+            this.AutorotGridView.Size = new System.Drawing.Size(169, 114);
             this.AutorotGridView.TabIndex = 39;
             this.AutorotGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.AutorotGridView_CellValueChanged);
             this.AutorotGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.AutorotGridView_RowsAdded);
@@ -315,9 +326,9 @@
             // 
             // AddButton
             // 
-            this.AddButton.Location = new System.Drawing.Point(81, 20);
+            this.AddButton.Location = new System.Drawing.Point(81, 18);
             this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(43, 23);
+            this.AddButton.Size = new System.Drawing.Size(43, 21);
             this.AddButton.TabIndex = 40;
             this.AddButton.Text = "add";
             this.AddButton.UseVisualStyleBackColor = true;
@@ -325,9 +336,9 @@
             // 
             // DeleteButton
             // 
-            this.DeleteButton.Location = new System.Drawing.Point(128, 20);
+            this.DeleteButton.Location = new System.Drawing.Point(128, 18);
             this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.Size = new System.Drawing.Size(43, 23);
+            this.DeleteButton.Size = new System.Drawing.Size(43, 21);
             this.DeleteButton.TabIndex = 41;
             this.DeleteButton.Text = "del";
             this.DeleteButton.UseVisualStyleBackColor = true;
@@ -337,7 +348,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(8, 39);
+            this.label12.Location = new System.Drawing.Point(8, 36);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(236, 13);
             this.label12.TabIndex = 26;
@@ -347,7 +358,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(6, 58);
+            this.label11.Location = new System.Drawing.Point(6, 54);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(137, 13);
             this.label11.TabIndex = 25;
@@ -356,9 +367,9 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 76);
+            this.label10.Location = new System.Drawing.Point(6, 70);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(154, 13);
+            this.label10.Size = new System.Drawing.Size(130, 12);
             this.label10.TabIndex = 24;
             this.label10.Text = "-  DCS: \"recenter VR Headset\"";
             // 
@@ -376,9 +387,9 @@
             this.HMDYawBox.Controls.Add(this.label11);
             this.HMDYawBox.Controls.Add(this.label12);
             this.HMDYawBox.Controls.Add(this.label10);
-            this.HMDYawBox.Location = new System.Drawing.Point(12, 22);
+            this.HMDYawBox.Location = new System.Drawing.Point(12, 21);
             this.HMDYawBox.Name = "HMDYawBox";
-            this.HMDYawBox.Size = new System.Drawing.Size(256, 118);
+            this.HMDYawBox.Size = new System.Drawing.Size(256, 109);
             this.HMDYawBox.TabIndex = 31;
             this.HMDYawBox.TabStop = false;
             // 
@@ -386,7 +397,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(9, 95);
+            this.label1.Location = new System.Drawing.Point(9, 88);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(233, 13);
             this.label1.TabIndex = 55;
@@ -404,9 +415,9 @@
             // 
             // SetResetButton
             // 
-            this.SetResetButton.Location = new System.Drawing.Point(165, 56);
+            this.SetResetButton.Location = new System.Drawing.Point(165, 52);
             this.SetResetButton.Name = "SetResetButton";
-            this.SetResetButton.Size = new System.Drawing.Size(71, 35);
+            this.SetResetButton.Size = new System.Drawing.Size(71, 32);
             this.SetResetButton.TabIndex = 28;
             this.SetResetButton.Text = "Set Reset Button";
             this.SetResetButton.UseVisualStyleBackColor = true;
@@ -416,7 +427,7 @@
             // 
             this.HMDYawLabel.AutoSize = true;
             this.HMDYawLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HMDYawLabel.Location = new System.Drawing.Point(67, 20);
+            this.HMDYawLabel.Location = new System.Drawing.Point(67, 18);
             this.HMDYawLabel.Name = "HMDYawLabel";
             this.HMDYawLabel.Size = new System.Drawing.Size(101, 13);
             this.HMDYawLabel.TabIndex = 27;
@@ -427,7 +438,7 @@
             // 
             this.VersionLabel.AutoSize = true;
             this.VersionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.VersionLabel.Location = new System.Drawing.Point(237, 482);
+            this.VersionLabel.Location = new System.Drawing.Point(237, 445);
             this.VersionLabel.Name = "VersionLabel";
             this.VersionLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.VersionLabel.Size = new System.Drawing.Size(34, 13);
@@ -438,9 +449,9 @@
             // modeLB
             // 
             this.modeLB.AutoSize = true;
-            this.modeLB.Location = new System.Drawing.Point(6, 482);
+            this.modeLB.Location = new System.Drawing.Point(6, 445);
             this.modeLB.Name = "modeLB";
-            this.modeLB.Size = new System.Drawing.Size(86, 13);
+            this.modeLB.Size = new System.Drawing.Size(75, 12);
             this.modeLB.TabIndex = 35;
             this.modeLB.Text = "(Mode: standing)";
             this.toolTip1.SetToolTip(this.modeLB, "current VR gaming mode ");
@@ -466,9 +477,9 @@
             this.groupBox1.Controls.Add(this.SetRightButton);
             this.groupBox1.Controls.Add(this.RightLabel);
             this.groupBox1.Controls.Add(this.LeftLabel);
-            this.groupBox1.Location = new System.Drawing.Point(12, 146);
+            this.groupBox1.Location = new System.Drawing.Point(12, 135);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(256, 146);
+            this.groupBox1.Size = new System.Drawing.Size(256, 135);
             this.groupBox1.TabIndex = 38;
             this.groupBox1.TabStop = false;
             // 
@@ -476,7 +487,7 @@
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(7, 102);
+            this.label25.Location = new System.Drawing.Point(7, 94);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(39, 15);
             this.label25.TabIndex = 53;
@@ -484,14 +495,14 @@
             // 
             // transFNUP
             // 
-            this.transFNUP.Location = new System.Drawing.Point(168, 97);
+            this.transFNUP.Location = new System.Drawing.Point(168, 90);
             this.transFNUP.Maximum = new decimal(new int[] {
             20,
             0,
             0,
             0});
             this.transFNUP.Name = "transFNUP";
-            this.transFNUP.Size = new System.Drawing.Size(44, 20);
+            this.transFNUP.Size = new System.Drawing.Size(44, 18);
             this.transFNUP.TabIndex = 26;
             this.transFNUP.ValueChanged += new System.EventHandler(this.transFNUP_ValueChanged);
             this.transFNUP.KeyUp += new System.Windows.Forms.KeyEventHandler(this.transFNUP_KeyUp);
@@ -500,7 +511,7 @@
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(131, 53);
+            this.label24.Location = new System.Drawing.Point(131, 49);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(68, 15);
             this.label24.TabIndex = 52;
@@ -508,14 +519,14 @@
             // 
             // angleNUD
             // 
-            this.angleNUD.Location = new System.Drawing.Point(34, 72);
+            this.angleNUD.Location = new System.Drawing.Point(34, 66);
             this.angleNUD.Maximum = new decimal(new int[] {
             360,
             0,
             0,
             0});
             this.angleNUD.Name = "angleNUD";
-            this.angleNUD.Size = new System.Drawing.Size(38, 20);
+            this.angleNUD.Size = new System.Drawing.Size(38, 18);
             this.angleNUD.TabIndex = 9;
             this.angleNUD.Value = new decimal(new int[] {
             30,
@@ -527,14 +538,14 @@
             // 
             // transLRNUP
             // 
-            this.transLRNUP.Location = new System.Drawing.Point(168, 71);
+            this.transLRNUP.Location = new System.Drawing.Point(168, 66);
             this.transLRNUP.Maximum = new decimal(new int[] {
             40,
             0,
             0,
             0});
             this.transLRNUP.Name = "transLRNUP";
-            this.transLRNUP.Size = new System.Drawing.Size(44, 20);
+            this.transLRNUP.Size = new System.Drawing.Size(44, 18);
             this.transLRNUP.TabIndex = 25;
             this.transLRNUP.ValueChanged += new System.EventHandler(this.transLRNUP_ValueChanged);
             this.transLRNUP.KeyUp += new System.Windows.Forms.KeyEventHandler(this.transLRNUP_KeyUp);
@@ -542,27 +553,27 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(72, 75);
+            this.label8.Location = new System.Drawing.Point(72, 69);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(25, 13);
+            this.label8.Size = new System.Drawing.Size(20, 12);
             this.label8.TabIndex = 20;
             this.label8.Text = "deg";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(215, 99);
+            this.label17.Location = new System.Drawing.Point(215, 91);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(21, 13);
+            this.label17.Size = new System.Drawing.Size(18, 12);
             this.label17.TabIndex = 30;
             this.label17.Text = "cm";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(135, 75);
+            this.label14.Location = new System.Drawing.Point(135, 69);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(26, 13);
+            this.label14.Size = new System.Drawing.Size(20, 12);
             this.label14.TabIndex = 27;
             this.label14.Text = "L/R";
             // 
@@ -570,7 +581,7 @@
             // 
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(7, 53);
+            this.label23.Location = new System.Drawing.Point(7, 49);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(53, 15);
             this.label23.TabIndex = 51;
@@ -580,9 +591,9 @@
             // 
             this.snapRB.AutoSize = true;
             this.snapRB.Checked = true;
-            this.snapRB.Location = new System.Drawing.Point(12, 120);
+            this.snapRB.Location = new System.Drawing.Point(12, 111);
             this.snapRB.Name = "snapRB";
-            this.snapRB.Size = new System.Drawing.Size(50, 17);
+            this.snapRB.Size = new System.Drawing.Size(44, 16);
             this.snapRB.TabIndex = 1;
             this.snapRB.TabStop = true;
             this.snapRB.Text = "Snap";
@@ -591,9 +602,9 @@
             // additivRB
             // 
             this.additivRB.AutoSize = true;
-            this.additivRB.Location = new System.Drawing.Point(68, 120);
+            this.additivRB.Location = new System.Drawing.Point(68, 111);
             this.additivRB.Name = "additivRB";
-            this.additivRB.Size = new System.Drawing.Size(89, 17);
+            this.additivRB.Size = new System.Drawing.Size(81, 16);
             this.additivRB.TabIndex = 12;
             this.additivRB.Text = "Accumulative";
             this.additivRB.UseVisualStyleBackColor = true;
@@ -602,9 +613,9 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(135, 99);
+            this.label16.Location = new System.Drawing.Point(135, 91);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(30, 13);
+            this.label16.Size = new System.Drawing.Size(27, 12);
             this.label16.TabIndex = 29;
             this.label16.Text = "Fwd.";
             // 
@@ -621,26 +632,26 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(10, 76);
+            this.label9.Location = new System.Drawing.Point(10, 70);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(21, 13);
+            this.label9.Size = new System.Drawing.Size(16, 12);
             this.label9.TabIndex = 21;
             this.label9.Text = "+/-";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(215, 75);
+            this.label15.Location = new System.Drawing.Point(215, 69);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(21, 13);
+            this.label15.Size = new System.Drawing.Size(18, 12);
             this.label15.TabIndex = 28;
             this.label15.Text = "cm";
             // 
             // SetLeftButton
             // 
-            this.SetLeftButton.Location = new System.Drawing.Point(39, 23);
+            this.SetLeftButton.Location = new System.Drawing.Point(39, 21);
             this.SetLeftButton.Name = "SetLeftButton";
-            this.SetLeftButton.Size = new System.Drawing.Size(72, 23);
+            this.SetLeftButton.Size = new System.Drawing.Size(72, 21);
             this.SetLeftButton.TabIndex = 36;
             this.SetLeftButton.Text = "Set Button";
             this.SetLeftButton.UseVisualStyleBackColor = true;
@@ -648,9 +659,9 @@
             // 
             // SetRightButton
             // 
-            this.SetRightButton.Location = new System.Drawing.Point(166, 23);
+            this.SetRightButton.Location = new System.Drawing.Point(166, 21);
             this.SetRightButton.Name = "SetRightButton";
-            this.SetRightButton.Size = new System.Drawing.Size(72, 23);
+            this.SetRightButton.Size = new System.Drawing.Size(72, 21);
             this.SetRightButton.TabIndex = 37;
             this.SetRightButton.Text = "Set Button";
             this.SetRightButton.UseVisualStyleBackColor = false;
@@ -660,7 +671,7 @@
             // 
             this.RightLabel.AutoSize = true;
             this.RightLabel.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RightLabel.Location = new System.Drawing.Point(133, 24);
+            this.RightLabel.Location = new System.Drawing.Point(133, 22);
             this.RightLabel.Margin = new System.Windows.Forms.Padding(0);
             this.RightLabel.Name = "RightLabel";
             this.RightLabel.Size = new System.Drawing.Size(35, 22);
@@ -672,7 +683,7 @@
             this.LeftLabel.AutoSize = true;
             this.LeftLabel.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LeftLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.LeftLabel.Location = new System.Drawing.Point(4, 23);
+            this.LeftLabel.Location = new System.Drawing.Point(4, 21);
             this.LeftLabel.Name = "LeftLabel";
             this.LeftLabel.Size = new System.Drawing.Size(36, 24);
             this.LeftLabel.TabIndex = 38;
@@ -698,6 +709,8 @@
             this.appModeToolStripMenuItem,
             this.gameModeToolStripMenuItem,
             this.PosCompensationToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.PitchLimToolStripMenuItem,
             this.toolStripSeparator3,
             this.resetOptionsToDefaultToolStripMenuItem});
             this.advancedConfigToolStripMenuItem.Name = "advancedConfigToolStripMenuItem";
@@ -858,23 +871,100 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(196, 6);
+            // 
+            // PitchLimToolStripMenuItem
+            // 
+            this.PitchLimToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem2,
+            this.toolStripMenuItem4,
+            this.toolStripMenuItem5,
+            this.toolStripMenuItem6,
+            this.toolStripMenuItem7,
+            this.toolStripMenuItem8,
+            this.toolStripMenuItem9,
+            this.toolStripMenuItem10,
+            this.toolStripMenuItem11});
+            this.PitchLimToolStripMenuItem.Name = "PitchLimToolStripMenuItem";
+            this.PitchLimToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.PitchLimToolStripMenuItem.Text = "Pitch limit for Autorot";
+            this.PitchLimToolStripMenuItem.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.PitchLimToolStripMenuItem_DropDownItemClicked);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem2.Text = "10 deg";
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem4.Text = "20 deg";
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem5.Text = "30 deg";
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem6.Text = "40 deg";
+            // 
+            // toolStripMenuItem7
+            // 
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem7.Text = "50 deg";
+            // 
+            // toolStripMenuItem8
+            // 
+            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem8.Text = "60 deg";
+            // 
+            // toolStripMenuItem9
+            // 
+            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem9.Text = "70 deg";
+            // 
+            // toolStripMenuItem10
+            // 
+            this.toolStripMenuItem10.Name = "toolStripMenuItem10";
+            this.toolStripMenuItem10.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem10.Text = "80 deg";
+            // 
+            // toolStripMenuItem11
+            // 
+            this.toolStripMenuItem11.Name = "toolStripMenuItem11";
+            this.toolStripMenuItem11.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem11.Text = "90 deg";
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(276, 500);
+            this.ClientSize = new System.Drawing.Size(276, 462);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.modeLB);
             this.Controls.Add(this.HMDYawBox);
             this.Controls.Add(this.groupAuto);
             this.Controls.Add(this.VersionLabel);
             this.Controls.Add(this.menuStrip);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
-            this.MaximumSize = new System.Drawing.Size(292, 3070);
-            this.MinimumSize = new System.Drawing.Size(292, 539);
+            this.MaximumSize = new System.Drawing.Size(292, 2837);
+            this.MinimumSize = new System.Drawing.Size(292, 501);
             this.Name = "MainForm";
-            this.Text = "VRNeckSafer";
+            this.Text = "VRNS";
             this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             this.Resize += new System.EventHandler(this.MainForm_Resize);
@@ -924,7 +1014,7 @@
         private System.Windows.Forms.RadioButton additivRB;
         private System.Windows.Forms.Button SetRightButton;
         private System.Windows.Forms.RadioButton snapRB;
-        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label AutorotLabel;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label23;
@@ -971,6 +1061,17 @@
         private System.Windows.Forms.Button graphButton;
         private System.Windows.Forms.Label error_label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem PitchLimToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem9;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem10;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem11;
     }
 }
 

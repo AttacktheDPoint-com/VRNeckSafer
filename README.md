@@ -87,8 +87,12 @@ fix for fwd translation when autorotation to left
 - added fancy diagram to help understand the autorot values
 - fixed offset bug reintroduced in v2.04
 
+**Update v2.06:**
+- corrected error in translation when HMD Offset is big for IL-2
+- reset button resets accumulative offset
+- added pitch limit (options menu). when HMD pitch (looking up) is bigger than limit autorot goes on hold. default is 90 deg = not effective 
 
 known issues:
 still problems with Valve Index and DCS
 
-Download link: [VRNeckSaferV20VRNeckSaferV204VRNeckSaferV205.zip](https://gitlab.com/NobiWan/vrnecksafer/-/blob/master/VRNeckSafer/Release/VRNeckSaferV205.zip)
+Download link: [VRNeckSaferV20VRNeckSaferV204VRNeckSaferV206.zip](https://gitlab.com/NobiWan/vrnecksafer/-/blob/master/VRNeckSafer/Release/VRNeckSaferV206.zip)
