@@ -29,14 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupAuto = new System.Windows.Forms.GroupBox();
             this.error_label2 = new System.Windows.Forms.Label();
             this.AutorotLabel = new System.Windows.Forms.Label();
@@ -49,6 +47,11 @@
             this.SetHoldButton1 = new System.Windows.Forms.Button();
             this.autoCB = new System.Windows.Forms.CheckBox();
             this.AutorotGridView = new System.Windows.Forms.DataGridView();
+            this.act = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LR = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fwd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AddButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
@@ -118,11 +121,6 @@
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.act = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deact = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LR = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fwd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupAuto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AutorotGridView)).BeginInit();
             this.HMDYawBox.SuspendLayout();
@@ -272,14 +270,6 @@
             this.AutorotGridView.AllowUserToDeleteRows = false;
             this.AutorotGridView.AllowUserToResizeColumns = false;
             this.AutorotGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.AutorotGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
             this.AutorotGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.AutorotGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.act,
@@ -287,14 +277,6 @@
             this.rot,
             this.LR,
             this.Fwd});
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.AutorotGridView.DefaultCellStyle = dataGridViewCellStyle21;
             this.AutorotGridView.Location = new System.Drawing.Point(81, 43);
             this.AutorotGridView.Name = "AutorotGridView";
             this.AutorotGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -303,6 +285,65 @@
             this.AutorotGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.AutorotGridView_CellValueChanged);
             this.AutorotGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.AutorotGridView_RowsAdded);
             this.AutorotGridView.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.AutorotGridView_RowsRemoved);
+            // 
+            // act
+            // 
+            this.act.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.act.DefaultCellStyle = dataGridViewCellStyle6;
+            this.act.Frozen = true;
+            this.act.HeaderText = "act";
+            this.act.Name = "act";
+            this.act.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.act.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.act.ToolTipText = "Activation angle";
+            this.act.Width = 30;
+            // 
+            // deact
+            // 
+            this.deact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deact.DefaultCellStyle = dataGridViewCellStyle7;
+            this.deact.Frozen = true;
+            this.deact.HeaderText = "deact";
+            this.deact.Name = "deact";
+            this.deact.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.deact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.deact.ToolTipText = "Deactivation angle (< act and > previous act)";
+            this.deact.Width = 30;
+            // 
+            // rot
+            // 
+            this.rot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rot.DefaultCellStyle = dataGridViewCellStyle8;
+            this.rot.Frozen = true;
+            this.rot.HeaderText = "rot";
+            this.rot.Name = "rot";
+            this.rot.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.rot.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.rot.ToolTipText = "Rotation angle";
+            this.rot.Width = 30;
+            // 
+            // LR
+            // 
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LR.DefaultCellStyle = dataGridViewCellStyle9;
+            this.LR.Frozen = true;
+            this.LR.HeaderText = "L/R";
+            this.LR.Name = "LR";
+            this.LR.ToolTipText = "Translation Left/Right (<40cm)";
+            this.LR.Width = 30;
+            // 
+            // Fwd
+            // 
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Fwd.DefaultCellStyle = dataGridViewCellStyle10;
+            this.Fwd.Frozen = true;
+            this.Fwd.HeaderText = "Fwd";
+            this.Fwd.Name = "Fwd";
+            this.Fwd.ToolTipText = "Translation to front (< 20cm)";
+            this.Fwd.Width = 50;
             // 
             // AddButton
             // 
@@ -427,7 +468,7 @@
             this.VersionLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.VersionLabel.Size = new System.Drawing.Size(34, 13);
             this.VersionLabel.TabIndex = 34;
-            this.VersionLabel.Text = "v2.07";
+            this.VersionLabel.Text = "v2.08";
             this.VersionLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // modeLB
@@ -720,7 +761,7 @@
             // 
             this.startMinimzedToolStripMenuItem.CheckOnClick = true;
             this.startMinimzedToolStripMenuItem.Name = "startMinimzedToolStripMenuItem";
-            this.startMinimzedToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.startMinimzedToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.startMinimzedToolStripMenuItem.Text = "Start minimzed";
             this.startMinimzedToolStripMenuItem.CheckStateChanged += new System.EventHandler(this.startMinimzedToolStripMenuItem_CheckStateChanged);
             // 
@@ -728,14 +769,14 @@
             // 
             this.minimizeToTrayToolStripMenuItem.CheckOnClick = true;
             this.minimizeToTrayToolStripMenuItem.Name = "minimizeToTrayToolStripMenuItem";
-            this.minimizeToTrayToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.minimizeToTrayToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.minimizeToTrayToolStripMenuItem.Text = "Minimize to tray";
             this.minimizeToTrayToolStripMenuItem.CheckStateChanged += new System.EventHandler(this.minimizeToTrayToolStripMenuItem_CheckStateChanged);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(196, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(213, 6);
             // 
             // appModeToolStripMenuItem
             // 
@@ -743,7 +784,7 @@
             this.overlayToolStripMenuItem,
             this.backgroundToolStripMenuItem});
             this.appModeToolStripMenuItem.Name = "appModeToolStripMenuItem";
-            this.appModeToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.appModeToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.appModeToolStripMenuItem.Text = "App  mode";
             // 
             // overlayToolStripMenuItem
@@ -769,7 +810,7 @@
             this.forceSeatedToolStripMenuItem,
             this.forceStandingToolStripMenuItem});
             this.gameModeToolStripMenuItem.Name = "gameModeToolStripMenuItem";
-            this.gameModeToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.gameModeToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.gameModeToolStripMenuItem.Text = "Game mode";
             // 
             // autoToolStripMenuItem
@@ -801,7 +842,7 @@
             this.alwaysToolStripMenuItem,
             this.neverToolStripMenuItem});
             this.PosCompensationToolStripMenuItem.Name = "PosCompensationToolStripMenuItem";
-            this.PosCompensationToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.PosCompensationToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.PosCompensationToolStripMenuItem.Text = "Position compensation";
             // 
             // inSeatedModeToolStripMenuItem
@@ -835,7 +876,7 @@
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(196, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(213, 6);
             // 
             // PitchLimToolStripMenuItem
             // 
@@ -850,7 +891,7 @@
             this.toolStripMenuItem10,
             this.toolStripMenuItem11});
             this.PitchLimToolStripMenuItem.Name = "PitchLimToolStripMenuItem";
-            this.PitchLimToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.PitchLimToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.PitchLimToolStripMenuItem.Text = "Pitch limit for Autorot";
             this.PitchLimToolStripMenuItem.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.PitchLimToolStripMenuItem_DropDownItemClicked);
             // 
@@ -911,19 +952,19 @@
             // MultipleLRButtonsToolStripMenuItem
             // 
             this.MultipleLRButtonsToolStripMenuItem.Name = "MultipleLRButtonsToolStripMenuItem";
-            this.MultipleLRButtonsToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
-            this.MultipleLRButtonsToolStripMenuItem.Text = "Multiple L/R buttons";
+            this.MultipleLRButtonsToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.MultipleLRButtonsToolStripMenuItem.Text = "Multiple L/R/Reset buttons";
             this.MultipleLRButtonsToolStripMenuItem.Click += new System.EventHandler(this.moreLRButtonsToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(196, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(213, 6);
             // 
             // resetOptionsToDefaultToolStripMenuItem
             // 
             this.resetOptionsToDefaultToolStripMenuItem.Name = "resetOptionsToDefaultToolStripMenuItem";
-            this.resetOptionsToDefaultToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.resetOptionsToDefaultToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.resetOptionsToDefaultToolStripMenuItem.Text = "Reset options to default";
             this.resetOptionsToDefaultToolStripMenuItem.Click += new System.EventHandler(this.resetOptionsToDefaultToolStripMenuItem_Click);
             // 
@@ -952,65 +993,6 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.exitToolStripMenuItem.Text = "Exit";
-            // 
-            // act
-            // 
-            this.act.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.act.DefaultCellStyle = dataGridViewCellStyle16;
-            this.act.Frozen = true;
-            this.act.HeaderText = "act";
-            this.act.Name = "act";
-            this.act.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.act.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.act.ToolTipText = "Activation angle";
-            this.act.Width = 30;
-            // 
-            // deact
-            // 
-            this.deact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deact.DefaultCellStyle = dataGridViewCellStyle17;
-            this.deact.Frozen = true;
-            this.deact.HeaderText = "deact";
-            this.deact.Name = "deact";
-            this.deact.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.deact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.deact.ToolTipText = "Deactivation angle (< act and > previous act)";
-            this.deact.Width = 30;
-            // 
-            // rot
-            // 
-            this.rot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rot.DefaultCellStyle = dataGridViewCellStyle18;
-            this.rot.Frozen = true;
-            this.rot.HeaderText = "rot";
-            this.rot.Name = "rot";
-            this.rot.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.rot.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.rot.ToolTipText = "Rotation angle";
-            this.rot.Width = 30;
-            // 
-            // LR
-            // 
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LR.DefaultCellStyle = dataGridViewCellStyle19;
-            this.LR.Frozen = true;
-            this.LR.HeaderText = "L/R";
-            this.LR.Name = "LR";
-            this.LR.ToolTipText = "Translation Left/Right (<40cm)";
-            this.LR.Width = 30;
-            // 
-            // Fwd
-            // 
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Fwd.DefaultCellStyle = dataGridViewCellStyle20;
-            this.Fwd.Frozen = true;
-            this.Fwd.HeaderText = "Fwd";
-            this.Fwd.Name = "Fwd";
-            this.Fwd.ToolTipText = "Translation to front (< 20cm)";
-            this.Fwd.Width = 50;
             // 
             // MainForm
             // 

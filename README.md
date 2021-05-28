@@ -96,7 +96,10 @@ fix for fwd translation when autorotation to left
  - fixed GUI font
  - Added option to select more than one button for manual rotation
 
+ **Update v2.08:**
+ - Added option to select more than one reset button
+
 known issues:
 still problems with Valve Index and DCS
 
-Download link: [VRNeckSaferV20VRNeckSaferV204VRNeckSaferV207.zip](https://gitlab.com/NobiWan/vrnecksafer/-/blob/master/VRNeckSafer/Release/VRNeckSaferV207.zip)
+Download link: [VRNeckSaferV20VRNeckSaferV204VRNeckSaferV208.zip](https://gitlab.com/NobiWan/vrnecksafer/-/blob/master/VRNeckSafer/Release/VRNeckSaferV208.zip)

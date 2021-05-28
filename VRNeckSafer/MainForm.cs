@@ -207,6 +207,8 @@ namespace VRNeckSafer
                 l_pressed |= js.IsButtonPressed(conf.LeftButton3);
                 r_pressed |= js.IsButtonPressed(conf.RightButton2);
                 r_pressed |= js.IsButtonPressed(conf.RightButton3);
+                reset_pressed |= js.IsButtonPressed(conf.ResetButton2);
+                reset_pressed |= js.IsButtonPressed(conf.ResetButton3);
             }
             bool h1 = checkButtonPress(SetHoldButton1, conf.HoldButton1);
             bool h2 = checkButtonPress(SetHoldButton2, conf.HoldButton2);
@@ -244,6 +246,17 @@ namespace VRNeckSafer
                 SetRightButton.ForeColor = SystemColors.ControlText;
                 SetRightButton.BackColor = SystemColors.Control;
             }
+            if (reset_pressed)
+            {
+                SetResetButton.ForeColor = System.Drawing.Color.LightGreen;
+                SetResetButton.BackColor = SystemColors.ControlText;
+            }
+            else
+            {
+                SetResetButton.ForeColor = SystemColors.ControlText;
+                SetResetButton.BackColor = SystemColors.Control;
+            }
+
             trans_offset = new Vector3(0, 0, 0);
 
             if (vr.isSeatedMode())
@@ -589,9 +602,19 @@ namespace VRNeckSafer
 
         private void SetResetButton_Click(object sender, EventArgs e)
         {
-            ButtonForm frm = new ButtonForm(this, "Button for Reset:", conf.ResetButton);
-            frm.ShowDialog();
-            setButtonToolTip(SetResetButton, conf.ResetButton);
+
+            if (conf.MultipleLRbuttons == false)
+            {
+                ButtonForm frm = new ButtonForm(this, "Reset Button:", conf.ResetButton);
+                frm.ShowDialog();
+            }
+            else
+            {
+                MultiButtons frm = new MultiButtons(this, "Reset", conf.ResetButton, conf.ResetButton2, conf.ResetButton3);
+                frm.ShowDialog();
+            }
+            setButtonToolTip(SetLeftButton, conf.LeftButton);
+            setLabelToolTip(LeftLabel, conf.LeftButton);
         }
 
         private void SetHoldButton1_Click(object sender, EventArgs e)

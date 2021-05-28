@@ -56,6 +56,8 @@ namespace VRNeckSafer
         public ButtonConfig RightButton2;
         public ButtonConfig RightButton3;
         public ButtonConfig ResetButton;
+        public ButtonConfig ResetButton2;
+        public ButtonConfig ResetButton3;
         public ButtonConfig HoldButton1;
         public ButtonConfig HoldButton2;
         public ButtonConfig HoldButton3;
@@ -85,6 +87,8 @@ namespace VRNeckSafer
             RightButton2 = new ButtonConfig();
             RightButton3 = new ButtonConfig();
             ResetButton = new ButtonConfig();
+            ResetButton2 = new ButtonConfig();
+            ResetButton3 = new ButtonConfig();
             HoldButton1 = new ButtonConfig();
             HoldButton2 = new ButtonConfig();
             HoldButton3 = new ButtonConfig();
