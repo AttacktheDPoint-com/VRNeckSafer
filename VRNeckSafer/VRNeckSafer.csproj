@@ -185,6 +185,8 @@
     <Content Include="Release\VRNSv202.JPG" />
     <Content Include="Release\VRNSv205.JPG" />
     <Content Include="Release\VRNSv205b.JPG" />
+    <Content Include="Release\VRNSv208.JPG" />
+    <Content Include="Release\VRNSv208b.JPG" />
     <Content Include="Release\VRNSv20_2.JPG" />
     <Content Include="VRNS.ico" />
   </ItemGroup>
