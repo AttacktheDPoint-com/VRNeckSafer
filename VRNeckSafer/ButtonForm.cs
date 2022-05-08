@@ -62,11 +62,11 @@ namespace VRNeckSafer
             cb.Items.Clear();
             cb.Items.Add("none");
             if (joyIndex == -1) return;
-            for (int i = 0; i < mf.js.Sticks[joyIndex].Capabilities.ButtonCount; i++)
+            for (int i = 0; i < mf.js.Sticks[joyIndex].Stick.Capabilities.ButtonCount; i++)
             {
                 cb.Items.Add("But: " + (i + 1));
             }
-            for (int i = 0; i < mf.js.Sticks[joyIndex].Capabilities.PovCount; i++)
+            for (int i = 0; i < mf.js.Sticks[joyIndex].Stick.Capabilities.PovCount; i++)
             {
                 if (butconf.Use8WayHat)
                 {
@@ -108,7 +108,7 @@ namespace VRNeckSafer
                 if (butconf.Use8WayHat)
                 {
                     int butindex =
-                        mf.js.Sticks[jb.joyIndex].Capabilities.ButtonCount
+                        mf.js.Sticks[jb.joyIndex].Stick.Capabilities.ButtonCount
                         + jb.pov * 8
                         + jb.btn / 4500
                         + 1;
@@ -117,7 +117,7 @@ namespace VRNeckSafer
                 else
                 {
                     int butindex =
-                        mf.js.Sticks[jb.joyIndex].Capabilities.ButtonCount
+                        mf.js.Sticks[jb.joyIndex].Stick.Capabilities.ButtonCount
                         + jb.pov * 4
                         + jb.btn / 9000
                         + 1;
@@ -146,7 +146,7 @@ namespace VRNeckSafer
             else
             {
                 int butindex =
-                    mf.js.Sticks[jb.joyIndex].Capabilities.ButtonCount
+                    mf.js.Sticks[jb.joyIndex].Stick.Capabilities.ButtonCount
                     + jb.pov * 4
                     + jb.btn / 9000
                     + 1;

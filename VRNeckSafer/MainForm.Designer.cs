@@ -121,6 +121,7 @@
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AccumReset = new System.Windows.Forms.Button();
             this.groupAuto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AutorotGridView)).BeginInit();
             this.HMDYawBox.SuspendLayout();
@@ -468,7 +469,7 @@
             this.VersionLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.VersionLabel.Size = new System.Drawing.Size(34, 13);
             this.VersionLabel.TabIndex = 34;
-            this.VersionLabel.Text = "v2.08";
+            this.VersionLabel.Text = "v2.09";
             this.VersionLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // modeLB
@@ -484,6 +485,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.AccumReset);
             this.groupBox1.Controls.Add(this.label25);
             this.groupBox1.Controls.Add(this.transFNUP);
             this.groupBox1.Controls.Add(this.label24);
@@ -505,7 +507,7 @@
             this.groupBox1.Controls.Add(this.LeftLabel);
             this.groupBox1.Location = new System.Drawing.Point(12, 135);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(256, 135);
+            this.groupBox1.Size = new System.Drawing.Size(256, 136);
             this.groupBox1.TabIndex = 38;
             this.groupBox1.TabStop = false;
             // 
@@ -513,7 +515,7 @@
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(7, 94);
+            this.label25.Location = new System.Drawing.Point(7, 85);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(39, 15);
             this.label25.TabIndex = 53;
@@ -522,7 +524,7 @@
             // transFNUP
             // 
             this.transFNUP.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.transFNUP.Location = new System.Drawing.Point(168, 90);
+            this.transFNUP.Location = new System.Drawing.Point(175, 87);
             this.transFNUP.Maximum = new decimal(new int[] {
             20,
             0,
@@ -538,7 +540,7 @@
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(131, 49);
+            this.label24.Location = new System.Drawing.Point(138, 46);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(68, 15);
             this.label24.TabIndex = 52;
@@ -547,7 +549,7 @@
             // angleNUD
             // 
             this.angleNUD.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.angleNUD.Location = new System.Drawing.Point(34, 66);
+            this.angleNUD.Location = new System.Drawing.Point(34, 63);
             this.angleNUD.Maximum = new decimal(new int[] {
             360,
             0,
@@ -567,7 +569,7 @@
             // transLRNUP
             // 
             this.transLRNUP.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.transLRNUP.Location = new System.Drawing.Point(168, 66);
+            this.transLRNUP.Location = new System.Drawing.Point(175, 63);
             this.transLRNUP.Maximum = new decimal(new int[] {
             40,
             0,
@@ -583,7 +585,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(72, 69);
+            this.label8.Location = new System.Drawing.Point(72, 66);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(25, 13);
             this.label8.TabIndex = 20;
@@ -593,7 +595,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(215, 91);
+            this.label17.Location = new System.Drawing.Point(222, 88);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(21, 13);
             this.label17.TabIndex = 30;
@@ -603,7 +605,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(135, 69);
+            this.label14.Location = new System.Drawing.Point(142, 66);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(26, 13);
             this.label14.TabIndex = 27;
@@ -613,7 +615,7 @@
             // 
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(7, 49);
+            this.label23.Location = new System.Drawing.Point(7, 46);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(53, 15);
             this.label23.TabIndex = 51;
@@ -624,7 +626,7 @@
             this.snapRB.AutoSize = true;
             this.snapRB.Checked = true;
             this.snapRB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.snapRB.Location = new System.Drawing.Point(12, 111);
+            this.snapRB.Location = new System.Drawing.Point(12, 101);
             this.snapRB.Name = "snapRB";
             this.snapRB.Size = new System.Drawing.Size(50, 17);
             this.snapRB.TabIndex = 1;
@@ -636,11 +638,11 @@
             // 
             this.additivRB.AutoSize = true;
             this.additivRB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.additivRB.Location = new System.Drawing.Point(68, 111);
+            this.additivRB.Location = new System.Drawing.Point(13, 116);
             this.additivRB.Name = "additivRB";
-            this.additivRB.Size = new System.Drawing.Size(89, 17);
+            this.additivRB.Size = new System.Drawing.Size(58, 17);
             this.additivRB.TabIndex = 12;
-            this.additivRB.Text = "Accumulative";
+            this.additivRB.Text = "Accum";
             this.additivRB.UseVisualStyleBackColor = true;
             this.additivRB.CheckedChanged += new System.EventHandler(this.additivRB_CheckedChanged);
             // 
@@ -648,7 +650,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(135, 91);
+            this.label16.Location = new System.Drawing.Point(142, 88);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(30, 13);
             this.label16.TabIndex = 29;
@@ -668,7 +670,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(10, 70);
+            this.label9.Location = new System.Drawing.Point(10, 67);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(21, 13);
             this.label9.TabIndex = 21;
@@ -678,7 +680,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(215, 69);
+            this.label15.Location = new System.Drawing.Point(222, 66);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(21, 13);
             this.label15.TabIndex = 28;
@@ -994,6 +996,17 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
+            // AccumReset
+            // 
+            this.AccumReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AccumReset.Location = new System.Drawing.Point(72, 98);
+            this.AccumReset.Name = "AccumReset";
+            this.AccumReset.Size = new System.Drawing.Size(49, 35);
+            this.AccumReset.TabIndex = 54;
+            this.AccumReset.Text = "Accum Reset";
+            this.AccumReset.UseVisualStyleBackColor = true;
+            this.AccumReset.Click += new System.EventHandler(this.AccumReset_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1121,6 +1134,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn rot;
         private System.Windows.Forms.DataGridViewTextBoxColumn LR;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fwd;
+        private System.Windows.Forms.Button AccumReset;
     }
 }
 

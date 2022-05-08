@@ -199,6 +199,7 @@ namespace VRNeckSafer
         private void loopTimer_Tick(object sender, EventArgs e)
         {
             bool reset_pressed = checkButtonPress(SetResetButton, conf.ResetButton);
+            bool acc_res_pressed = js.IsButtonPressed(conf.AccuResetButton);
             bool l_pressed = js.IsButtonPressed(conf.LeftButton);
             bool r_pressed = js.IsButtonPressed(conf.RightButton);
             if (conf.MultipleLRbuttons)
@@ -209,6 +210,8 @@ namespace VRNeckSafer
                 r_pressed |= js.IsButtonPressed(conf.RightButton3);
                 reset_pressed |= js.IsButtonPressed(conf.ResetButton2);
                 reset_pressed |= js.IsButtonPressed(conf.ResetButton3);
+                acc_res_pressed |= js.IsButtonPressed(conf.AccuResetButton2);
+                acc_res_pressed |= js.IsButtonPressed(conf.AccuResetButton3);
             }
             bool h1 = checkButtonPress(SetHoldButton1, conf.HoldButton1);
             bool h2 = checkButtonPress(SetHoldButton2, conf.HoldButton2);
@@ -256,6 +259,16 @@ namespace VRNeckSafer
                 SetResetButton.ForeColor = SystemColors.ControlText;
                 SetResetButton.BackColor = SystemColors.Control;
             }
+            if (acc_res_pressed)
+            {
+                AccumReset.ForeColor = System.Drawing.Color.LightGreen;
+                AccumReset.BackColor = SystemColors.ControlText;
+            }
+            else
+            {
+                AccumReset.ForeColor = SystemColors.ControlText;
+                AccumReset.BackColor = SystemColors.Control;
+            }
 
             trans_offset = new Vector3(0, 0, 0);
 
@@ -291,6 +304,8 @@ namespace VRNeckSafer
                     joy_offset_angle -= (int)angleNUD.Value;
                 if (r_pressed && !lastpressed)
                     joy_offset_angle += (int)angleNUD.Value;
+                if (acc_res_pressed)
+                    joy_offset_angle = 0;
             }
             else
             {
@@ -613,8 +628,19 @@ namespace VRNeckSafer
                 MultiButtons frm = new MultiButtons(this, "Reset", conf.ResetButton, conf.ResetButton2, conf.ResetButton3);
                 frm.ShowDialog();
             }
-            setButtonToolTip(SetLeftButton, conf.LeftButton);
-            setLabelToolTip(LeftLabel, conf.LeftButton);
+        }
+        private void AccumReset_Click(object sender, EventArgs e)
+        {
+            if (conf.MultipleLRbuttons == false)
+            {
+                ButtonForm frm = new ButtonForm(this, "Accum Reset Button:", conf.AccuResetButton);
+                frm.ShowDialog();
+            }
+            else
+            {
+                MultiButtons frm = new MultiButtons(this, "Accum Reset", conf.AccuResetButton, conf.AccuResetButton2, conf.AccuResetButton3);
+                frm.ShowDialog();
+            }
         }
 
         private void SetHoldButton1_Click(object sender, EventArgs e)
@@ -880,5 +906,6 @@ namespace VRNeckSafer
         {
 
         }
+
     }
 }

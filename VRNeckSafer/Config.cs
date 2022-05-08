@@ -62,6 +62,9 @@ namespace VRNeckSafer
         public ButtonConfig HoldButton2;
         public ButtonConfig HoldButton3;
         public ButtonConfig HoldButton4;
+        public ButtonConfig AccuResetButton;
+        public ButtonConfig AccuResetButton2;
+        public ButtonConfig AccuResetButton3;
         public int Angle;
         public int TransLR;
         public int TransF;
@@ -93,6 +96,9 @@ namespace VRNeckSafer
             HoldButton2 = new ButtonConfig();
             HoldButton3 = new ButtonConfig();
             HoldButton4 = new ButtonConfig();
+            AccuResetButton = new ButtonConfig();
+            AccuResetButton2 = new ButtonConfig();
+            AccuResetButton3 = new ButtonConfig();
             Angle = 30;
             TransLR = 0;
             TransF = 0;
@@ -118,6 +124,23 @@ namespace VRNeckSafer
                     configfilename = @".\" + args[1];
 
                 Config c = JsonConvert.DeserializeObject<Config>(File.ReadAllText(configfilename));
+                if (c.LeftButton   == null) c.LeftButton    = new ButtonConfig();
+                if (c.LeftButton2  == null) c.LeftButton2   = new ButtonConfig();
+                if (c.LeftButton3  == null) c.LeftButton3   = new ButtonConfig();
+                if (c.RightButton  == null) c.RightButton   = new ButtonConfig();
+                if (c.RightButton2 == null) c.RightButton2  = new ButtonConfig();
+                if (c.RightButton3 == null) c.RightButton3  = new ButtonConfig();
+                if (c.ResetButton  == null) c.ResetButton   = new ButtonConfig();
+                if (c.ResetButton2 == null) c.ResetButton2  = new ButtonConfig();
+                if (c.ResetButton3 == null) c.ResetButton3  = new ButtonConfig();
+                if (c.HoldButton1  == null) c.HoldButton1   = new ButtonConfig();
+                if (c.HoldButton2  == null) c.HoldButton2   = new ButtonConfig();
+                if (c.HoldButton3  == null) c.HoldButton3   = new ButtonConfig();
+                if (c.HoldButton4  == null) c.HoldButton4  =  new ButtonConfig();
+                if (c.AccuResetButton == null) c.AccuResetButton = new ButtonConfig();
+                if (c.AccuResetButton2 == null) c.AccuResetButton2 = new ButtonConfig();
+                if (c.AccuResetButton3 == null) c.AccuResetButton3 = new ButtonConfig();
+
                 if (c.AutoSteps.Count == 0)
                 {
                     c.AutoSteps.Add(new int[5] { 60, 51, 10, 0, 0 });

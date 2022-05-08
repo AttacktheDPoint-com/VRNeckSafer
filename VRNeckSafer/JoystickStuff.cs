@@ -11,13 +11,16 @@ namespace VRNeckSafer
         public String ModJoystickGUID;
         public String ModButton;
     }
-
+    public class StickItem
+    {
+        public Joystick Stick;
+        public bool Attached;
+    }
     public class JoystickStuff
     {
         DirectInput DInput;
         public IList<DeviceInstance> ll;
-        public List<Joystick> Sticks;
-        //        public Joystick Stick;
+        public List<StickItem> Sticks;
         public JoyBut jb;
 
         public List<bool[]> LastButtons;
@@ -59,22 +62,30 @@ namespace VRNeckSafer
         public void GetJoysticks()
         {
             ll = DInput.GetDevices(DeviceClass.GameControl, DeviceEnumerationFlags.AttachedOnly);
-            Sticks = new List<Joystick>();
+            Sticks = new List<StickItem>();
             LastButtons = new List<bool[]>();
             LastPOVs = new List<int[]>();
 
             for (int i = 0; i < ll.Count; i++)
             {
+                Sticks.Add(new StickItem());
+                if (DInput.IsDeviceAttached(ll[i].InstanceGuid))
+                {
+                    Sticks[i].Attached = true;
+                }
                 LastButtons.Add(new bool[128]);
                 LastPOVs.Add(new int[4]);
-                Sticks.Add(new Joystick(DInput, ll[i].InstanceGuid));
-                Sticks[i].Acquire();
-
+                Sticks[i].Stick= new Joystick(DInput, ll[i].InstanceGuid);
+                Sticks[i].Stick.Acquire();
             }
         }
 
         public bool IsButtonPressed(ButtonConfig butconf)
         {
+            if (butconf==null)
+            {
+                return false;
+            }
             bool pressed = IsPressed(butconf.Use8WayHat, butconf.JoystickGUID, butconf.Button);
             if (butconf.UseModifier)
                 pressed = pressed && IsPressed(butconf.Use8WayHat, butconf.ModJoystickGUID, butconf.ModButton);
@@ -90,6 +101,12 @@ namespace VRNeckSafer
         }
         public bool IsPressed(bool use8wayhat, string JoystickGUID, string Button)
         {
+ 
+//            if (ll.Count!= DInput.GetDevices(DeviceClass.GameControl, DeviceEnumerationFlags.AttachedOnly).Count)
+//            {
+//                GetJoysticks();
+
+//            }
             int j, b = -1, p = -1;
 
             j = IndexFromGuid(JoystickGUID);
@@ -124,22 +141,42 @@ namespace VRNeckSafer
                 int.TryParse(Button.Substring(4), out b);
                 b *= 100;
             }
-
-            JoystickState State = Sticks[j].GetCurrentState();
-            if ((p == -1) && (b == -1)) return false;
-
-            if (p == -1)
+            try
             {
-                return State.Buttons[b - 1];
-            }
-            else
-            {
-                if (State.PointOfViewControllers[p] == -1) return false;
-                if (use8wayhat)
-                    return State.PointOfViewControllers[p] == b;
+                if (!Sticks[j].Attached && DInput.IsDeviceAttached(ll[j].InstanceGuid)) // Joystick reaquired?
+                {
+                    GetJoysticks();
+                }
 
-                return (Math.Abs(State.PointOfViewControllers[p] - b) < 5000)  || (State.PointOfViewControllers[p]==31500 && b==0);
+                if (DInput.IsDeviceAttached(ll[j].InstanceGuid)) { 
+                    JoystickState State = Sticks[j].Stick.GetCurrentState();
+                    if ((p == -1) && (b == -1)) return false;
+
+                    if (p == -1)
+                    {
+                        return State.Buttons[b - 1];
+                    }
+                    else
+                    {
+                        if (State.PointOfViewControllers[p] == -1) return false;
+                        if (use8wayhat)
+                            return State.PointOfViewControllers[p] == b;
+
+                        return (Math.Abs(State.PointOfViewControllers[p] - b) < 5000) || (State.PointOfViewControllers[p] == 31500 && b == 0);
+                    }
+                }
+                else
+                {
+                    Sticks[j].Attached = false;
+                    return false;
+                }
             }
+            catch (Exception)
+            {
+                GetJoysticks();
+                return false;
+            }
+
         }
         public JoyBut ScanJoysticks()
         {
@@ -148,8 +185,8 @@ namespace VRNeckSafer
             bool found = false;
             for (int i = 0; i < Sticks.Count; i++)
             {
-                JoystickState State = Sticks[i].GetCurrentState();
-                for (int k = 0; k < Sticks[i].Capabilities.ButtonCount; k++)
+                JoystickState State = Sticks[i].Stick.GetCurrentState();
+                for (int k = 0; k < Sticks[i].Stick.Capabilities.ButtonCount; k++)
                 {
                     if (State.Buttons[k] != LastButtons[i][k])
                     {
@@ -160,7 +197,7 @@ namespace VRNeckSafer
                         break;
                     }
                 }
-                for (int k = 0; k < Sticks[i].Capabilities.PovCount; k++)
+                for (int k = 0; k < Sticks[i].Stick.Capabilities.PovCount; k++)
                 {
                     if (State.PointOfViewControllers[k] != LastPOVs[i][k])
                     {
@@ -180,7 +217,7 @@ namespace VRNeckSafer
         {
             for (int i = 0; i < Sticks.Count; i++)
             {
-                JoystickState State = Sticks[i].GetCurrentState();
+                JoystickState State = Sticks[i].Stick.GetCurrentState();
                 Array.Copy(State.Buttons, LastButtons[i], 128);
                 Array.Copy(State.PointOfViewControllers, LastPOVs[i], 4);
             }
