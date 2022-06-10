@@ -106,4 +106,4 @@ fix for fwd translation when autorotation to left
 known issues:
 still problems with Valve Index and Varjo Aero
 
-Download link: [VRNeckSaferV20VRNeckSaferV204VRNeckSaferV209.zip](https://gitlab.com/NobiWan/vrnecksafer/-/blob/master/VRNeckSafer/Release/VRNeckSaferV209.zip)
+Download link: [VRNeckSaferV209.zip](https://gitlab.com/NobiWan/vrnecksafer/-/blob/master/VRNeckSafer/Release/VRNeckSaferV209.zip)
