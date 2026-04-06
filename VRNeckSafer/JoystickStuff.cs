@@ -185,7 +185,15 @@ namespace VRNeckSafer
             bool found = false;
             for (int i = 0; i < Sticks.Count; i++)
             {
-                JoystickState State = Sticks[i].Stick.GetCurrentState();
+                JoystickState State;
+                try
+                {
+                    State = Sticks[i].Stick.GetCurrentState();
+                }
+                catch (Exception)
+                {
+                    continue;
+                }
                 for (int k = 0; k < Sticks[i].Stick.Capabilities.ButtonCount; k++)
                 {
                     if (State.Buttons[k] != LastButtons[i][k])
@@ -217,9 +225,16 @@ namespace VRNeckSafer
         {
             for (int i = 0; i < Sticks.Count; i++)
             {
-                JoystickState State = Sticks[i].Stick.GetCurrentState();
-                Array.Copy(State.Buttons, LastButtons[i], 128);
-                Array.Copy(State.PointOfViewControllers, LastPOVs[i], 4);
+                try
+                {
+                    JoystickState State = Sticks[i].Stick.GetCurrentState();
+                    Array.Copy(State.Buttons, LastButtons[i], 128);
+                    Array.Copy(State.PointOfViewControllers, LastPOVs[i], 4);
+                }
+                catch (Exception)
+                {
+                    // Skip devices that fail to read — may be disconnected
+                }
             }
         }
     }

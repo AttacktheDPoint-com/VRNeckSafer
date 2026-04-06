@@ -17,6 +17,8 @@ namespace VRNeckSafer
         public bool Toggle;
         [JsonIgnore]
         public bool togglestate;
+        [JsonIgnore]
+        // Must not persist — a stale true value causes the first press after load to be missed
         public bool laststate;
         public ButtonConfig()
         {
@@ -143,13 +145,7 @@ namespace VRNeckSafer
 
                 if (c.AutoSteps.Count == 0)
                 {
-                    c.AutoSteps.Add(new int[5] { 60, 51, 10, 0, 0 });
-                    c.AutoSteps.Add(new int[5] { 70, 61, 20, 5, 1 });
-                    c.AutoSteps.Add(new int[5] { 80, 71, 30, 7, 3 });
-                    c.AutoSteps.Add(new int[5] { 90, 81, 40, 10, 5 });
-                    c.AutoSteps.Add(new int[5] { 100, 91, 50, 10, 5 });
-                    c.AutoSteps.Add(new int[5] { 110, 101, 60, 10, 5 });
-                    c.AutoSteps.Add(new int[5] { 120, 111, 70, 10, 5 });
+                    c.AutoSteps = DefaultAutoSteps();
                 }
                 return c;
             }
@@ -158,13 +154,7 @@ namespace VRNeckSafer
                 Config conf = new Config();
                 if (conf.AutoSteps.Count == 0)
                 {
-                    conf.AutoSteps.Add(new int[5] { 60, 51, 10, 0, 0 });
-                    conf.AutoSteps.Add(new int[5] { 70, 61, 20, 5, 1 });
-                    conf.AutoSteps.Add(new int[5] { 80, 71, 30, 7, 3 });
-                    conf.AutoSteps.Add(new int[5] { 90, 81, 40, 10, 5 });
-                    conf.AutoSteps.Add(new int[5] { 100, 91, 50, 10, 5 });
-                    conf.AutoSteps.Add(new int[5] { 110, 101, 60, 10, 5 });
-                    conf.AutoSteps.Add(new int[5] { 120, 111, 70, 10, 5 });
+                    conf.AutoSteps = DefaultAutoSteps();
                 }
 
                 conf.WriteConfig();
@@ -172,9 +162,35 @@ namespace VRNeckSafer
             }
         }
 
+        private static List<int[]> DefaultAutoSteps()
+        {
+            return new List<int[]>
+            {
+                new int[5] { 60, 51, 10, 0, 0 },
+                new int[5] { 70, 61, 20, 5, 1 },
+                new int[5] { 80, 71, 30, 7, 3 },
+                new int[5] { 90, 81, 40, 10, 5 },
+                new int[5] { 100, 91, 50, 10, 5 },
+                new int[5] { 110, 101, 60, 10, 5 },
+                new int[5] { 120, 111, 70, 10, 5 },
+            };
+        }
+
         public void WriteConfig()
         {
-            File.WriteAllText(configfilename, JsonConvert.SerializeObject(this, Formatting.Indented));
+            string json = JsonConvert.SerializeObject(this, Formatting.Indented);
+            try
+            {
+                string tmpFile = configfilename + ".tmp";
+                File.WriteAllText(tmpFile, json);
+                File.Copy(tmpFile, configfilename, true);
+                File.Delete(tmpFile);
+            }
+            catch
+            {
+                // Fallback to direct write if atomic write fails
+                File.WriteAllText(configfilename, json);
+            }
         }
     }
 }

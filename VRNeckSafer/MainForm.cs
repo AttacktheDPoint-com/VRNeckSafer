@@ -8,6 +8,8 @@ namespace VRNeckSafer
 
     public partial class MainForm : Form
     {
+        private bool initializing = true;
+
         public JoystickStuff js;
         public VRStuff vr;
         public Config conf;
@@ -24,8 +26,6 @@ namespace VRNeckSafer
         public float trans_offset_F;
         public Vector3 trans_offset;
         public Vector3 auto_trans_offset;
-
-        public int hmdYaw;
 
         public bool lastpressed;
 
@@ -47,10 +47,13 @@ namespace VRNeckSafer
             if (conf.StartMinimized) this.WindowState = FormWindowState.Minimized;
 
 
-            VRStuff.conf = conf;
-
             js = new JoystickStuff();
-            vr = new VRStuff();
+            try { vr = new VRStuff(conf); }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show(ex.Message, "Problem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Environment.Exit(1);
+            }
 
             angleNUD.Value = conf.Angle;
             transFNUP.Value = conf.TransF;
@@ -112,6 +115,7 @@ namespace VRNeckSafer
 
             error_label.Visible = check_autorot_config();
             error_label2.Visible = error_label.Visible;
+            initializing = false;
             loopTimer.Start();
         }
 
@@ -153,12 +157,12 @@ namespace VRNeckSafer
         private void angleNUD_ValueChanged(object sender, EventArgs e)
         {
             conf.Angle = (int)angleNUD.Value;
-            conf.WriteConfig();
+            if (!initializing) conf.WriteConfig();
         }
         private void angleNUD_KeyUp(object sender, KeyEventArgs e)
         {
             conf.Angle = (int)angleNUD.Value;
-            conf.WriteConfig();
+            if (!initializing) conf.WriteConfig();
         }
 
         private void additivRB_CheckedChanged(object sender, EventArgs e)
@@ -170,14 +174,14 @@ namespace VRNeckSafer
             label15.Enabled = !additivRB.Checked;
             label16.Enabled = !additivRB.Checked;
             label17.Enabled = !additivRB.Checked;
-            conf.WriteConfig();
+            if (!initializing) conf.WriteConfig();
         }
 
         private void autoCB_CheckedChanged(object sender, EventArgs e)
         {
             conf.Auto = autoCB.Checked;
             enableAuto(autoCB.Checked);
-            conf.WriteConfig();
+            if (!initializing) conf.WriteConfig();
         }
 
         bool checkButtonPress(Button b, ButtonConfig bc)
@@ -217,7 +221,8 @@ namespace VRNeckSafer
             bool h2 = checkButtonPress(SetHoldButton2, conf.HoldButton2);
             bool h3 = checkButtonPress(SetHoldButton3, conf.HoldButton3);
             bool h4 = checkButtonPress(SetHoldButton4, conf.HoldButton4);
-            bool pitchlimit= vr.getHmdPitch() - 90 > conf.PitchLimForAutorot;
+            // getHmdPitch() returns 90 when level, decreasing toward 0 when looking up
+            bool pitchlimit = 90 - vr.getHmdPitch() > conf.PitchLimForAutorot;
 
             bool autofrozen = h1 || h2 || h3 || h4 || pitchlimit;
 
@@ -425,34 +430,35 @@ namespace VRNeckSafer
         private void zeroBT_Click(object sender, EventArgs e)
         {
             vr.getHmdSeatedPositionOffset();
-            vr.getHmdYaw();
+            // Capture current yaw as the new zero reference (not just read yaw)
+            vr.getHmdYawOffset();
         }
 
         private void transFNUP_ValueChanged(object sender, EventArgs e)
         {
             conf.TransF = (int)transFNUP.Value;
             trans_offset_F = (float)transFNUP.Value / 100F;
-            conf.WriteConfig();
+            if (!initializing) conf.WriteConfig();
         }
         private void transFNUP_KeyUp(object sender, KeyEventArgs e)
         {
             conf.TransF = (int)transFNUP.Value;
             trans_offset_F = (float)transFNUP.Value / 100F;
-            conf.WriteConfig();
+            if (!initializing) conf.WriteConfig();
         }
 
         private void transLRNUP_ValueChanged(object sender, EventArgs e)
         {
             conf.TransLR = (int)transLRNUP.Value;
             trans_offset_LR = (float)transLRNUP.Value / 100F;
-            conf.WriteConfig();
+            if (!initializing) conf.WriteConfig();
         }
 
         private void transLRNUP_KeyUp(object sender, KeyEventArgs e)
         {
             conf.TransLR = (int)transLRNUP.Value;
             trans_offset_LR = (float)transLRNUP.Value / 100F;
-            conf.WriteConfig();
+            if (!initializing) conf.WriteConfig();
         }
 
 
@@ -587,13 +593,13 @@ namespace VRNeckSafer
         {
             if (conf.MultipleLRbuttons == false)
             {
-                ButtonForm frm = new ButtonForm(this, "Button for Left Rotation:", conf.LeftButton); 
-                frm.ShowDialog();
+                using (var frm = new ButtonForm(this, "Button for Left Rotation:", conf.LeftButton))
+                    frm.ShowDialog();
             }
             else
             {
-                MultiButtons frm = new MultiButtons(this, "Left",  conf.LeftButton, conf.LeftButton2, conf.LeftButton3);
-                frm.ShowDialog();
+                using (var frm = new MultiButtons(this, "Left",  conf.LeftButton, conf.LeftButton2, conf.LeftButton3))
+                    frm.ShowDialog();
             }
             setButtonToolTip(SetLeftButton, conf.LeftButton);
             setLabelToolTip(LeftLabel, conf.LeftButton);
@@ -603,13 +609,13 @@ namespace VRNeckSafer
         {
             if (conf.MultipleLRbuttons == false)
             {
-                ButtonForm frm = new ButtonForm(this, "Button for Right Rotation:", conf.RightButton);
-                frm.ShowDialog();
+                using (var frm = new ButtonForm(this, "Button for Right Rotation:", conf.RightButton))
+                    frm.ShowDialog();
             }
             else
             {
-                MultiButtons frm = new MultiButtons(this, "Right", conf.RightButton, conf.RightButton2, conf.RightButton3);
-                frm.ShowDialog();
+                using (var frm = new MultiButtons(this, "Right", conf.RightButton, conf.RightButton2, conf.RightButton3))
+                    frm.ShowDialog();
             }
             setButtonToolTip(SetRightButton, conf.RightButton);
             setLabelToolTip(RightLabel, conf.RightButton);
@@ -620,54 +626,54 @@ namespace VRNeckSafer
 
             if (conf.MultipleLRbuttons == false)
             {
-                ButtonForm frm = new ButtonForm(this, "Reset Button:", conf.ResetButton);
-                frm.ShowDialog();
+                using (var frm = new ButtonForm(this, "Reset Button:", conf.ResetButton))
+                    frm.ShowDialog();
             }
             else
             {
-                MultiButtons frm = new MultiButtons(this, "Reset", conf.ResetButton, conf.ResetButton2, conf.ResetButton3);
-                frm.ShowDialog();
+                using (var frm = new MultiButtons(this, "Reset", conf.ResetButton, conf.ResetButton2, conf.ResetButton3))
+                    frm.ShowDialog();
             }
         }
         private void AccumReset_Click(object sender, EventArgs e)
         {
             if (conf.MultipleLRbuttons == false)
             {
-                ButtonForm frm = new ButtonForm(this, "Accum Reset Button:", conf.AccuResetButton);
-                frm.ShowDialog();
+                using (var frm = new ButtonForm(this, "Accum Reset Button:", conf.AccuResetButton))
+                    frm.ShowDialog();
             }
             else
             {
-                MultiButtons frm = new MultiButtons(this, "Accum Reset", conf.AccuResetButton, conf.AccuResetButton2, conf.AccuResetButton3);
-                frm.ShowDialog();
+                using (var frm = new MultiButtons(this, "Accum Reset", conf.AccuResetButton, conf.AccuResetButton2, conf.AccuResetButton3))
+                    frm.ShowDialog();
             }
         }
 
         private void SetHoldButton1_Click(object sender, EventArgs e)
         {
-            ButtonForm frm = new ButtonForm(this, "Button for Reset:", conf.HoldButton1);
-            frm.ShowDialog();
+            using (var frm = new ButtonForm(this, "Hold Button 1 (freeze autorot):", conf.HoldButton1))
+                frm.ShowDialog();
             setButtonToolTip(SetHoldButton1, conf.HoldButton1);
         }
 
         private void SetHoldButton2_Click(object sender, EventArgs e)
         {
-            ButtonForm frm = new ButtonForm(this, "Button for Reset:", conf.HoldButton2);
-            frm.ShowDialog();
+            using (var frm = new ButtonForm(this, "Hold Button 2 (freeze autorot):", conf.HoldButton2))
+                frm.ShowDialog();
             setButtonToolTip(SetHoldButton2, conf.HoldButton2);
         }
 
         private void SetHoldButton3_Click(object sender, EventArgs e)
         {
-            ButtonForm frm = new ButtonForm(this, "Button for Reset:", conf.HoldButton3);
-            frm.ShowDialog();
+            using (var frm = new ButtonForm(this, "Hold Button 3 (freeze autorot):", conf.HoldButton3))
+                frm.ShowDialog();
             setButtonToolTip(SetHoldButton3, conf.HoldButton3);
         }
 
         private void SetHoldButton4_Click(object sender, EventArgs e)
         {
-            ButtonForm frm = new ButtonForm(this, "Button for Reset:", conf.HoldButton4);
-            frm.ShowDialog();
+            using (var frm = new ButtonForm(this, "Hold Button 4 (freeze autorot):", conf.HoldButton4))
+                frm.ShowDialog();
             setButtonToolTip(SetHoldButton4, conf.HoldButton4);
         }
 
@@ -857,8 +863,12 @@ namespace VRNeckSafer
                     neverToolStripMenuItem.Checked = true;
                     break;
             }
-            ToolStripMenuItem item= (ToolStripMenuItem)PitchLimToolStripMenuItem.DropDownItems[conf.PitchLimForAutorot / 10 - 1];
-            item.Checked = true;
+            int pitchIdx = conf.PitchLimForAutorot / 10 - 1;
+            if (pitchIdx >= 0 && pitchIdx < PitchLimToolStripMenuItem.DropDownItems.Count)
+            {
+                ToolStripMenuItem item = (ToolStripMenuItem)PitchLimToolStripMenuItem.DropDownItems[pitchIdx];
+                item.Checked = true;
+            }
         }
 
         private void resetOptionsToDefaultToolStripMenuItem_Click(object sender, EventArgs e)
@@ -874,6 +884,7 @@ namespace VRNeckSafer
 
         private void graphButton_Click(object sender, EventArgs e)
         {
+            if (gr != null && !gr.IsDisposed) gr.Dispose();
             gr = new Graph(this);
             gr.Show();
         }

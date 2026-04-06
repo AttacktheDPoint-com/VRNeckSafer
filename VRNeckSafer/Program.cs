@@ -11,7 +11,8 @@ namespace VRNeckSafer
         [STAThread]
         static void Main()
         {
-            using (var mutex = new System.Threading.Mutex(false, "saebamini.com SingletonApp"))
+            // Use app-specific name to avoid collisions with other programs
+            using (var mutex = new System.Threading.Mutex(false, "VRNeckSafer_SingleInstance"))
             {
                 bool isAnotherInstanceOpen = !mutex.WaitOne(TimeSpan.Zero);
                 if (isAnotherInstanceOpen)

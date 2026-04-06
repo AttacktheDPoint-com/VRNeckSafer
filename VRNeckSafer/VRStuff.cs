@@ -8,7 +8,7 @@ namespace VRNeckSafer
 {
     public class VRStuff
     {
-        static public Config conf;
+        public Config conf;
 
         private CVRSystem system;
         private TrackedDevicePose_t[] Poses;
@@ -17,8 +17,9 @@ namespace VRNeckSafer
         public double deltaRot;
         double HMDYawOffset;
 
-        public VRStuff()
+        public VRStuff(Config config)
         {
+            conf = config;
             var initError = EVRInitError.None;
 
             Poses = new TrackedDevicePose_t[OpenVR.k_unMaxTrackedDeviceCount];
@@ -42,15 +43,10 @@ namespace VRNeckSafer
 
             if (initError != EVRInitError.None)
             {
-                if (initError == EVRInitError.Unknown)
-                {
-                    MessageBox.Show("SteamVR timed out!\r\n try to restart SteamVR/Oculus/WMR", "Problem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                else
-                {
-                    MessageBox.Show("Unable to connect to SteamVR/OpenVR", "Problem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                System.Environment.Exit(0);
+                string msg = (initError == EVRInitError.Unknown)
+                    ? "SteamVR timed out!\r\n try to restart SteamVR/Oculus/WMR"
+                    : "Unable to connect to SteamVR/OpenVR";
+                throw new InvalidOperationException(msg);
             }
         }
 

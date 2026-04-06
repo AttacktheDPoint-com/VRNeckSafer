@@ -89,6 +89,8 @@ namespace VRNeckSafer
         private void Cancelbutton_Click(object sender, EventArgs e)
         {
             mf.conf = Config.ReadConfig();
+            // Keep VRStuff's config reference in sync after reload
+            mf.vr.conf = mf.conf;
             Close();
         }
     }

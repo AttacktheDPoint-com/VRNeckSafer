@@ -218,8 +218,9 @@ namespace VRNeckSafer
 
         private void ModifierDeviceComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            FillButtonComboBox(MainDeviceComboBox.SelectedIndex - 1, MainButtonComboBox);
-            MainButtonComboBox.Text = "none";
+            // Bug fix: was incorrectly refilling MainButtonComboBox
+            FillButtonComboBox(ModifierDeviceComboBox.SelectedIndex - 1, ModifierButtonComboBox);
+            ModifierButtonComboBox.Text = "none";
         }
 
         private void Use8WayHatCheckBox_CheckedChanged(object sender, EventArgs e)

@@ -242,6 +242,9 @@ namespace VRNeckSafer
         {
             grx = ClientSize.Width - 40;
             gry = ClientSize.Height / 2 - 30;
+            // Dispose previous bitmap and graphics to avoid GDI handle leak
+            gr?.Dispose();
+            bm1?.Dispose();
             bm1 = new Bitmap(ClientSize.Width, ClientSize.Height / 2);
             gr = Graphics.FromImage(bm1);
 
@@ -274,6 +277,9 @@ namespace VRNeckSafer
             grx = ClientSize.Width - 40;
             gry = ClientSize.Height / 2 - 30;
 
+            // Dispose previous bitmap and graphics to avoid GDI handle leak
+            gr?.Dispose();
+            bm2?.Dispose();
             bm2 = new Bitmap(ClientSize.Width, ClientSize.Height / 2);
             gr = Graphics.FromImage(bm2);
 
@@ -299,17 +305,17 @@ namespace VRNeckSafer
             FwdLine();
 
             Rectangle L1 = new Rectangle(65, 10, 125, 48);
-            gr.FillRectangle(new SolidBrush(System.Drawing.Color.White), L1);
+            gr.FillRectangle(Brushes.White, L1);
             gr.DrawRectangle(blackPen, L1);
-            gr.DrawString("Rotational offset:", myFont, new SolidBrush(System.Drawing.Color.Black), L1.X + 1, L1.Y + 2);
-            gr.DrawString(" Activation (act)", myFont, new SolidBrush(System.Drawing.Color.Red), L1.X + 1, L1.Y + 17);
-            gr.DrawString(" Deactivation (de)", myFont, new SolidBrush(System.Drawing.Color.Green), L1.X + 1, L1.Y + 32);
+            gr.DrawString("Rotational offset:", myFont, Brushes.Black, L1.X + 1, L1.Y + 2);
+            gr.DrawString(" Activation (act)", myFont, Brushes.Red, L1.X + 1, L1.Y + 17);
+            gr.DrawString(" Deactivation (de)", myFont, Brushes.Green, L1.X + 1, L1.Y + 32);
             Rectangle L2 = new Rectangle(ClientSize.Width - 192, 10, 137, 48);
-            gr.FillRectangle(new SolidBrush(System.Drawing.Color.White), L2);
+            gr.FillRectangle(Brushes.White, L2);
             gr.DrawRectangle(blackPen, L2);
-            gr.DrawString("Translational offset:", myFont, new SolidBrush(System.Drawing.Color.Black), L2.X + 1, L2.Y + 2);
-            gr.DrawString(" Left/Right (L/R)", myFont, new SolidBrush(System.Drawing.Color.Blue), L2.X + 1, L2.Y + 17);
-            gr.DrawString(" Forward (Fwd)", myFont, new SolidBrush(System.Drawing.Color.CadetBlue), L2.X + 1, L2.Y + 32);
+            gr.DrawString("Translational offset:", myFont, Brushes.Black, L2.X + 1, L2.Y + 2);
+            gr.DrawString(" Left/Right (L/R)", myFont, Brushes.Blue, L2.X + 1, L2.Y + 17);
+            gr.DrawString(" Forward (Fwd)", myFont, Brushes.CadetBlue, L2.X + 1, L2.Y + 32);
             gr.RotateTransform(270);
             gr.DrawString("Autorot values", myFont, myBrush, -gry / 2 - 60, 7);
 
@@ -325,6 +331,22 @@ namespace VRNeckSafer
             DrawBitmap1();
             DrawBitmap2();
             Invalidate();
+        }
+
+        public void DisposeGdiResources()
+        {
+            gr?.Dispose();
+            bm1?.Dispose();
+            bm2?.Dispose();
+            redPen?.Dispose();
+            greenPen?.Dispose();
+            black2Pen?.Dispose();
+            bluePen?.Dispose();
+            blue2Pen?.Dispose();
+            blackPen?.Dispose();
+            dashedPen?.Dispose();
+            myFont?.Dispose();
+            myBrush?.Dispose();
         }
     }
 }
