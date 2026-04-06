@@ -1,5 +1,13 @@
 # VRNeckSafer — Revival
 
+<p>
+  <img src="https://img.shields.io/badge/original-abandoned-important.svg" alt="Original Status">
+  <img src="https://img.shields.io/badge/last%20original%20commit-2022--06-lightgrey.svg" alt="Last Original Commit">
+  <img src="https://img.shields.io/badge/license-GPL--3.0-blue.svg" alt="License">
+  <img src="https://img.shields.io/badge/fixes-23%20bugs-brightgreen.svg" alt="Fixes">
+  <img src="https://img.shields.io/badge/revival-active-brightgreen.svg" alt="Revival Status">
+</p>
+
 > **This is not just a fork.** This repo contains NobiWan's original [VRNeckSafer](https://gitlab.com/NobiWan/vrnecksafer) with a community fix pass — 23 bug fixes, crash guards, resource leak fixes, and performance optimizations. No new features were added. The original author's code and design are preserved; we only fixed things that were broken. See the [OpenXR version (XRNeckSafer)](https://github.com/AttacktheDPoint-com/XRNeckSafer-Rework) for the same treatment on the OpenXR codebase.
 
 **Latest stable:** [v2.10](https://github.com/AttacktheDPoint-com/VRNeckSafer-Revival/releases/tag/v2.10) (drop-in replacement for v2.09) | **Beta:** [v2.11 betas](https://github.com/AttacktheDPoint-com/VRNeckSafer-Revival/releases) (VR behavior changes, needs headset testing)
@@ -203,3 +211,24 @@ fix for fwd translation when autorotation to left
 
 known issues:
 still problems with Valve Index and Varjo Aero
+
+---
+
+## Support This Project
+
+This project was revived by **[Attack the D Point](https://github.com/AttacktheDPoint-com)** — we find abandoned open-source projects, fix them, and ship them.
+
+If this fix saved you time, consider supporting the work:
+
+<a href="https://github.com/sponsors/AttacktheDPoint-com"><img src="https://img.shields.io/badge/Sponsor_on_GitHub-%E2%9D%A4-ea4aaa.svg" alt="GitHub Sponsors"></a>
+<a href="https://ko-fi.com/atdpt"><img src="https://img.shields.io/badge/Buy_a_Coffee-ko--fi-ff5e5b.svg" alt="Ko-fi"></a>
+
+Your support helps us keep reviving projects like this one. See what else we're working on at [AttacktheDPoint-com](https://github.com/AttacktheDPoint-com).
+
+---
+
+## Credits
+
+All credit for the original project goes to **[NobiWan](https://gitlab.com/NobiWan)** and its contributors. This fork exists because the original was too good to let die.
+
+*Licensed under GPL-3.0 — same as the original.*
