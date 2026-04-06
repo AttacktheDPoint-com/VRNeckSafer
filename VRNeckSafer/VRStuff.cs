@@ -117,9 +117,17 @@ namespace VRNeckSafer
         {
             double Angle = a * Math.PI / 180.0;
 
+            // Write the reset pose WITHOUT committing to the live config.
+            // The reset only needs to exist as "working" state so the subsequent
+            // pose read reflects the un-offset origin. Skipping CommitWorkingCopy
+            // here saves one COM call and avoids a single-frame glitch where the
+            // identity pose is briefly visible in VR.
             HmdMatrix34_t resetCenter = new HmdMatrix34_t()
             { m0 = 1, m1 = 0, m2 = 0, m3 = deltaPos.X, m4 = 0, m5 = 1, m6 = 0, m7 = deltaPos.Y, m8 = 0, m9 = 0, m10 = 1, m11 = deltaPos.Z };
-            setChaperone(resetCenter);
+            if (isSeatedMode())
+                OpenVR.ChaperoneSetup.SetWorkingSeatedZeroPoseToRawTrackingPose(ref resetCenter);
+            else
+                OpenVR.ChaperoneSetup.SetWorkingStandingZeroPoseToRawTrackingPose(ref resetCenter);
 
             getHMDPose();
 
